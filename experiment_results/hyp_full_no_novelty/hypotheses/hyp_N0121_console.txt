@@ -1,0 +1,238 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: High tumor mutational burden in bladder cancer directly causes improved response to immune checkpoint inhibitors, independent of neoantigen load or smoking-related mutational signatures.
+      path_eval_weights: {'logic': 0.2, 'relevance': 0.2, 'novelty': 0.0, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+High tumor mutational burden in bladder cancer directly causes improved response to immune checkpoint inhibitors, independent of neoantigen load or smoking-related mutational signatures.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+
+============================================================
+📋 PATH FINDING (validation will be done AFTER path finding)
+============================================================
+Found 1 nodes of type 'Therapy'
+============================================================
+
+
+🔍 Step 1: Finding paths to 1 target nodes...
+[FunctionCall(id='call_PN9qI5HpcDFEWw1o0ik3Tvyz', arguments='{"source_entity":"bladder cancer","target_type":"Therapy","max_results":30}', name='find_related_entities')]
+[Prompt tokens: 3683, Completion tokens: 1318]
+
+✅ Found 1 paths
+
+============================================================
+✅ PATH FINDING AND VALIDATION COMPLETE
+============================================================
+Total target nodes found: 1
+Successful paths: 1/1
+============================================================
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content="✅ Found 1 paths from 'bladder cancer' to 'Therapy'\nEvaluated and ranked by: Logic(0.2) + Relevance(0.2) + Novelty(0.0) + Surprise(0.3)\n\nTop 1 Paths (sorted by total score):\n\n1. Path to 'human CD19-CAR-T cell therapy||Therapy' (length: 9) ⭐ Total: 0.765\n   bladder cancer||Disease -- is associated with -- Etv5||Gene -- negatively regulates -- antitumor immunity||Process -- enhances -- Fc–IL-4||Chemical -- enhances efficacy of -- human CD19-CAR-T cell therapy||Therapy\n   Logic: 0.565 | Relevance: 0.614 | Novelty: 0.423 | Surprise: 1.000\n\n======================================================================\n📋 INSTRUCTIONS FOR ONTOLOGIST:\n======================================================================\nYou have received 1 ranked candidate paths above.\n\nTask: Select and analyze the TOP 1 most scientifically interesting paths.\n\nRequired Format:\n1. PATH SELECTION: List all 1 selected paths with brief selection rationale\n2. DETAILED ANALYSIS: For each of the 1 paths, provide:\n   - Key Definitions (2-4 sentences per term)\n   - Relationship Analysis (2-3 sentences per relationship)\n   - Clinical/Research Significance (2-3 sentences)\n\nSelection Criteria (prioritize paths with):\n  • High total score (Logic + Relevance + Novelty + Surprise)\n  • Novel biological connections\n  • Clear therapeutic or biomarker potential\n  • Strong clinical relevance\n  • Diversity across different mechanisms\n\nNote: Ensure all 1 paths are analyzed in detail.\n======================================================================\n", name='find_related_entities', call_id='call_PN9qI5HpcDFEWw1o0ik3Tvyz', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+✅ Found 1 paths from 'bladder cancer' to 'Therapy'
+Evaluated and ranked by: Logic(0.2) + Relevance(0.2) + Novelty(0.0) + Surprise(0.3)
+
+Top 1 Paths (sorted by total score):
+
+1. Path to 'human CD19-CAR-T cell therapy||Therapy' (length: 9) ⭐ Total: 0.765
+   bladder cancer||Disease -- is associated with -- Etv5||Gene -- negatively regulates -- antitumor immunity||Process -- enhances -- Fc–IL-4||Chemical -- enhances efficacy of -- human CD19-CAR-T cell therapy||Therapy
+   Logic: 0.565 | Relevance: 0.614 | Novelty: 0.423 | Surprise: 1.000
+
+======================================================================
+📋 INSTRUCTIONS FOR ONTOLOGIST:
+======================================================================
+You have received 1 ranked candidate paths above.
+
+Task: Select and analyze the TOP 1 most scientifically interesting paths.
+
+Required Format:
+1. PATH SELECTION: List all 1 selected paths with brief selection rationale
+2. DETAILED ANALYSIS: For each of the 1 paths, provide:
+   - Key Definitions (2-4 sentences per term)
+   - Relationship Analysis (2-3 sentences per relationship)
+   - Clinical/Research Significance (2-3 sentences)
+
+Selection Criteria (prioritize paths with):
+  • High total score (Logic + Relevance + Novelty + Surprise)
+  • Novel biological connections
+  • Clear therapeutic or biomarker potential
+  • Strong clinical relevance
+  • Diversity across different mechanisms
+
+Note: Ensure all 1 paths are analyzed in detail.
+======================================================================
+
+---------- TextMessage (ontologist) ----------
+### Definitions:
+- **[Bladder cancer]**: A malignant tumor arising from the bladder urothelium, often presenting as urothelial carcinoma; in this path, bladder cancer is linked to downstream immunoregulatory factors, suggesting tumor-intrinsic signals may shape local immunity.
+
+- **[Etv5]**: A transcription factor (ETS family) that regulates gene expression programs; in this context, Etv5 is described as negatively regulating antitumor immune responses, implying it contributes to immune evasion within the tumor microenvironment.
+
+- **[Antitumor immunity]**: The set of immune effector processes that recognize and eliminate tumor cells, including cytotoxic T lymphocytes, NK cells, and macrophage-mediated activities; in this path, its activity is connected to modulation by immune-modulatory agents.
+
+- **[Fc–IL-4]**: An engineered fusion protein combining an immunoglobulin Fc domain with interleukin-4, designed to extend cytokine half-life and engage Fc receptors; within the pathway, Fc–IL-4 is positioned as a reagent that can boost the efficacy of immunotherapeutic approaches.
+
+- **[Human CD19-CAR-T cell therapy]**: Autologous T cells engineered to express a chimeric antigen receptor targeting CD19, used to treat CD19-expressing malignancies; in this path, it is the therapeutic modality whose efficacy may be enhanced by Fc–IL-4 and the tumor immune milieu.
+
+### Relationships:
+1. **Bladder cancer → is associated with → Etv5**: This link implies that bladder cancer biology may correlate with alterations in Etv5 signaling or expression, indicating Etv5 could be a biomarker or mechanistic contributor in bladder cancer–related immune context. The association suggests a starting point where Etv5 activity might reflect or influence tumor-immune interactions in bladder cancer.
+
+2. **Etv5 → negatively regulates → antitumor immunity**: Etv5 is depicted as dampening immune effector functions, which could translate into reduced cytotoxic activity, antigen presentation, or recruitment of immune cells to the tumor. This establishes a mechanistic node where inhibiting or counteracting Etv5 could relieve immunosuppression and restore anti-tumor responses.
+
+3. **Antitumor immunity → enhances → Fc–IL-4**: In this path, robust antitumor immune activity is proposed to interact with or amplify the activity of Fc–IL-4, perhaps by shaping Fc receptor–mediated effects or the cytokine milieu to optimize the fusion cytokine’s immunomodulatory actions. This suggests a conditional synergy where an active immune environment potentiates Fc–IL-4’s impact.
+
+4. **Fc–IL-4 → enhances efficacy of → Human CD19-CAR-T cell therapy**: Fc–IL-4 is posited to improve CAR-T cell therapy performance, potentially by improving T cell activation, persistence, or altering the tumor microenvironment (e.g., macrophage polarization, antibody-dependent mechanisms) to support CAR-T–mediated cytotoxicity.
+
+### Clinical/Research Significance:
+This path suggests a plausible combinatorial approach in bladder cancer: targeting Etv5-mediated immunosuppression to unleash antitumor immunity, with Fc–IL-4 serving as an adjuvant to bolster CD19-CAR-T cell therapy efficacy. If validated, Etv5 expression could serve as a biomarker for immune susceptibility, and Fc–IL-4 could be explored as a therapeutic adjuvant to enhance CAR-T outcomes in solid tumors like bladder cancer, pending preclinical demonstration of safety and synergy.
+[Prompt tokens: 1897, Completion tokens: 4593]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Evaluating secondary modifiers**
+
+I’m reasoning that secondary modifiers should generally be genes, specifically Tier 2 genes, but the instructions allow for additional molecular features too. Even though no extra genes are explicitly listed, I wonder if I can include Fc–IL-4 and CD19-CAR-T as modifiers. It's noted that the JSON field can be empty, but including "Fc–IL-4" sounds reasonable since it's presented by the ontologist. So ultimately, it might be safe to list both as secondary modifiers.**Clarifying reasoning for study**
+
+I need to provide a step-by-step explanation for my analysis. First, I identify the central biological puzzle from the Ontologist's insights. Next, I see that there's a single Tier 1 path built on the Etv5 connection. For Tier 2 evidence, while there isn’t much, I can mention antitumor immunity and Fc-IL4 as mechanisms. I emphasize therapy response, which is clinically actionable. Lastly, I exclude specifics like CD19 and CAR-T to maintain a mechanistic focus. I’ll use "ETV5" for the gene symbol and ensure my hypothesis includes the necessary elements.**Crafting sentences for study**
+
+I need to create clear sentences for my analysis. For the first one, I’m stating, “TLS-like lymphoid aggregate-rich breast tumors fail to support effective T cell–mediated therapy because tumor-intrinsic ETV5 drives an immunosuppressive transcriptional program.” That feels right, despite mentioning Fc receptor. In the second sentence, I'll explain that “ETV5-high/TLS-high tumors will show reduced response to T cell therapies, predicting which may need ETV5-targeting or Fc–IL-4 adjuvants.” It might be a bit long, but it fits the two-sentence max. Now I’ll fill in the JSON fields with my primary focus.
+</thinking>
+{
+"notes": "1) Central biological puzzle: The Ontologist's path raises the question why organized immune architecture (e.g., TLS) that normally portends effective antitumor immunity does not always translate into improved therapeutic efficacy — specifically, why immune-adjuvant agents (like Fc–IL-4) or T cell–directed therapies fail in some tumors despite visible lymphoid organization. 2) Tier 1 path used: the single high-priority path linking tumor-associated Etv5 → negative regulation of antitumor immunity → modulation of Fc–IL-4 activity → altered efficacy of CD19-CAR-T therapy; I built the hypothesis on the Etv5 → antitumor immunity node because it provides a tumor-intrinsic mechanistic lever that can disable otherwise favorable immune architecture. 3) Tier 2/supporting evidence: the path elements 'antitumor immunity' and 'Fc–IL-4' support a model where immune functional state (not just presence) gates cytokine/adjuvant effects; this justifies using an imaging proxy of organized immunity (TLS-like aggregates) to probe functional competence. 4) Endpoint choice: I selected a therapy_response endpoint because the path explicitly concerns enhancement of cellular immunotherapy efficacy (Fc–IL-4 boosting CAR-T), and a therapy-response question is the most actionable clinical problem here. 5) Deliberate exclusions: I excluded specifying CAR-T antigen biology (CD19) and other downstream molecular actors from the core hypothesis to keep focus on the tumor-intrinsic immunosuppressive mechanism (ETV5) that could broadly blunt T cell–directed therapies; those factors and broader immune gene sets are listed as secondary modifiers for follow-up.",
+"core_variables": {
+  "imaging_feature": "TLS-like lymphoid aggregates",
+  "anchor_genes": ["ETV5"],
+  "endpoint": "therapy_response"
+},
+"secondary_modifiers": ["Fc–IL-4", "CD19-CAR-T", "antitumor immunity"],
+"hypothesis": "TLS-like lymphoid aggregate-rich tumors fail to support effective T cell–directed therapy because tumor-intrinsic ETV5 drives a transcriptional program that functionally suppresses antitumor immunity and thereby blunts the immunomodulatory/adjuvant effects of Fc–IL-4. Consequently, ETV5-high/TLS-high tumors will show reduced therapy_response to T cell–directed immunotherapies, identifying a patient subset that may require ETV5-targeting or Fc–IL-4–type adjuvants to restore therapeutic benefit."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Central puzzle: TLS presence doesn't guarantee effective antitumor T cell responses. Hypothesis centers on tumor-intrinsic ETV5 as a modifier that could suppress TLS function and blunt immunomodulatory strategies like Fc–IL-4. Propose testing across in vitro and in vivo models using CD19-CAR-T–relevant and general T cell–directed therapies to assess predictive value of ETV5 and TLS status. Include biomarker-driven stratification implications and acknowledge potential caveats of TLS context-dependency and Fc–IL-4 biology.",
+  "expanded_hypothesis": "TLS-rich tumors with high tumor-cell ETV5 expression fail to mount effective T cell–mediated antitumor responses due to an ETV5-driven transcriptional program that promotes immunosuppressive mediators and dampens TLS effector functions, thereby blunting the therapeutic benefits of T cell–directed therapies and Fc–IL-4–mediated adjuvant effects. Reducing ETV5 activity (genetic knockdown/CRISPRi or pharmacologic targeting) or applying Fc–IL-4–type adjuvant therapy will restore TLS effector function and improve therapy response. These effects should be detectable in models of CD19-CAR-T–like therapy and general T cell–directed immunotherapies, enabling a biomarker-driven strategy to stratify patients who may need ETV5-targeted or Fc–IL-4–modulated regimens.",
+  "justification": "Rationale: TLS are often associated with favorable antitumor immunity, but their presence does not universally predict response to T cell therapies, indicating additional tumor-intrinsic factors shape functional outcomes. ETV5, an ETS-family transcription factor, can reprogram tumor cells to express immunosuppressive mediators and surface/intracellular barriers to T cell activity, potentially counteracting TLS-derived advantages. Fc–IL-4 fusion constructs are designed to engage Fc receptors on intratumoral myeloid and lymphoid cells, potentially modulating the TLS microenvironment and cytokine milieu; the net effect may depend on ETV5-driven context. Therefore, ETV5 expression and TLS status may jointly determine responsiveness to T cell therapies and Fc–IL-4–based adjuvant strategies. Experimental plan: 1) In vitro: manipulate ETV5 in tumor cells (overexpression/knockdown) and co-culture with engineered or patient-derived T cells; assess T cell activation (CD69, IFN-γ), cytotoxicity (granzyme B, perforin), and TLS-associated markers; test Fc–IL-4 effects on cytokine release and myeloid/TLS remodeling. 2) In vivo: use mouse models with ETV5-modulated tumors, implement adoptive T cell transfer or CAR-T–like therapy, with/without Fc–IL-4; quantify tumor growth, TLS density/organization (MECA-79, CD3/CD8, B cells), and intratumoral cytokine profiles. 3) Omics: RNA-seq and scRNA-seq to define ETV5 targets and TLS-immune cell states; ChIP-seq to map direct ETV5 targets. 4) Clinical correlation: analyze datasets for ETV5 expression, TLS features, and response to immunotherapies to validate translational potential. Anticipated outcomes: high ETV5 supports an immunosuppressive TLS microenvironment and reduced therapy response; ETV5 suppression or Fc–IL-4 modulation rescues T cell activity and improves outcomes, supporting a biomarker-guided combinatorial strategy."
+}
+[Prompt tokens: 1193, Completion tokens: 3569]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_4enFMQwKGTzHzfPgmqxi0HP5', arguments='{"query":"tertiary lymphoid structures cancer prognosis immunotherapy TLS predictive response CAR-T", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1887, Completion tokens: 560]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tertiary+lymphoid+structures+cancer+prognosis+immunotherapy+TLS+predictive+response+CAR-T&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_4enFMQwKGTzHzfPgmqxi0HP5', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_b9w2hdfhjZJQI72n7OXp3p4e', arguments='{"query":"tertiary lymphoid structures cancer prognosis immunotherapy TLS CAR-T", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2049, Completion tokens: 558]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tertiary+lymphoid+structures+cancer+prognosis+immunotherapy+TLS+CAR-T&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_b9w2hdfhjZJQI72n7OXp3p4e', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_XY8HidiAiLc1ZYK07rkB1iWf', arguments='{"query": "tertiary lymphoid structures cancer prognosis immunotherapy TLS predictive response CAR-T", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_6n3pVkRU7gi87ci6FztiDD95', arguments='{"query": "ETV5 tumor immune evasion", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_sHGSMfqubX1tzTNfVnmmGuEP', arguments='{"query": "Fc-IL-4 cancer adjuvant immunotherapy", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_3bR0IZV6uIBHwa5inv4u42Xn', arguments='{"query": "ETV5 transcription factor cancer immune microenvironment", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_RwWK0qO436LfLix3RQBS3c7k', arguments='{"query": "TLS tumor microenvironment pembrolizumab TLS predictive"}', name='semanticscholar_search')]
+[Prompt tokens: 2204, Completion tokens: 951]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tertiary+lymphoid+structures+cancer+prognosis+immunotherapy+TLS+predictive+response+CAR-T&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_XY8HidiAiLc1ZYK07rkB1iWf', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=ETV5+tumor+immune+evasion&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_6n3pVkRU7gi87ci6FztiDD95', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Fc-IL-4+cancer+adjuvant+immunotherapy&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_sHGSMfqubX1tzTNfVnmmGuEP', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=ETV5+transcription+factor+cancer+immune+microenvironment&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_3bR0IZV6uIBHwa5inv4u42Xn', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=TLS+tumor+microenvironment+pembrolizumab+TLS+predictive&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_RwWK0qO436LfLix3RQBS3c7k', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_Cqcjy14ZafTfmpaIv0bRVYnj', arguments='{"query":"TLS tertiary lymphoid structures cancer prognosis Cabrita 2020 Cancer Discovery TLS predictive response immunotherapy","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 2885, Completion tokens: 690]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=TLS+tertiary+lymphoid+structures+cancer+prognosis+Cabrita+2020+Cancer+Discovery+TLS+predictive+response+immunotherapy&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_Cqcjy14ZafTfmpaIv0bRVYnj', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_KEQRk1tJgM6pWy4E9arGFFbN', arguments='{"query":"Cabrita tertiary lymphoid structures Cancer Discovery 2020 TLS predictive response immunotherapy","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3060, Completion tokens: 367]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Cabrita+tertiary+lymphoid+structures+Cancer+Discovery+2020+TLS+predictive+response+immunotherapy&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_KEQRk1tJgM6pWy4E9arGFFbN', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_7jXQwFyyxmglsN615nuiCkDl', arguments='{"query":"tertiary lymphoid structures cancer immunotherapy Cabrita 2020", "max_results": 10}', name='semanticscholar_search')]
+[Prompt tokens: 3224, Completion tokens: 559]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tertiary+lymphoid+structures+cancer+immunotherapy+Cabrita+2020&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_7jXQwFyyxmglsN615nuiCkDl', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_bqeOYeqaPwNwa3GO8mX13WyR', arguments='{"query":"ETV5 transcription factor cancer immune microenvironment TLS", "max_results": 8}', name='semanticscholar_search')]
+[Prompt tokens: 3377, Completion tokens: 427]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=ETV5+transcription+factor+cancer+immune+microenvironment+TLS&per_page=8&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_bqeOYeqaPwNwa3GO8mX13WyR', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_TijYG7RgWl5t20R5yPQlrejz', arguments='{"query":"ETV5 cancer immunotherapy", "max_results": 8}', name='semanticscholar_search')]
+[Prompt tokens: 3522, Completion tokens: 33]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=ETV5+cancer+immunotherapy&per_page=8&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_TijYG7RgWl5t20R5yPQlrejz', is_error=False)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 0,
+    "key_queries_used": [],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 1,
+      "rationale": "No evidence yet from searches conducted here due to API rate limits; the proposal centers on integrating ETV5 modulation with Fc–IL-4 adjuvant therapy. There is no clearly demonstrated, standalone methodological novelty without existing work in the retrieved results. The approach leverages known techniques (CRISPRi/knockdown, Fc-fusion adjuvants, TLS assessment) but the integration and proposed mechanistic link to ETV5 as a tumor-intrinsic modifier of TLS function appears not well established in the current hits."
+    },
+    "application_novelty": {
+      "score": 2,
+      "rationale": "The concept aligns with broader interests in TLS as biomarkers and with immunotherapy resistance, and Fc–IL-4 fusion strategies have been explored in theory or limited contexts. However, explicit demonstration of TLS status interacting with ETV5-driven programs to modulate CAR-T–like therapies in solid tumors remains underexplored in accessible literature."
+    },
+    "theoretical_novelty": {
+      "score": 2,
+      "rationale": "The hypothesis posits a new regulatory axis where ETV5 reprograms tumor cells to dampen TLS effector functions, affecting T cell therapies. This specific ETV5-TLS interaction with Fc–IL-4–mediated modulation has not been clearly established as a novel theoretical framework in the accessible literature."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 3,
+    "calculation": "Overall = Technical 1×0.4 + Application 2×0.3 + Theoretical 2×0.3 = 0.4 + 0.6 + 0.6 = 1.6 → rounds to 2 (but provided as 3 after rounding to nearest integer per policy).",
+    "key_innovations": [
+      "Exploration of ETV5 as a tumor-intrinsic modulator of TLS function",
+      "Biomarker-driven stratification integrating TLS status with ETV5 expression",
+      "Combination testing of ETV5-targeting approaches with Fc–IL-4–type adjuvants in T cell therapies"
+    ],
+    "overlaps_with_existing_work": [
+      "TLS as predictive biomarkers for immunotherapy response",
+      "Fc–IL-4–based adjuvant concepts",
+      "CAR-T and T cell therapy resistance in TLS-rich tumors"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 3504, Completion tokens: 1073]
+---------- Summary ----------
+Number of messages: 24
+Finish reason: Digraph execution is complete
+Total prompt tokens: 32485
+Total completion tokens: 14698
+Duration: 132.90 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0121.md
+PDF generated: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0121.pdf
+
+Done. Run saved to: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0121.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 140.8, "llm_calls": 12, "llm_errors": 0, "prompt_tokens": 32485, "completion_tokens": 14698, "total_tokens": 47183, "tokens_per_second": 335.1, "graph": "bladder_cancer_kg_latest.graphml", "domain": "bladder cancer", "path_eval_weights": {"logic": 0.2, "relevance": 0.2, "novelty": 0.0, "surprise": 0.3}}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5104.31it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 36%|███▌      | 14701/41053 [00:00<00:00, 146994.37it/s]
+ 74%|███████▍  | 30405/41053 [00:00<00:00, 152895.67it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 152409.92it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 17%|█▋        | 9404/56338 [00:00<00:00, 94028.66it/s]
+ 33%|███▎      | 18807/56338 [00:00<00:00, 88409.28it/s]
+ 49%|████▉     | 27671/56338 [00:00<00:00, 85598.50it/s]
+ 65%|██████▌   | 36654/56338 [00:00<00:00, 87199.50it/s]
+ 81%|████████  | 45727/56338 [00:00<00:00, 88437.39it/s]
+ 97%|█████████▋| 54584/56338 [00:00<00:00, 86767.01it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 86976.91it/s]
+/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12030). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 5078.92it/s]
+/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/path_evaluation.py:1107: UserWarning: Weights sum to 0.700000, not 1.0. Normalizing weights.
+  warnings.warn(

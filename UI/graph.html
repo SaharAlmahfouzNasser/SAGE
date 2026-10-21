@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAGE — Knowledge Graph</title>
+
+  <!-- Graphology + Sigma.js v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/graphology@0.25.4/dist/graphology.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sigma@2.4.0/build/sigma.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1e3a5f;
+      --blue:       #2563eb;
+      --blue-mid:   #3b82f6;
+      --blue-light: #dbeafe;
+      --border:     #e2e8f0;
+      --text:       #1e293b;
+      --muted:      #64748b;
+      --xmuted:     #94a3b8;
+      --bg:         #f4f6f9;
+    }
+
+    html, body { height: 100%; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); }
+
+    /* ── TOOLBAR ── */
+    #toolbar {
+      height: 48px; background: var(--navy); color: white;
+      display: flex; align-items: center; gap: 12px; padding: 0 16px;
+      position: relative; z-index: 20; flex-shrink: 0;
+    }
+    .tb-title { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; color: #93c5fd; white-space: nowrap; }
+    .tb-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.15); }
+    .tb-search {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 5px; padding: 5px 10px; font-size: 0.82rem; color: white;
+      width: 200px; font-family: system-ui;
+    }
+    .tb-search::placeholder { color: rgba(255,255,255,0.4); }
+    .tb-search:focus { outline: none; background: rgba(255,255,255,0.15); }
+    .tb-btn {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 5px; padding: 4px 12px; font-size: 0.78rem; color: white;
+      cursor: pointer; font-family: system-ui; white-space: nowrap;
+    }
+    .tb-btn:hover { background: rgba(255,255,255,0.16); }
+    .tb-info { margin-left: auto; font-size: 0.76rem; color: #93c5fd; white-space: nowrap; }
+
+    /* ── BODY ── */
+    #body { display: flex; height: calc(100vh - 48px); }
+
+    /* ── LEFT SIDEBAR ── */
+    #sidebar {
+      width: 200px; flex-shrink: 0; background: white;
+      border-right: 1px solid var(--border); overflow-y: auto; padding: 14px;
+    }
+    .sb-title {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--xmuted); margin-bottom: 10px;
+    }
+    .type-row {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; color: var(--text); padding: 3px 0; cursor: pointer;
+    }
+    .type-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .type-count { margin-left: auto; color: var(--xmuted); font-size: 0.72rem; }
+    .sb-rule { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+    .sb-stat { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text); margin-bottom: 5px; }
+    .sb-stat span { color: var(--xmuted); }
+
+    /* ── SIGMA CANVAS ── */
+    #sigma-wrap { flex: 1; position: relative; overflow: hidden; }
+    #sigma-container { width: 100%; height: 100%; }
+
+    /* Loading overlay */
+    #loading {
+      position: absolute; inset: 0; background: rgba(244,246,249,0.92);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; z-index: 10;
+    }
+    #loading.hidden { display: none; }
+    .spinner { width: 28px; height: 28px; border: 3px solid #e2e8f0; border-top-color: var(--blue-mid); border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-msg { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── RIGHT NODE PANEL ── */
+    #node-panel {
+      width: 230px; flex-shrink: 0; background: white;
+      border-left: 1px solid var(--border); padding: 16px; overflow-y: auto;
+      transition: width 0.2s;
+    }
+    #node-panel.collapsed { width: 0; padding: 0; overflow: hidden; }
+    .np-empty { color: var(--xmuted); font-size: 0.8rem; text-align: center; margin-top: 48px; line-height: 1.6; }
+    .np-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; border-radius: 3px; padding: 2px 8px; color: white; margin-bottom: 8px; }
+    .np-name { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; word-break: break-word; line-height: 1.4; }
+    .np-meta { display: flex; justify-content: space-between; font-size: 0.77rem; color: var(--text); padding: 4px 0; border-bottom: 1px solid #f1f5f9; }
+    .np-meta span { color: var(--xmuted); }
+    .np-edge-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--xmuted); margin: 12px 0 6px; }
+    .np-edge { font-size: 0.76rem; color: var(--text); padding: 4px 0; border-bottom: 1px solid #f8f9fa; line-height: 1.4; }
+    .np-rel { font-size: 0.68rem; color: var(--xmuted); font-style: italic; }
+  </style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <span class="tb-title">SAGE Knowledge Graph</span>
+  <div class="tb-sep"></div>
+  <input class="tb-search" type="text" id="search-input" placeholder="Search nodes…" oninput="onSearch(this.value)" />
+  <div class="tb-sep"></div>
+  <button class="tb-btn" onclick="resetCamera()">Fit view</button>
+  <button class="tb-btn" onclick="resetHighlight()">Clear selection</button>
+  <span class="tb-info" id="tb-info">Loading…</span>
+</div>
+
+<div id="body">
+
+  <!-- SIDEBAR: type filters + stats -->
+  <div id="sidebar">
+    <div class="sb-title">Node Types</div>
+    <div id="type-filter"></div>
+    <hr class="sb-rule" />
+    <div class="sb-title">Stats</div>
+    <div class="sb-stat">All nodes  <span id="sb-nodes">—</span></div>
+    <div class="sb-stat">All edges  <span id="sb-edges">—</span></div>
+    <div class="sb-stat">Shown      <span id="sb-shown">—</span></div>
+    <div class="sb-stat">Avg degree <span id="sb-deg">—</span></div>
+    <hr class="sb-rule" />
+    <div class="sb-title">Navigation</div>
+    <div style="font-size:0.76rem;color:var(--muted);line-height:1.6;">
+      Scroll to zoom<br>
+      Drag to pan<br>
+      Click node for details
+    </div>
+  </div>
+
+  <!-- SIGMA CANVAS -->
+  <div id="sigma-wrap">
+    <div id="loading">
+      <div class="spinner"></div>
+      <div class="loading-msg" id="loading-msg">Fetching graph data…</div>
+    </div>
+    <div id="sigma-container"></div>
+  </div>
+
+  <!-- NODE DETAIL PANEL -->
+  <div id="node-panel">
+    <div class="np-empty">Click any node<br>to see details</div>
+  </div>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   COLOUR PALETTE  (matches index.html)
+══════════════════════════════════════════════════════════ */
+const TYPE_COLORS = {
+  Disease:       '#ef4444',
+  Gene:          '#3b82f6',
+  Drug:          '#10b981',
+  Pathway:       '#f59e0b',
+  Protein:       '#8b5cf6',
+  Process:       '#64748b',
+  Measurement:   '#06b6d4',
+  Method:        '#6366f1',
+  Treatment:     '#22c55e',
+  Cohort:        '#f97316',
+  Phenotype:     '#ec4899',
+  Mutation:      '#dc2626',
+  Variant:       '#7c3aed',
+  ClinicalTrial: '#0ea5e9',
+  Cell:          '#84cc16',
+  Chemical:      '#eab308',
+  Other:         '#94a3b8',
+};
+function nodeColor(type) {
+  return TYPE_COLORS[type] || TYPE_COLORS.Other;
+}
+function hexAlpha(hex, a) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════ */
+let sigmaRenderer = null;
+let graphData     = null;       // raw API response
+let hiddenTypes   = new Set();  // node types toggled off
+let highlighted   = null;       // { nodes: Set, edges: Set } | null
+
+/* ══════════════════════════════════════════════════════════
+   LOAD  GRAPH
+══════════════════════════════════════════════════════════ */
+async function loadGraph() {
+  const params   = new URLSearchParams(window.location.search);
+  const filename = params.get('file');
+  if (!filename) {
+    setMsg('No graph specified. Open this page from the SAGE UI.');
+    return;
+  }
+
+  document.title = `SAGE — ${filename}`;
+  setMsg('Fetching graph data…');
+
+  let data;
+  try {
+    const res = await fetch(`/api/graphs/${encodeURIComponent(filename)}?limit=400`);
+    if (!res.ok) throw new Error(await res.text());
+    data = await res.json();
+  } catch (e) {
+    setMsg('Failed to load graph: ' + e.message);
+    return;
+  }
+
+  graphData = data;
+  const stats = data.stats;
+
+  // Update sidebar stats
+  document.getElementById('sb-nodes').textContent = fmt(stats.nodes);
+  document.getElementById('sb-edges').textContent = fmt(stats.edges);
+  document.getElementById('sb-shown').textContent = `${fmt(stats.shown_nodes)} / ${fmt(stats.nodes)}`;
+  document.getElementById('tb-info').textContent  =
+    `${filename} · showing top ${fmt(stats.shown_nodes)} nodes by degree`;
+
+  // Average degree
+  const nodeEls = data.elements.filter(e => e.data.degree !== undefined);
+  const avgDeg  = nodeEls.length
+    ? (nodeEls.reduce((s, e) => s + e.data.degree, 0) / nodeEls.length).toFixed(1)
+    : '—';
+  document.getElementById('sb-deg').textContent = avgDeg;
+
+  setMsg('Computing layout…');
+  await sleep(30); // yield for repaint
+
+  try {
+    await buildGraph(data);
+  } catch (e) {
+    setMsg('Error rendering graph: ' + e.message);
+    console.error('Graph render error:', e);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   BUILD GRAPHOLOGY GRAPH + LAYOUT
+══════════════════════════════════════════════════════════ */
+async function buildGraph(data) {
+  const graph = new graphology.Graph({ type: 'directed', multi: false });
+
+  const elements = data.elements;
+  const nodeEls  = elements.filter(e => !e.data.source);
+  const edgeEls  = elements.filter(e =>  e.data.source);
+
+  // Map type → cluster angle for initial positioning
+  const allTypes = [...new Set(nodeEls.map(e => e.data.type))];
+  const typeAngle = {};
+  allTypes.forEach((t, i) => {
+    typeAngle[t] = (i / allTypes.length) * 2 * Math.PI;
+  });
+
+  // Add nodes with cluster-seeded positions spread wide for layout
+  nodeEls.forEach(({ data: d }) => {
+    const angle  = typeAngle[d.type] ?? 0;
+    const radius = 20 + Math.random() * 15;
+    const jitter = 8;
+    const x = Math.cos(angle) * radius + (Math.random() - 0.5) * jitter;
+    const y = Math.sin(angle) * radius + (Math.random() - 0.5) * jitter;
+    const size = 3 + Math.pow(d.degree || 1, 0.6) * 1.4;
+
+    graph.addNode(d.id, {
+      label:    d.label,
+      nodeType: d.type,
+      degree:   d.degree || 0,
+      x,
+      y,
+      size,
+      color: nodeColor(d.type),
+    });
+  });
+
+  // Add edges — colored by source node type
+  let edgeIdx = 0;
+  edgeEls.forEach(({ data: d }) => {
+    if (!graph.hasNode(d.source) || !graph.hasNode(d.target)) return;
+    try {
+      const srcColor = graph.getNodeAttribute(d.source, 'color');
+      graph.addEdge(d.source, d.target, {
+        label:     d.label,
+        size:      Math.max(0.5, (d.conf || 0.7) * 1.2),
+        color:     hexAlpha(srcColor, 0.22),
+        baseColor: srcColor,   // stash for highlight restore
+      });
+    } catch (_) { /* skip duplicate edges */ }
+    edgeIdx++;
+  });
+
+  // ── Force-directed layout (linLog mode) ──
+  setMsg('Running layout…');
+  await sleep(30); // yield so the message paints before blocking
+  forceLayout(graph, 300);
+
+  buildSidebar(data.stats.node_types);
+  renderSigma(graph);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FORCE LAYOUT — linLog mode (log attraction prevents dense
+   hubs from collapsing the graph into a ball)
+══════════════════════════════════════════════════════════ */
+function forceLayout(graph, iterations) {
+  const REPULSE  = 200;   // repulsion strength  (tuned for avg-degree ~43)
+  const GRAVITY  = 0.8;   // pulls toward origin so graph stays centered
+  const ids = graph.nodes();
+  const n   = ids.length;
+  const pos = {};
+
+  ids.forEach(id => { const a = graph.getNodeAttributes(id); pos[id] = { x: a.x, y: a.y }; });
+
+  for (let iter = 0; iter < iterations; iter++) {
+    const f = {};
+    ids.forEach(id => { f[id] = { x: 0, y: 0 }; });
+
+    // Repulsion — O(N²), fast enough for N ≤ 400
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const [a, b] = [ids[i], ids[j]];
+        const dx = pos[a].x - pos[b].x, dy = pos[a].y - pos[b].y;
+        const d  = Math.sqrt(dx*dx + dy*dy) || 0.01;
+        const r  = REPULSE / d;
+        f[a].x += r * dx / d;  f[a].y += r * dy / d;
+        f[b].x -= r * dx / d;  f[b].y -= r * dy / d;
+      }
+    }
+
+    // Log-attraction per edge (linLog: log(1+d) instead of d,
+    // so high-degree hubs don't overpower repulsion)
+    graph.edges().forEach(edge => {
+      const [s, t] = graph.extremities(edge);
+      const dx = pos[t].x - pos[s].x, dy = pos[t].y - pos[s].y;
+      const d  = Math.sqrt(dx*dx + dy*dy) || 0.01;
+      const a  = Math.log(1 + d) / d;
+      f[s].x += a * dx;  f[s].y += a * dy;
+      f[t].x -= a * dx;  f[t].y -= a * dy;
+    });
+
+    // Gravity toward origin
+    ids.forEach(id => {
+      const d = Math.sqrt(pos[id].x**2 + pos[id].y**2) || 0.01;
+      f[id].x -= GRAVITY * pos[id].x / d;
+      f[id].y -= GRAVITY * pos[id].y / d;
+    });
+
+    // Apply with capped step size
+    ids.forEach(id => {
+      const mag = Math.sqrt(f[id].x**2 + f[id].y**2) || 0.001;
+      const spd = Math.min(2, 6 / mag);
+      pos[id].x += f[id].x * spd;
+      pos[id].y += f[id].y * spd;
+    });
+  }
+
+  ids.forEach(id => graph.mergeNodeAttributes(id, pos[id]));
+}
+
+/* ══════════════════════════════════════════════════════════
+   SIGMA RENDERER
+══════════════════════════════════════════════════════════ */
+function renderSigma(graph) {
+  const container = document.getElementById('sigma-container');
+
+  if (typeof Sigma === 'undefined') {
+    setMsg('Error: Sigma.js failed to load. Check your network connection and try refreshing.');
+    console.error('Sigma is not defined — CDN script may have failed to load.');
+    return;
+  }
+
+  sigmaRenderer = new Sigma(graph, container, {
+    renderEdgeLabels: false,
+    labelThreshold:   8,
+    minCameraRatio:   0.05,
+    maxCameraRatio:   20,
+
+    nodeReducer: (node, data) => {
+      const res = { ...data };
+      if (hiddenTypes.has(data.nodeType)) return { ...res, hidden: true };
+      if (highlighted) {
+        if (!highlighted.nodes.has(node)) {
+          res.color = 'rgba(200,210,220,0.2)';
+          res.label = '';
+        }
+      }
+      return res;
+    },
+
+    edgeReducer: (edge, data) => {
+      const res = { ...data };
+      if (highlighted) {
+        if (highlighted.edges.has(edge)) {
+          // brighten selected edge: full opacity, use stored base color
+          res.color = hexAlpha(data.baseColor || '#3b82f6', 0.85);
+          res.size  = (data.size || 1) * 2;
+        } else {
+          res.color = 'rgba(200,210,220,0.06)';
+        }
+      }
+      return res;
+    },
+  });
+
+  // Click on node
+  sigmaRenderer.on('clickNode', ({ node }) => {
+    const attrs     = graph.getNodeAttributes(node);
+    const neighbors = new Set(graph.neighbors(node));
+    const edges     = new Set(graph.edges(node));
+    highlighted = { nodes: new Set([node, ...neighbors]), edges };
+    sigmaRenderer.refresh();
+    showPanel(node, attrs, graph);
+  });
+
+  // Click on stage (background) → clear
+  sigmaRenderer.on('clickStage', () => resetHighlight());
+
+  // Hide loading
+  document.getElementById('loading').classList.add('hidden');
+}
+
+/* ══════════════════════════════════════════════════════════
+   SIDEBAR — TYPE FILTERS
+══════════════════════════════════════════════════════════ */
+function buildSidebar(typeCounts) {
+  const sorted = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]);
+  const top    = sorted.slice(0, 14);
+
+  document.getElementById('type-filter').innerHTML = top.map(([type, count]) => `
+    <label class="type-row">
+      <input type="checkbox" checked
+        onchange="toggleType('${type}', this.checked)" />
+      <div class="type-dot" style="background:${nodeColor(type)};"></div>
+      <span>${type}</span>
+      <span class="type-count">${fmt(count)}</span>
+    </label>
+  `).join('');
+}
+
+function toggleType(type, visible) {
+  if (visible) hiddenTypes.delete(type);
+  else         hiddenTypes.add(type);
+  if (sigmaRenderer) sigmaRenderer.refresh();
+}
+
+/* ══════════════════════════════════════════════════════════
+   NODE DETAIL PANEL
+══════════════════════════════════════════════════════════ */
+function showPanel(nodeId, attrs, graph) {
+  const panel = document.getElementById('node-panel');
+  panel.classList.remove('collapsed');
+
+  const color = nodeColor(attrs.nodeType);
+
+  // Connections list (cap at 25)
+  const edgeObjs = graph.edges(nodeId).slice(0, 25).map(edge => {
+    const [src, tgt] = graph.extremities(edge);
+    const otherId    = src === nodeId ? tgt : src;
+    const other      = graph.getNodeAttributes(otherId);
+    const edgeAttrs  = graph.getEdgeAttributes(edge);
+    const dir        = src === nodeId ? '→' : '←';
+    return `<div class="np-edge">${dir} <strong>${other.label}</strong><br>
+      <span class="np-rel">${edgeAttrs.label || ''}</span></div>`;
+  }).join('');
+
+  panel.innerHTML = `
+    <div class="np-badge" style="background:${color};">${attrs.nodeType}</div>
+    <div class="np-name">${attrs.label}</div>
+    <div class="np-meta">Degree <span>${graph.degree(nodeId)}</span></div>
+    <div class="np-meta">Type   <span>${attrs.nodeType}</span></div>
+    <div class="np-edge-title">Connections${graph.edges(nodeId).length > 25 ? ' (top 25)' : ''}</div>
+    ${edgeObjs || '<div class="np-edge" style="color:var(--xmuted);">None in view</div>'}
+  `;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SEARCH
+══════════════════════════════════════════════════════════ */
+function onSearch(query) {
+  if (!sigmaRenderer) return;
+  const q = query.trim().toLowerCase();
+
+  if (!q) { resetHighlight(); return; }
+
+  const graph = sigmaRenderer.getGraph();
+  const matchNodes = new Set();
+  const matchEdges = new Set();
+
+  graph.nodes().forEach(node => {
+    const label = (graph.getNodeAttribute(node, 'label') || '').toLowerCase();
+    if (label.includes(q)) {
+      matchNodes.add(node);
+      graph.edges(node).forEach(e => matchEdges.add(e));
+      graph.neighbors(node).forEach(n => matchNodes.add(n));
+    }
+  });
+
+  highlighted = { nodes: matchNodes, edges: matchEdges };
+  sigmaRenderer.refresh();
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTROLS
+══════════════════════════════════════════════════════════ */
+function resetCamera() {
+  if (!sigmaRenderer) return;
+  sigmaRenderer.getCamera().animatedReset();
+}
+
+function resetHighlight() {
+  highlighted = null;
+  if (sigmaRenderer) sigmaRenderer.refresh();
+  document.getElementById('node-panel').innerHTML =
+    '<div class="np-empty">Click any node<br>to see details</div>';
+  document.getElementById('search-input').value = '';
+}
+
+/* ══════════════════════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════════════════════ */
+function setMsg(msg) {
+  document.getElementById('loading-msg').textContent = msg;
+}
+function fmt(n) {
+  return n == null ? '—' : Number(n).toLocaleString();
+}
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+loadGraph();
+</script>
+
+</body>
+</html>

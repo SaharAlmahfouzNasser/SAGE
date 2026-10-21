@@ -1,0 +1,284 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: SLC6A4 (serotonin transporter) overexpression in bladder urothelial carcinoma directly drives epithelial-mesenchymal transition via Wnt/beta-catenin signaling and predicts resistance to BCG immunotherapy.
+      path_eval_weights: {'logic': 0.0, 'relevance': 0.2, 'novelty': 0.3, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+SLC6A4 (serotonin transporter) overexpression in bladder urothelial carcinoma directly drives epithelial-mesenchymal transition via Wnt/beta-catenin signaling and predicts resistance to BCG immunotherapy.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_NGQnZae8NLpk0banm4v78OiS', arguments='{"sentence":"SLC6A4, bladder urothelial carcinoma, epithelial-mesenchymal transition, Wnt/beta-catenin signaling, BCG immunotherapy"}', name='generate_path_from_sentence')]
+[Prompt tokens: 3698, Completion tokens: 2424]
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content='epithelial-mesenchymal transition||Process -- is crucial for -- metastatic spread||Process -- implicates -- Wnt/beta-catenin signal pathway||Pathway -- implicates -- metastatic spread||Process -- affects -- radiation therapy||Treatment -- combined with -- immunotherapy||Drug -- treated with -- bladder cancer||Disease -- treats -- bacille Calmette-Guérin (BCG) therapy||Drug -- bind to -- urothelial cells||Cell -- bind to -- bacille Calmette-Guérin (BCG) therapy||Drug -- treats -- bladder cancer||Disease -- was diagnosed with -- patients||Cohort -- were obtained from -- Breast||Tissue -- is characterized by -- transitional stages||Process', name='generate_path_from_sentence', call_id='call_NGQnZae8NLpk0banm4v78OiS', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+epithelial-mesenchymal transition||Process -- is crucial for -- metastatic spread||Process -- implicates -- Wnt/beta-catenin signal pathway||Pathway -- implicates -- metastatic spread||Process -- affects -- radiation therapy||Treatment -- combined with -- immunotherapy||Drug -- treated with -- bladder cancer||Disease -- treats -- bacille Calmette-Guérin (BCG) therapy||Drug -- bind to -- urothelial cells||Cell -- bind to -- bacille Calmette-Guérin (BCG) therapy||Drug -- treats -- bladder cancer||Disease -- was diagnosed with -- patients||Cohort -- were obtained from -- Breast||Tissue -- is characterized by -- transitional stages||Process
+---------- TextMessage (ontologist) ----------
+### Case B: Single Path
+
+### Definitions:
+- **[Node 1]:** epithelial-mesenchymal transition (EMT) — a program by which epithelial cells lose polarity and cell-cell adhesion, acquire mesenchymal traits, and gain enhanced migratory/invasive capacity. Mechanistically, EMT facilitates disengagement from the primary tumor and enables invasion, contributing to metastatic potential. In the context of bladder cancer biology, EMT can modulate how tumor cells disseminate and respond to local therapies such as radiation or immune-based treatments.
+- **[Node 2]:** metastatic spread — the process by which cancer cells disseminate from a primary site to distant organs, underpinned by EMT-driven invasion, intravasation, survival in circulation, extravasation, and colonization. This is a core determinant of prognosis and therapeutic strategy.
+- **[Node 3]:** Wnt/beta-catenin signaling pathway — canonical Wnt signaling that stabilizes and accumulates beta-catenin, enabling its nuclear translocation and transcription of target genes that promote proliferation, survival, and EMT-associated programs. This pathway is a well-established driver of metastatic traits in several cancers.
+- **[Node 4]:** metastatic spread — (duplicate concept) ongoing dissemination of tumor cells; in this path, linked as an outcome influenced by signaling pathways.
+- **[Node 5]:** radiation therapy — application of ionizing radiation to induce DNA damage and tumor cell death; effectiveness and immune-modulatory impact can be affected by tumor biology, microenvironment, and prior metastatic burden.
+- **[Node 6]:** immunotherapy — therapeutic strategies that enhance or unleash the host immune response against tumors (e.g., checkpoint inhibitors, adoptive cell therapies); can synergize with radiation through heightened antigen presentation and immune priming.
+- **[Node 7]:** bladder cancer — malignancy arising from the bladder urothelium (predominantly urothelial carcinoma); treatment decisions often involve intravesical therapies and systemic modalities depending on stage.
+- **[Node 8]:** bacille Calmette-Guérin (BCG) therapy — intravesical immunotherapy using attenuated Mycobacterium bovis to provoke local immune activation, reducing recurrence in non-muscle-invasive bladder cancer.
+- **[Node 9]:** urothelial cells — the cell type lining the bladder lumen; interactions with BCG are central to the efficacy and mechanism of intravesical BCG.
+- **[Node 10]:** bacille Calmette-Guérin (BCG) therapy — (duplicate reference) see Node 8; formulation and activity remain as described.
+- **[Node 11]:** bladder cancer — (duplicate reference) see Node 7; emphasizes disease context.
+- **[Node 12]:** patients — individuals in whom disease status and treatment responses are observed; a cohort used for study.
+- **[Node 13]:** Breast — tissue/source label in the stated cohort; indicates the origin of some samples or data, though this is discordant with bladder cancer biology and the BCG therapy theme.
+- **[Node 14]:** Tissue — biological tissue sample/type used for analysis or characterization.
+- **[Node 15]:** transitional stages — refers to intermediate or evolving histological/molecular states within tissue samples (e.g., progression through disease or developmental stages).
+- **[Node 16]:** Process — a generic biological process category; used as an abstract node anchoring the final relationship.
+
+### Relationships:
+1. **[Node 1] → [is crucial for] → [Node 2]:** EMT drives loss of epithelial characteristics and acquisition of migratory, invasive traits that are essential for tumor cells to invade locally and disseminate, setting the stage for metastatic spread. This mechanistic link supports the hypothesis that targeting EMT could reduce metastatic potential and modify sensitivity to therapies.
+2. **[Node 2] → [implicates] → [Node 3]:** The metastatic cascade engages signaling networks (including Wnt/beta-catenin) that promote survival, EMT features, and colonization of distant sites; thus, metastasis implicates canonical Wnt signaling as a driver of invasive behavior.
+3. **[Node 3] → [implicates] → [Node 4]:** Activation of Wnt/beta-catenin signaling can further promote or sustain metastatic dissemination by upregulating EMT programs and pro-survival genes, reinforcing a feed-forward mechanism for spread.
+4. **[Node 4] → [affects] → [Node 5]:** The extent and pattern of metastatic spread can influence radiotherapy planning and response (e.g., burden, microenvironment, and radiosensitivity at metastatic sites), impacting treatment outcomes.
+5. **[Node 5] → [combined with] → [Node 6]:** Radiation therapy can synergize with immunotherapy by increasing tumor antigen release, enhancing immune recognition, and enabling more robust anti-tumor responses compared with each modality alone.
+6. **[Node 7] → [treats] → [Node 8]:** Bladder cancer is treated with BCG therapy in the non-muscle-invasive setting to induce local immune responses and reduce recurrence risk.
+7. **[Node 8] → [binds to] → [Node 9]:** BCG therapy interacts with urothelial cells, with binding and activation of local innate and adaptive immune mechanisms contributing to anti-tumor activity.
+8. **[Node 9] → [bind to] → [Node 10]:** Urothelial cells bind to BCG (reiterating the interaction needed for immune activation and therapeutic effect).
+9. **[Node 10] → [treats] → [Node 11]:** BCG therapy treats bladder cancer by initiating a local immune response that helps control residual tumor cells.
+10. **[Node 11] → [was diagnosed with] → [Node 12]:** Bladder cancer was diagnosed in the cohort of patients, establishing the disease context for the dataset.
+11. **[Node 12] → [cohort] → [Node 13 Breast]:** The patient cohort was described as “from Breast” in the provided path, indicating a potential mismatch between disease context and cohort source; this highlights data provenance issues that would need resolution in real-world interpretation.
+12. **[Node 13] → [Tissue] → [Node 14]:** Breast-derived tissue is described/characterized as tissue in the dataset, establishing a material context for analysis.
+13. **[Node 14] → [is characterized by] → [Node 15]:** The tissue is described by transitional stages, suggesting dynamic or evolving histologic/molecular states relevant to analysis.
+14. **[Node 15] → [is part of] → [Node 16] (Process):** Transitional stages are embedded within broader biological processes, signposting a general mechanistic frame for interpretation.
+
+### Clinical/Research Significance:
+- The core narrative suggests that EMT and Wnt/beta-catenin signaling cooperate to enable metastatic spread, which in turn can modulate sensitivity to radiation therapy and shape responses to immunotherapy. The BCG-bladder cancer axis emphasizes how intravesical immunotherapy leverages urothelial biology to drive local anti-tumor immunity, offering a potential integration point with radiotherapy and systemic immunotherapies. However, the path includes inconsistencies (e.g., a Breast-derived cohort linked to bladder cancer therapy), underscoring the need for careful data curation before drawing mechanistic conclusions or proposing clinical experiments. This path inspires hypotheses about combined modality strategies and the importance of tumor origin and microenvironment in shaping therapy outcomes, but requires cleaner, disease-matched data to validate.
+[Prompt tokens: 1690, Completion tokens: 6920]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Evaluating gene selections**
+
+I need to produce JSON notes that focus on core variables: imaging features (one of three) and up to two Tier 1 anchor genes. However, the Ontologist only provided a single path without specific genes, just mentioning pathways like Wnt/beta-catenin and EMT. I have to stick to the genes mentioned, such as CTNNB1 and others, but I can't invent any new genes or features that weren't presented. The dataset info does include some genes, but the challenge remains.**Deciding on molecular features**
+
+The Ontologist didn't list specific genes, but it does allow for anchor genes from Tier 1. So, if no genes are presented, I might consider using molecular features like "Wnt/beta-catenin pathway activation" as an anchor instead of specific genes. The Focusing Rule allows for 1-2 anchor genes or molecular features. I need to choose an imaging feature too; options include TIL density, TLS-like aggregates, or stromal-to-tumor ratio, which seems to fit with EMT since it relates to stroma interactions and desmoplasia.**Choosing anchor features and endpoints**
+
+I’m looking at anchor genes or molecular features like "Wnt/beta-catenin pathway activation" and the "EMT program," but I need to limit it to 1-2 anchors. I think I can combine "Wnt/beta-catenin activation" and "EMT status" but that might be two features. For the primary endpoint, since metastasis influences survival, I'm considering PFI (progression-free interval) as it ties to recurrence and progression. It seems appropriate for this path focused on metastatic spread. I’ll also need to craft a hypothesis that asks why tumors with a high stromal-to-tumor ratio sometimes still progress.**Defining mechanistic claims and modifiers**
+
+I’m crafting a mechanistic claim that Wnt-driven EMT creates invasive tumor cells in stromal-rich regions, allowing them to evade radiation and immunotherapy. I need to keep it to two sentences that convey that core idea and its predicted clinical consequence. For secondary modifiers, I can include relevant genes or molecular features; the NABA matrisome components like COL1A1 and FN1 are good candidates. While CTNNB1 seems fitting for beta-catenin, I can't include it since it's not listed in the Ontologist's nodes.**Clarifying gene usage and hypothesis framing**
+
+I’m trying to determine if I can include CTNNB1 since Wnt/beta-catenin is present in the ontologist. It mentions not to invent genes not provided, so I should avoid using specific gene names except those in the dataset. I could use molecular features as anchors, like "Wnt/beta-catenin pathway activation" and "EMT program activation." For secondary modifiers, I’ll include NABA_CORE_MATRISOME genes and T-cell exhaustion markers that were in the dataset. I’ll frame the hypothesis as a mechanistic claim rather than a question while ensuring I keep within the limits for imaging features, anchor genes, and endpoints. I’ll explain any exclusions in notes and assemble the JSON accordingly.
+</thinking>
+{
+"notes": "1) Central biological puzzle: The ontologist path links EMT and Wnt/beta-catenin signaling to metastatic spread and suggests that metastatic biology alters response to radiation/immunotherapy. The key puzzle is: why do tumors with a stromal-rich histology (transitional/stromal states) still progress and resist combined modality therapy despite abundant stroma that might favor immune priming or radiation delivery? 2) Tier 1 paths used: (a) EMT → metastatic spread and (b) Wnt/beta-catenin signaling → EMT/metastasis. I built on these because they provide a clear mechanistic axis whereby Wnt activation enforces EMT and invasive phenotypes that can localize to stromal niches. 3) Tier 2 supporting evidence: the ontologist path emphasized effects of metastatic burden on radiotherapy and the synergy between radiation and immunotherapy; dataset gene sets (matrisome ECM genes and T-cell exhaustion markers) support testing stromal and immune-modulatory modifiers. 4) Endpoint choice rationale: PFI (progression-free interval) is chosen because the mechanistic question centers on recurrence/metastatic progression and therapy resistance rather than long-term mortality; PFI is sensitive to early dissemination/recurrence driven by EMT/Wnt programs. 5) Deliberate exclusions: I excluded the bladder/BCG-specific nodes and urothelial context because they are discordant with the cohort (Breast) and would confound a breast-cancer-focused mechanistic question; I also excluded explicit single-gene claims (e.g., CTNNB1) to avoid inventing genes not listed by the ontologist, instead using pathway/program-level anchors.",
+"core_variables": {
+  "imaging_feature": "Stromal-to-tumor ratio (TSR)",
+  "anchor_genes": [
+    "Wnt/beta-catenin pathway activation",
+    "EMT program activation"
+  ],
+  "endpoint": "PFI"
+},
+"secondary_modifiers": [
+  "COL1A1",
+  "FN1",
+  "PDCD1",
+  "CTLA4"
+],
+"hypothesis": "Wnt/beta-catenin–activated tumors drive EMT programs that generate stromal-resident, invasive cell states; as a result, high stromal-to-tumor ratio (TSR) tumors with active Wnt/EMT signaling preferentially progress via early dissemination and are resistant to the progression-delaying effects of radiotherapy plus immunotherapy. Clinically, this mechanism predicts shorter progression-free interval (PFI) for TSR-high tumors harboring elevated Wnt/EMT activation despite extensive stroma."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Notes should be high-level and avoid revealing step-by-step reasoning; focus on design constraints and key decisions (anchors, imaging feature, endpoint, exclusions).",
+  "expanded_hypothesis": "In tumors with high stromal-to-tumor ratio (TSR), co-activation of the Wnt/beta-catenin pathway and the EMT program drives an invasive, stromal-associated tumor cell state that facilitates early dissemination and reduces sensitivity to radiotherapy plus immunotherapy. Consequently, TSR-high tumors with active Wnt/EMT signaling will show shorter progression-free interval (PFI) and higher early progression rates than TSR-low or Wnt/EMT-inactive tumors. Anchors: Imaging feature — TSR; Molecular anchors — Wnt/beta-catenin pathway activation; EMT program activation. Endpoint: PFI. Secondary modifiers to contextualize immune and extracellular matrix status include COL1A1, FN1 (matrisome components) and immune checkpoints PDCD1 and CTLA4 as markers of T-cell exhaustion/immune context."
+  ,
+  "justification": "Rationale: Wnt signaling promotes EMT and invasive behavior in cancer cells, contributing to metastasis and therapy resistance. Desmoplastic stroma, captured by TSR, often correlates with ECM remodeling and immune modulation; COL1A1 and FN1 are core matrisome components linked to stromal structure and invasion. Immune checkpoints PDCD1 and CTLA4 reflect T-cell exhaustion and may mediate immunotherapy response in a stroma-rich milieu. Together, TSR and pathway-level anchors (Wnt/EMT) target the functional tumor-stroma-immune axis driving progression and resistance. The study design yields testable predictions: (1) an interaction between TSR and Wnt/EMT activation predicts shortened PFI; (2) TSR-high, Wnt/EMT-active tumors show reduced benefit from radiotherapy plus immunotherapy compared with TSR-low or Wnt/EMT-inactive tumors; (3) ECM and immune context modifiers (COL1A1, FN1, PDCD1, CTLA4) modulate this effect. Experimental approaches include: retrospective analyses integrating imaging (TSR) with transcriptomic signatures of Wnt/EMT; validation in independent cohorts; and mechanistic in vitro/in vivo assays (e.g., 3D co-cultures with stromal components, EMT and ECM readouts, and radiation/immunotherapy response assays) to establish causality while respecting the constraint of anchor features limited to pathway-level markers and listed modifiers."
+}
+[Prompt tokens: 1474, Completion tokens: 3349]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_PFsOlNfFWafXQXRm4d2EBWbD', arguments='{"query": "tumor-stroma ratio TSR radiotherapy prognosis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_0hDmQIUCYAmjYXOXho4mDVI0', arguments='{"query": "Wnt/β-catenin EMT cancer immunotherapy resistance", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_KuXgigv2I8jjUAZiveQj39Zs', arguments='{"query": "EMT radiotherapy resistance cancer", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_nHgDqkqqbPaCoWbn1bg4q9mA', arguments='{"query": "COL1A1 FN1 ECM cancer prognosis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_h311F7q5mWVZDPzzfwZ8Vs1w', arguments='{"query": "PDCD1 CTLA4 tumor microenvironment stromal cancer immunotherapy resistance", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_MGVVMypaBkdHBKtCFPsemyWS', arguments='{"query": "Wnt/beta-catenin immunotherapy exclusion CD8 tumor", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_klvkozfvvkJVNCdc3O1efp3Z', arguments='{"query": "tumor stroma imaging TSR meta-analysis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_846ikbUtu5TEcXhnHeTE46aK', arguments='{"query": "Wnt EMT invasion early dissemination metastasis cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1667, Completion tokens: 1178]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor-stroma+ratio+TSR+radiotherapy+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_PFsOlNfFWafXQXRm4d2EBWbD', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Wnt%2F%CE%B2-catenin+EMT+cancer+immunotherapy+resistance&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_0hDmQIUCYAmjYXOXho4mDVI0', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=EMT+radiotherapy+resistance+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_KuXgigv2I8jjUAZiveQj39Zs', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=COL1A1+FN1+ECM+cancer+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_nHgDqkqqbPaCoWbn1bg4q9mA', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PDCD1+CTLA4+tumor+microenvironment+stromal+cancer+immunotherapy+resistance&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_h311F7q5mWVZDPzzfwZ8Vs1w', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Wnt%2Fbeta-catenin+immunotherapy+exclusion+CD8+tumor&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_MGVVMypaBkdHBKtCFPsemyWS', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor+stroma+imaging+TSR+meta-analysis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_klvkozfvvkJVNCdc3O1efp3Z', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Wnt+EMT+invasion+early+dissemination+metastasis+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_846ikbUtu5TEcXhnHeTE46aK', is_error=False)]
+SAGE_METRICS: {"duration_seconds": 139.6, "llm_calls": 4, "llm_errors": 1, "prompt_tokens": 8529, "completion_tokens": 13871, "total_tokens": 22400, "tokens_per_second": 160.5, "failed": true}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5019.06it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 36%|███▌      | 14642/41053 [00:00<00:00, 146405.48it/s]
+ 71%|███████▏  | 29283/41053 [00:00<00:00, 145437.56it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 146024.03it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 16%|█▋        | 9276/56338 [00:00<00:00, 92756.33it/s]
+ 33%|███▎      | 18552/56338 [00:00<00:00, 91628.35it/s]
+ 49%|████▉     | 27716/56338 [00:00<00:00, 90800.90it/s]
+ 65%|██████▌   | 36797/56338 [00:00<00:00, 89642.29it/s]
+ 81%|████████  | 45763/56338 [00:00<00:00, 89169.83it/s]
+ 97%|█████████▋| 54681/56338 [00:00<00:00, 86243.69it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 87015.47it/s]
+Error processing publish message for novelty_critic_agent_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 67, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 485, in on_message_impl
+    return await h(self, message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 268, in wrapper
+    return_value = await func(self, message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 133, in handle_request
+    async for msg in self._agent.on_messages_stream(self._message_buffer, ctx.cancellation_token):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_message_filter_agent.py", line 183, in on_messages_stream
+    async for item in self._wrapped_agent.on_messages_stream(filtered, cancellation_token):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 991, in on_messages_stream
+    async for output_event in self._process_model_result(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1263, in _process_model_result
+    async for llm_output in cls._call_llm(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1109, in _call_llm
+    model_result = await model_client.create(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_ext/models/openai/_openai_client.py", line 704, in create
+    result: Union[ParsedChatCompletion[BaseModel], ChatCompletion] = await future
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 90, in patched_async_create
+    resp = await orig_async_create(self, *args, **kwargs)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 2877, in create
+    return await self._post(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+Error processing publish message for path_generation_agent_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for ontologist_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for scientist_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for hypothesis_expansion_agent_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for coding_tasks_agent_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for summary_agent_1e230e43-ee8d-4fdf-8440-85ead30a62b5/1e230e43-ee8d-4fdf-8440-85ead30a62b5
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Traceback (most recent call last):
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 261, in <module>
+    asyncio.run(main())
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 246, in main
+    await sci_agents.run_with_console(message=args.query, save_to=save_to)
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/hypothesis_generation_pipeline_graph.py", line 426, in run_with_console
+    await CustomConsole(self.graph_flow.run_stream(task=message), output_stats=True, file_path=save_to)
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/modifiedAutogen/console.py", line 134, in CustomConsole
+    async for message in stream:
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_base_group_chat.py", line 554, in run_stream
+    raise RuntimeError(str(message.error))
+RuntimeError: BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+Traceback:
+Traceback (most recent call last):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 133, in handle_request
+    async for msg in self._agent.on_messages_stream(self._message_buffer, ctx.cancellation_token):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_message_filter_agent.py", line 183, in on_messages_stream
+    async for item in self._wrapped_agent.on_messages_stream(filtered, cancellation_token):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 991, in on_messages_stream
+    async for output_event in self._process_model_result(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1263, in _process_model_result
+    async for llm_output in cls._call_llm(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1109, in _call_llm
+    model_result = await model_client.create(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_ext/models/openai/_openai_client.py", line 704, in create
+    result: Union[ParsedChatCompletion[BaseModel], ChatCompletion] = await future
+
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 90, in patched_async_create
+    resp = await orig_async_create(self, *args, **kwargs)
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 2877, in create
+    return await self._post(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+

@@ -1,0 +1,423 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: Identify a prognostic biomarker for non-muscle-invasive bladder cancer (NMIBC) using only gene-expression and transcriptomic features.
+      path_eval_weights: {'logic': 0.0, 'relevance': 0.2, 'novelty': 0.3, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+Identify a prognostic biomarker for non-muscle-invasive bladder cancer (NMIBC) using only gene-expression and transcriptomic features.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_JXmrGzuRK5F1payfKHXeTj8r', arguments='{"source_entity":"non-muscle-invasive bladder cancer (NMIBC)","target_type":"Biomarker","max_results":30}', name='find_related_entities')]
+
+============================================================
+📋 PATH FINDING (validation will be done AFTER path finding)
+============================================================
+Found 47 nodes of type 'Biomarker'
+============================================================
+
+Limited to 30 nodes for path calculation
+
+🔍 Step 1: Finding paths to 30 target nodes...
+[Prompt tokens: 3679, Completion tokens: 1326]
+   Progress: 10/30
+   Progress: 20/30
+   Progress: 30/30
+
+✅ Found 30 paths
+
+============================================================
+✅ PATH FINDING AND VALIDATION COMPLETE
+============================================================
+Total target nodes found: 47
+Successful paths: 30/30
+============================================================
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content="✅ Found 30 paths from 'non-muscle-invasive bladder cancer (NMIBC)' to 'Biomarker'\nEvaluated and ranked by: Logic(0.0) + Relevance(0.2) + Novelty(0.3) + Surprise(0.3)\n\nTop 10 Paths (sorted by total score):\n\n1. Path to 'biomarkers||Biomarker' (length: 9) ⭐ Total: 0.752\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is prevalent with significant morbidity and mortality rates -- || -- is one of the fibrogenic growth factors -- TGF-β||Protein -- is recognized as -- biomarkers||Biomarker\n   Logic: 0.753 | Relevance: 0.647 | Novelty: 0.573 | Surprise: 1.000\n\n2. Path to 'an independent prognostic factor for bladder cancer||Biomarker' (length: 7) ⭐ Total: 0.501\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- MSH6||Gene -- is identified as -- an independent prognostic factor for bladder cancer||Biomarker\n   Logic: 0.724 | Relevance: 0.703 | Novelty: 0.687 | Surprise: 0.180\n\n3. Path to 'accessibility of established biomarkers||Biomarker' (length: 11) ⭐ Total: 0.489\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was diagnosed with -- patients||Cohort -- is used to select treatment for -- MSI||Process -- has emerged as -- AI-based biomarkers||Biomarker -- could improve -- accessibility of established biomarkers||Biomarker\n   Logic: 0.804 | Relevance: 0.626 | Novelty: 0.699 | Surprise: 0.188\n\n4. Path to 'liquid biopsy biomarkers||Biomarker' (length: 9) ⭐ Total: 0.472\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker\n   Logic: 0.738 | Relevance: 0.693 | Novelty: 0.618 | Surprise: 0.179\n\n5. Path to 'selected urine-DNA methylation biomarkers||Biomarker' (length: 7) ⭐ Total: 0.467\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker\n   Logic: 0.816 | Relevance: 0.743 | Novelty: 0.505 | Surprise: 0.245\n\n6. Path to 'SARIFA-positivity||Biomarker' (length: 11) ⭐ Total: 0.464\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- is the third most common cancer -- colorectal cancer||Disease -- mutated in -- BRAF V600E||Mutation -- is not associated with -- SARIFA-positivity||Biomarker\n   Logic: 0.699 | Relevance: 0.683 | Novelty: 0.590 | Surprise: 0.193\n\n7. Path to 'a prognostically adverse biomarker||Biomarker' (length: 9) ⭐ Total: 0.448\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- expressed in; is expressed in -- E-FABP||Protein -- is associated with -- Lymph node metastasis||Symptom -- is -- a prognostically adverse biomarker||Biomarker\n   Logic: 0.761 | Relevance: 0.654 | Novelty: 0.638 | Surprise: 0.119\n\n8. Path to 'pZVR||Biomarker' (length: 9) ⭐ Total: 0.441\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the most likely causative factor -- inflammation||Process -- is associated with -- prostate cancer||Disease -- is associated with; remained a strong independent predictor of -- pZVR||Biomarker\n   Logic: 0.709 | Relevance: 0.656 | Novelty: 0.655 | Surprise: 0.084\n\n9. Path to 'prostate-specific antigen (PSA)||Biomarker' (length: 9) ⭐ Total: 0.441\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the most likely causative factor -- inflammation||Process -- is associated with -- prostate cancer||Disease -- is associated with -- prostate-specific antigen (PSA)||Biomarker\n   Logic: 0.705 | Relevance: 0.665 | Novelty: 0.648 | Surprise: 0.084\n\n10. Path to 'tumour mutational burden (TMB)||Biomarker' (length: 7) ⭐ Total: 0.441\n   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was analyzed for its correlation with -- risk score||Measurement -- showed a negative relevance to -- tumour mutational burden (TMB)||Biomarker\n   Logic: 0.744 | Relevance: 0.698 | Novelty: 0.517 | Surprise: 0.193\n\n======================================================================\n📋 INSTRUCTIONS FOR ONTOLOGIST:\n======================================================================\nYou have received 10 ranked candidate paths above.\n\nTask: Select and analyze the TOP 10 most scientifically interesting paths.\n\nRequired Format:\n1. PATH SELECTION: List all 10 selected paths with brief selection rationale\n2. DETAILED ANALYSIS: For each of the 10 paths, provide:\n   - Key Definitions (2-4 sentences per term)\n   - Relationship Analysis (2-3 sentences per relationship)\n   - Clinical/Research Significance (2-3 sentences)\n\nSelection Criteria (prioritize paths with):\n  • High total score (Logic + Relevance + Novelty + Surprise)\n  • Novel biological connections\n  • Clear therapeutic or biomarker potential\n  • Strong clinical relevance\n  • Diversity across different mechanisms\n\nNote: Ensure all 10 paths are analyzed in detail.\n======================================================================\n", name='find_related_entities', call_id='call_JXmrGzuRK5F1payfKHXeTj8r', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+✅ Found 30 paths from 'non-muscle-invasive bladder cancer (NMIBC)' to 'Biomarker'
+Evaluated and ranked by: Logic(0.0) + Relevance(0.2) + Novelty(0.3) + Surprise(0.3)
+
+Top 10 Paths (sorted by total score):
+
+1. Path to 'biomarkers||Biomarker' (length: 9) ⭐ Total: 0.752
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is prevalent with significant morbidity and mortality rates -- || -- is one of the fibrogenic growth factors -- TGF-β||Protein -- is recognized as -- biomarkers||Biomarker
+   Logic: 0.753 | Relevance: 0.647 | Novelty: 0.573 | Surprise: 1.000
+
+2. Path to 'an independent prognostic factor for bladder cancer||Biomarker' (length: 7) ⭐ Total: 0.501
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- MSH6||Gene -- is identified as -- an independent prognostic factor for bladder cancer||Biomarker
+   Logic: 0.724 | Relevance: 0.703 | Novelty: 0.687 | Surprise: 0.180
+
+3. Path to 'accessibility of established biomarkers||Biomarker' (length: 11) ⭐ Total: 0.489
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was diagnosed with -- patients||Cohort -- is used to select treatment for -- MSI||Process -- has emerged as -- AI-based biomarkers||Biomarker -- could improve -- accessibility of established biomarkers||Biomarker
+   Logic: 0.804 | Relevance: 0.626 | Novelty: 0.699 | Surprise: 0.188
+
+4. Path to 'liquid biopsy biomarkers||Biomarker' (length: 9) ⭐ Total: 0.472
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker
+   Logic: 0.738 | Relevance: 0.693 | Novelty: 0.618 | Surprise: 0.179
+
+5. Path to 'selected urine-DNA methylation biomarkers||Biomarker' (length: 7) ⭐ Total: 0.467
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker
+   Logic: 0.816 | Relevance: 0.743 | Novelty: 0.505 | Surprise: 0.245
+
+6. Path to 'SARIFA-positivity||Biomarker' (length: 11) ⭐ Total: 0.464
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- is the third most common cancer -- colorectal cancer||Disease -- mutated in -- BRAF V600E||Mutation -- is not associated with -- SARIFA-positivity||Biomarker
+   Logic: 0.699 | Relevance: 0.683 | Novelty: 0.590 | Surprise: 0.193
+
+7. Path to 'a prognostically adverse biomarker||Biomarker' (length: 9) ⭐ Total: 0.448
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- expressed in; is expressed in -- E-FABP||Protein -- is associated with -- Lymph node metastasis||Symptom -- is -- a prognostically adverse biomarker||Biomarker
+   Logic: 0.761 | Relevance: 0.654 | Novelty: 0.638 | Surprise: 0.119
+
+8. Path to 'pZVR||Biomarker' (length: 9) ⭐ Total: 0.441
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the most likely causative factor -- inflammation||Process -- is associated with -- prostate cancer||Disease -- is associated with; remained a strong independent predictor of -- pZVR||Biomarker
+   Logic: 0.709 | Relevance: 0.656 | Novelty: 0.655 | Surprise: 0.084
+
+9. Path to 'prostate-specific antigen (PSA)||Biomarker' (length: 9) ⭐ Total: 0.441
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the most likely causative factor -- inflammation||Process -- is associated with -- prostate cancer||Disease -- is associated with -- prostate-specific antigen (PSA)||Biomarker
+   Logic: 0.705 | Relevance: 0.665 | Novelty: 0.648 | Surprise: 0.084
+
+10. Path to 'tumour mutational burden (TMB)||Biomarker' (length: 7) ⭐ Total: 0.441
+   non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was analyzed for its correlation with -- risk score||Measurement -- showed a negative relevance to -- tumour mutational burden (TMB)||Biomarker
+   Logic: 0.744 | Relevance: 0.698 | Novelty: 0.517 | Surprise: 0.193
+
+======================================================================
+📋 INSTRUCTIONS FOR ONTOLOGIST:
+======================================================================
+You have received 10 ranked candidate paths above.
+
+Task: Select and analyze the TOP 10 most scientifically interesting paths.
+
+Required Format:
+1. PATH SELECTION: List all 10 selected paths with brief selection rationale
+2. DETAILED ANALYSIS: For each of the 10 paths, provide:
+   - Key Definitions (2-4 sentences per term)
+   - Relationship Analysis (2-3 sentences per relationship)
+   - Clinical/Research Significance (2-3 sentences)
+
+Selection Criteria (prioritize paths with):
+  • High total score (Logic + Relevance + Novelty + Surprise)
+  • Novel biological connections
+  • Clear therapeutic or biomarker potential
+  • Strong clinical relevance
+  • Diversity across different mechanisms
+
+Note: Ensure all 10 paths are analyzed in detail.
+======================================================================
+
+---------- TextMessage (ontologist) ----------
+### HIERARCHICAL PATH TRIAGE
+
+I have reviewed 10 paths and organized them into three tiers.
+
+---
+
+## TIER 1 — CORE AXIS (3 paths)
+
+These paths provide the strongest, most testable mechanistic backbone for a biomarker-centric hypothesis in NMIBC.
+
+### CORE PATH 1: Transforming growth factor beta (TGF-β) as a biomarker axis
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is prevalent with significant morbidity and mortality rates -- || -- is one of the fibrogenic growth factors -- TGF-β||Protein -- is recognized as -- biomarkers||Biomarker
+
+**Role in core axis:** Positions TGF-β as a fibrogenic/EMT-promoting cytokine that can be detected as a biomarker signal in NMIBC, linking tumor biology to measurable readouts.
+
+#### Key Definitions:
+- **NMIBC:** Bladder cancer confined to the urothelium or subepithelial tissues; clinically important as a target for non-invasive biomarkers due to surveillance and recurrence risk.
+- **TGF-β (TGFB1 family):** A cytokine family that drives fibroplasia, ECM remodeling, and EMT; in tumor contexts it can promote a pro-tibroblastic, immunosuppressive microenvironment and influence invasion potential.
+- **Biomarker:** A measurable indicator (protein, cytokine, methylation pattern, etc.) used to infer tumor biology, prognosis, or treatment response.
+  
+#### Relationship Analysis:
+1. **NMIBC → is classified based on → bladder cancer:** Defines disease categorization context; this matters because biomarker panels often hinge on the clinical classification of NMIBC vs. muscle-invasive disease.
+2. **TGF-β → is a fibrogenic growth factor:** Establishes a mechanistic pathway by which NMIBC could remodel its microenvironment and influence biomarker signals (e.g., ECM components, EMT markers).
+3. **TGF-β → is recognized as → biomarkers:** Frames TGF-β-related readouts (e.g., TGF-β signaling activity, downstream gene signatures) as clinically actionable biomarkers in NMIBC.
+
+#### Mechanistic Contribution:
+This path supports a model in which TGF-β–driven ECM remodeling and EMT dynamics generate biomarker signals predictive of recurrence risk, progression tendency, or response to intravesical therapies.
+
+---
+
+### CORE PATH 2: MSH6 as an independent prognostic biomarker in bladder cancer
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- MSH6||Gene -- is identified as -- an independent prognostic factor for bladder cancer||Biomarker
+
+**Role in core axis:** Highlights a DNA mismatch repair gene (MSH6) as an autonomous prognostic biomarker, anchoring a mechanistic link between genome maintenance and NMIBC outcomes.
+
+#### Key Definitions:
+- **MSH6:** A core DNA mismatch repair gene; loss or alteration can influence microsatellite instability and mutation burden, affecting tumor behavior and therapy responses.
+- **Prognostic biomarker:** A factor whose baseline state correlates with future clinical outcomes (e.g., recurrence, progression, survival) independent of treatment.
+
+#### Relationship Analysis:
+1. **NMIBC → is associated with → MSH6:** Suggests that MSH6 status modulates NMIBC biology and could stratify risk independent of current treatment decisions.
+2. **MSH6 → is identified as → an independent prognostic factor for bladder cancer:** Indicates a direct, testable clinical relevance for prognosis, supporting use in risk stratification or patient counseling.
+
+#### Mechanistic Contribution:
+This path supports a mechanistic narrative where defects in DNA repair (via MSH6) shape the mutational landscape and immunogenicity of NMIBC, translating into prognosis and potentially informing adjuvant therapy choices (e.g., immunotherapy considerations in MSI-like contexts).
+
+---
+
+### CORE PATH 3: Urine DNA methylation biomarkers for NMIBC
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker
+
+**Role in core axis:** Provides a non-invasive, methylation-based biomarker strategy tied to bladder-specific pathology, supporting surveillance and early detection paradigms.
+
+#### Key Definitions:
+- **Urine DNA methylation biomarkers:** Epigenetic marks (methylation patterns) detectable in urine that reflect urothelial tumor DNA shedding; they enable non-invasive testing for bladder cancer presence or recurrence.
+- **Urothelial carcinoma:** The most common histologic type of bladder cancer; methylation signatures in urine can reflect disease activity in this lineage.
+
+#### Relationship Analysis:
+1. **NMIBC → is associated with → urothelial carcinoma:** Grounds biomarker development in the canonical histology of NMIBC.
+2. **Selected urine-DNA methylation biomarkers → used for → diagnosis/monitoring:** Indicates a concrete, testable clinical utility for non-invasive surveillance.
+
+#### Mechanistic Contribution:
+This path supports a practical, mechanistically linked biomarker strategy: tumor-derived DNA methylation patterns shed into urine serve as a direct readout of tumor presence, burden, and possibly recurrence risk in NMIBC.
+
+---
+
+## TIER 2 — SUPPORTING LAYER (4 paths)
+
+These paths reinforce the core axis, adding complementary biomarker modalities, accessibility considerations, and broader tumor biology context.
+
+### SUPPORTING PATH 1: Liquid biopsy biomarkers (CTCs) in NMIBC
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker
+
+**Supports core axis by:** Extending NMIBC biomarker strategies to non-invasive blood-based detection, potentially enabling dynamic monitoring of tumor burden and treatment response.
+
+**Key mechanism:** Circulating tumor cells (CTCs) reflect real-time tumor shedding into the bloodstream; their detection can provide prognostic or predictive information and may correlate with disease activity even when imaging is inconclusive.
+
+---
+
+### SUPPORTING PATH 2: Accessibility of established biomarkers via AI-based approaches
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was diagnosed with -- patients||Cohort -- is used to select treatment for -- MSI||Process -- has emerged as -- AI-based biomarkers||Biomarker -- could improve -- accessibility of established biomarkers||Biomarker
+
+**Supports core axis by:** Proposes that AI-driven analysis of existing biomarkers (e.g., MSI-related markers) can improve practical access, standardization, and adoption in clinical workflows.
+
+**Key mechanism:** AI tools can harmonize heterogeneous data (genomic, epigenetic, imaging) to yield robust, scalable biomarker panels, making established biomarkers more actionable in routine NMIBC care.
+
+---
+
+### SUPPORTING PATH 3: Tumor mutational burden (TMB) as a biomarker context
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- was analyzed for its correlation with -- risk score||Measurement -- showed a negative relevance to -- tumour mutational burden (TMB)||Biomarker
+
+**Supports core axis by:** Adds a genomic context for biomarkers, highlighting how global mutation load (TMB) may relate to risk scores or prognosis in NMIBC.
+
+**Key mechanism:** TMB influences neoantigen burden and potentially antitumor immunity; its measurement can help stratify patients for immunotherapies or surveillance intensity.
+
+---
+
+### SUPPORTING PATH 4: inflammation-linked biomarker pZVR
+**Path:** non-muscle invasive bladder cancer (NMIBC)||Disease -- is classified based on -- bladder cancer||Disease -- is the most likely causative factor -- inflammation||Process -- is associated with -- prostate cancer||Disease -- is associated with; remained a strong independent predictor of -- pZVR||Biomarker
+
+**Supports core axis by:** Introduces inflammatory milieu–associated biomarkers that may reflect tumor-immune interactions and microenvironment status, enhancing multi-parameter risk models.
+
+**Key mechanism:** Inflammation correlates with tumor behavior and could modulate biomarker readouts and responses to intravesical therapies; pZVR represents a biomarker node in this inflammatory context.
+
+---
+
+## TIER 3 — EXPLORATORY LAYER (remaining paths)
+
+These paths are intriguing but less directly wired to a cohesive NMIBC biomarker core; they offer potential secondary lines of investigation.
+
+- **SARIFA-positivity:** A histopathologic/biomarker signal whose cross-cancer relevance is unclear; edge suggests no association with SARIFA-positivity despite BRAF V600E mutation—an inspirational but not yet mechanistically tight link to NMIBC biomarker biology.
+- **E-FABP prognostic biomarker:** Indicates fatty acid-binding protein expression (E-FABP/FABP family) as a potential prognostic readout; mechanistic ties to lipid metabolism and metastasis could be informative but require validation in NMIBC.
+- **Prostate-specific antigen (PSA):** Cross-cancer biomarker signal linked through inflammatory contexts; not bladder-specific, so the mechanistic relevance is uncertain but could illuminate shared inflammatory or systemic processes affecting biomarker interpretability.
+
+---
+
+## SYNTHESIS FOR SCIENTIST
+
+### Central Mechanistic Question:
+Given multiple NMIBC biomarkers across protein, genomic, epigenetic, and inflammatory domains, how do tumor-intrinsic factors (e.g., TGF-β signaling, MSH6 status, methylation patterns) shape the local tumor microenvironment and systemic biomarker readouts to influence recurrence, progression, and treatment responsiveness?
+
+### Anchor Genes/Entities (from Tier 1):
+- MSH6
+- TGFB1/TGF-β signaling axis
+- Urine DNA methylation biomarkers (urothelial methylation signatures)
+
+### Supporting Genes/Entities (from Tier 2):
+- Circulating tumor cells (CTCs)
+- Tumor mutational burden (TMB)
+- Inflammation-related markers (pZVR)
+- AI-accessible biomarker frameworks for MSI
+
+### Path Quality Warning:
+Path 1 (TGF-β biomarker link) relies on a conventional cytokine/ECM remodeling axis that is plausible but often context-dependent in NMIBC; Path 6 (SARIFA-positivity) and Path 7 (E-FABP) are more exploratory with less direct NMIBC validation; cross-cancer references (e.g., PSA) should be treated as exploratory with caution until bladder-specific evidence is established.
+
+---
+
+If you want, I can:
+- Expand each path with more granular, mechanistic sub-claims and experimental readouts (e.g., specific TGF-β targets, MSH6-associated mutation spectra, methylation panels).
+- Propose a tiered test plan (in vitro, ex vivo, and clinical validation steps) to prioritize biomarker panels across NMIBC surveillance, prognosis, and therapy selection.
+[Prompt tokens: 2998, Completion tokens: 7635]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Organizing data requirements**
+
+I need to create JSON notes and variables while adhering to a strict format, especially using the Focusing Rule. I’m considering primary endpoints around recurrence and progression-free interval (PFI) for NMIBC. However, the dataset context is TCGA-BRCA, which is confusing since it relates to breast cancer, while my task is focused on NMIBC. I have to pull together a hypothesis based on Tier 1 anchor genes and available imaging features from previous instructions.**Selecting imaging features**
+
+I see that the dataset’s imaging features were primarily for breast cancer, but we need to adapt them for NMIBC. The options provided are TIL density, TLS-like, and TSR. TIL density is promising because immune infiltrates in bladder tumors can predict outcomes. On the other hand, TSR relates to TGF-β and ECM remodeling, which is also very relevant. Since TGF-β is a core element, I'll go with 'Stromal-to-tumor ratio (TSR)' as the imaging feature and consider using TGFB1 and MSH6 as anchor genes.**Formulating the hypothesis**
+
+I need to focus on Tier 1 anchor genes which include MSH6 and TGFB1/TGF-β, but I can't include urine DNA methylation biomarkers since that’s not a gene. For the endpoint, progression-free interval (PFI) is the best choice for NMIBC, as it relates to the risk of progression to muscle-invasive disease. My hypothesis should address why a high stromal ratio sometimes fails to predict progression, proposing that TGF-β-rich stroma interacts with MSH6 deficiency, leading to immunosuppression and worse outcomes. I'll outline how these dynamics alter immune responses too.**Crafting the hypothesis**
+
+The hypothesis I'm formulating suggests that in NMIBC, a high stromal-to-tumor ratio driven by TGFB1 signaling creates an immunosuppressive extracellular matrix (ECM). This process diminishes the protective effect of MSH6 deficiency-related neoantigenicity, which raises the risk of progression and shortens progression-free interval (PFI). I need to focus solely on the imaging feature and anchor genes (TGFB1, MSH6) within the hypothesis, without mentioning urine DNA methylation—I'll categorize that under secondary modifiers instead. I've got to ensure clarity in my notes too, providing reasoning as required.
+</thinking>
+{
+"notes": "1) Central biological puzzle: Tier 1 synthesis highlights apparent discordance between tumor-intrinsic genomic signals (MSH6-driven DNA repair status) and microenvironmental/epithelial–stromal programs (TGF-β–driven fibrosis/EMT and urine DNA methylation readouts). The key puzzle is: under what microenvironmental conditions does a tumor's DNA-repair–linked immunogenicity (or lack thereof) translate into altered progression risk in NMIBC? 2) Tier 1 paths used: I built on the TGFB1 (TGF-β) axis because it mechanistically links to ECM remodeling and stromal expansion (directly mapable to stromal-to-tumor ratio on H&E). I also used MSH6 because mismatch-repair defects alter neoantigen load and prognostic behavior in bladder cancer. These two provide a clear tumor–microenvironment interaction to test. 3) Tier 2 evidence that supports the claim: TMB/neoantigen context and CTC dynamics inform systemic tumor burden and immune visibility; urine DNA methylation biomarkers give a non-invasive tumor burden readout that can stratify shedding vs tissue-confined disease; inflammation-linked markers (pZVR) and AI-accessible MSI signatures provide orthogonal measures of immune suppression and biomarker accessibility. Together they supply testable modifiers of the central interaction. 4) Endpoint choice: I selected progression-free interval (PFI) because NMIBC clinical decision-making hinges on risk of progression to muscle-invasive disease; PFI is the most relevant, sensitive endpoint for mechanistic hypotheses about tumor–stroma–immune interplay. 5) Deliberate exclusions: I excluded placing urine DNA methylation biomarkers in the 1–2 anchor slots to obey the imaging+genes constraint and to keep the mechanistic claim sharp (imaging feature + molecular anchors). Exploratory/less directly mechanistic signals (e.g., SARIFA, E-FABP, PSA cross-cancer links) were omitted from the core hypothesis and relegated to secondary_modifiers or left out because they are less bladder-specific or mechanistically diffuse.",
+"core_variables": {
+  "imaging_feature": "Stromal-to-tumor ratio (TSR)",
+  "anchor_genes": [
+    "TGFB1",
+    "MSH6"
+  ],
+  "endpoint": "PFI"
+},
+"secondary_modifiers": [
+  "urine_DNA_methylation_biomarkers",
+  "Tumor_mutational_burden (TMB)",
+  "Circulating_tumor_cells (CTCs)",
+  "pZVR (inflammation_marker)",
+  "AI-based_MSI/TMB_signature_frameworks"
+],
+"hypothesis": "In NMIBC, a high stromal-to-tumor ratio (TSR) driven by TGFB1-mediated ECM remodeling creates an immunosuppressive, physical barrier that negates the putative protective effect of MSH6-deficiency–associated neoantigenicity. Clinically, tumors that are MSH6-deficient but TSR-high will have shorter progression-free interval (PFI) than MSH6-deficient/T S R-low tumors, because TGF-β–rich stroma prevents effective immune surveillance of mutation-derived neoantigens."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Organize a clear, testable interaction framework: (1) TSR as imaging readout of TGFB1-driven ECM/stromal remodeling; (2) MSH6 status as a proxy for mismatch repair deficiency and neoantigen potential; (3) Hypothesize that TGFB1-driven high TSR dampens neoantigen-driven immunity in MSH6-deficient NMIBC, accelerating progression. Include secondary modifiers (urine methylation, TMB, CTCs) only as non-core modifiers. Plan to test with tissue-based assays (IHC, sequencing) and clinical outcomes (PFI); use interaction analysis in Cox models. Outline mechanistic readouts: immune cell localization, TGF-β signaling activity, stromal markers. Be mindful of heterogeneity and confounders (treatment history, sampling site).",
+  "expanded_hypothesis": "In non-muscle invasive bladder cancer (NMIBC), a high stromal-to-tumor ratio (TSR) driven by TGFB1 signaling creates an immunosuppressive extracellular matrix that diminishes the immunogenic potential of MSH6-deficient neoantigens. Consequently, tumors with TSR-high and MSH6 deficiency will exhibit shorter progression-free interval (PFI) than TSR-low or MSH6-proficient tumors. This effect is amplified when TGFB1 signaling is active, such that the TSR-high/MSH6-deficient group shows reduced cytotoxic T cell activity and a more suppressive microenvironment (e.g., higher Tregs, M2-like macrophages, and dampened CD8+ T cell spatial engagement) compared to other groups. The hypothesis remains focused on TSR as the imaging feature and TGFB1/MSH6 as the anchor genes; urine DNA methylation biomarkers are considered a secondary modifier and not part of the core testable hypothesis.",
+  "justification": "Biological rationale: TGFB1 signaling promotes ECM remodeling and stromal expansion, contributing to a physical and biochemical barrier that can suppress anti-tumor immunity. In NMIBC, MSH6 deficiency increases DNA mismatch repair deficiency and elevates neoantigen burden, potentially enhancing immune visibility; however, a TGFB1-rich stroma may render these neoantigens less detectable by effective immune surveillance. The TSR proxy integrates stromal abundance and ECM remodeling, which are mechanistically linked to TGFB1 activity and influence immune cell infiltration and function. Testing the TSR–MSH6 interaction addresses why high stromal content sometimes fails to predict progression and directly links tumor-intrinsic repair status with microenvironmental context to PFI. Experimental approach focuses on tissue-based measurements (TSR, TGFB1 signaling readouts, MSH6 status) and robust clinical endpoints (PFI), with a plan for mechanistic immunoprofiling (multiplex IHC, spatial analyses) to corroborate immune suppression in the TSR-high/MSH6-deficient context. Potential confounders (heterogeneity, prior therapies, sampling biases) should be controlled in multivariable models and, where possible, validated in independent cohorts.",
+  "core_variables": {
+    "imaging_feature": "Stromal-to-tumor ratio (TSR)",
+    "anchor_genes": [
+      "TGFB1",
+      "MSH6"
+    ],
+    "endpoint": "PFI"
+  },
+  "secondary_modifiers": [
+    "urine_DNA_methylation_biomarkers",
+    "Tumor_mutational_burden (TMB)",
+    "Circulating_tumor_cells (CTCs)",
+    "pZVR (inflammation_marker)",
+    "AI-based_MSI/TMB_signature_frameworks"
+  ],
+  "hypothesis": "In NMIBC, a high stromal-to-tumor ratio (TSR) driven by TGFB1-mediated ECM remodeling creates an immunosuppressive environment that negates the protective effect of MSH6-deficiency–associated neoantigenicity. Consequently, MSH6-deficient, TSR-high tumors exhibit shorter progression-free interval (PFI) than MSH6-deficient, TSR-low tumors, due to impaired immune surveillance and enhanced stromal-mediated immune exclusion. The effect is most pronounced when TGFB1 signaling is active, and is modulated by microenvironmental immune contexture."
+}
+[Prompt tokens: 1444, Completion tokens: 2172]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_F4PTaZ0YQnFAQPONBTxe8ieP', arguments='{"query":"non-muscle invasive bladder cancer TSR stromal-to-tumor ratio prognosis", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2026, Completion tokens: 368]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=non-muscle+invasive+bladder+cancer+TSR+stromal-to-tumor+ratio+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_F4PTaZ0YQnFAQPONBTxe8ieP', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_zoWXemRlZlmU4BKij3wNTaBF', arguments='{"query":"tumor-stroma ratio bladder cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2186, Completion tokens: 488]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor-stroma+ratio+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_zoWXemRlZlmU4BKij3wNTaBF', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_mJg18o8AMSb4RZ4kSx0fmIfB', arguments='{"query":"MSH6 deficiency bladder cancer mismatch repair urothelial carcinoma", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2322, Completion tokens: 365]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=MSH6+deficiency+bladder+cancer+mismatch+repair+urothelial+carcinoma&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_mJg18o8AMSb4RZ4kSx0fmIfB', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_mTT47X242fNoNhIvcwS9TliK', arguments='{"query": "bladder cancer tumor-stroma ratio", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_xeICMLXSf9vxJBTkIJZBwN0n', arguments='{"query": "stroma ratio prognosis bladder cancer", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_vXZxGrwH0ig8R0g20reDedXI', arguments='{"query": "MSH6 deficiency bladder cancer mismatch repair urothelial carcinoma", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_r63aI3qgKNrlONraNhjmIWp8', arguments='{"query": "TGFB1 signaling bladder cancer stromal remodeling", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_LkL2Vx5yxEm8lIYaZGs8zpQo', arguments='{"query": "NMIBC immune microenvironment bladder cancer PD-1 CTL", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_ClnrTiI6bAfYWHNYt5xn9PyA', arguments='{"query": "neoantigen bladder cancer MMR deficiency MSH6", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2475, Completion tokens: 598]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+tumor-stroma+ratio&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_mTT47X242fNoNhIvcwS9TliK', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=stroma+ratio+prognosis+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_xeICMLXSf9vxJBTkIJZBwN0n', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=MSH6+deficiency+bladder+cancer+mismatch+repair+urothelial+carcinoma&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_vXZxGrwH0ig8R0g20reDedXI', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=TGFB1+signaling+bladder+cancer+stromal+remodeling&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_r63aI3qgKNrlONraNhjmIWp8', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=NMIBC+immune+microenvironment+bladder+cancer+PD-1+CTL&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_LkL2Vx5yxEm8lIYaZGs8zpQo', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=neoantigen+bladder+cancer+MMR+deficiency+MSH6&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_ClnrTiI6bAfYWHNYt5xn9PyA', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_qiW78yKQ18X5pM91TP2y4I65', arguments='{"query":"tumor-stroma ratio bladder cancer prognosis","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3283, Completion tokens: 679]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor-stroma+ratio+bladder+cancer+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_qiW78yKQ18X5pM91TP2y4I65', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_0v3BnxjGN5aODwP9LCfDeCi4', arguments='{"query":"tumor stroma ratio bladder cancer prognosis","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3424, Completion tokens: 551]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor+stroma+ratio+bladder+cancer+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_0v3BnxjGN5aODwP9LCfDeCi4', is_error=False)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 9,
+    "key_queries_used": [
+      "non-muscle invasive bladder cancer TSR imaging readout TGFB1",
+      "tumor-stroma ratio bladder cancer",
+      "MSH6 deficiency bladder cancer mismatch repair urothelial carcinoma",
+      "bladder cancer tumor-stroma ratio",
+      "stroma ratio prognosis bladder cancer",
+      "MSH6 deficiency bladder cancer mismatch repair urothelial carcinoma",
+      "TGFB1 signaling bladder cancer stromal remodeling",
+      "NMIBC immune microenvironment bladder cancer PD-1 CTL",
+      "neoantigen bladder cancer MMR deficiency MSH6"
+    ],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 6,
+      "rationale": "The proposal integrates a TSR imaging readout with TGFB1-driven ECM remodeling and MSH6 status in NMIBC, which constitutes a non-trivial combination of existing concepts. However, it does not introduce a fundamentally new computational or experimental method beyond established tissue-based assays and Cox model interaction analyses."
+    },
+    "application_novelty": {
+      "score": 6,
+      "rationale": "Applying TSR and MSH6-driven neoantigen considerations to NMIBC progression and PFI is relatively underexplored, but it remains within the scope of known cancer biomarker strategies. The approach extends to a clinically meaningful endpoint (PFI) and tissue-level readouts, offering moderate novelty."
+    },
+    "theoretical_novelty": {
+      "score": 6,
+      "rationale": "The proposed framework linking TGFB1-driven ECM remodeling, TSR as an imaging proxy, and MSH6-deficient neoantigen immunogenicity contributes a cohesive hypothesis that extends current understanding of immune exclusion in the context of stromal biology. This constitutes a conceptual advance but is not a radically new theoretical paradigm."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 6,
+    "calculation": "(Technical 6 * 0.4) + (Application 6 * 0.3) + (Theoretical 6 * 0.3) = 2.4 + 1.8 + 1.8 = 6.0",
+    "key_innovations": [
+      "Integration of TSR imaging with TGFB1-driven ECM remodeling as a basis for immune context in NMIBC",
+      "Proposed interaction framework: TSR-high and MSH6-deficient status predicting shorter PFI via immune exclusion",
+      "Inclusion of TGFB1 signaling as a modifying axis for neoantigen visibility in MSH6-deficient NMIBC"
+    ],
+    "overlaps_with_existing_work": [
+      "TSR as a prognostic/imaging biomarker in various cancers",
+      "TGFB1-mediated ECM remodeling influencing tumor immunity",
+      "MMR deficiency and neoantigen load in bladder cancer"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 3566, Completion tokens: 4072]
+---------- Summary ----------
+Number of messages: 20
+Finish reason: Digraph execution is complete
+Total prompt tokens: 27403
+Total completion tokens: 18254
+Duration: 229.40 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/hyp_full_no_logic/hypotheses/hyp_P0018.md
+PDF generated: experiment_results/hyp_full_no_logic/hypotheses/hyp_P0018.pdf
+
+Done. Run saved to: experiment_results/hyp_full_no_logic/hypotheses/hyp_P0018.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 237.6, "llm_calls": 10, "llm_errors": 0, "prompt_tokens": 27403, "completion_tokens": 18254, "total_tokens": 45657, "tokens_per_second": 192.2, "graph": "bladder_cancer_kg_latest.graphml", "domain": "bladder cancer", "path_eval_weights": {"logic": 0.0, "relevance": 0.2, "novelty": 0.3, "surprise": 0.3}}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 4648.32it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 37%|███▋      | 15241/41053 [00:00<00:00, 152394.16it/s]
+ 74%|███████▍  | 30481/41053 [00:00<00:00, 148179.60it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 148586.02it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 16%|█▋        | 9176/56338 [00:00<00:00, 91752.21it/s]
+ 33%|███▎      | 18352/56338 [00:00<00:00, 63046.20it/s]
+ 49%|████▊     | 27390/56338 [00:00<00:00, 73047.29it/s]
+ 63%|██████▎   | 35419/56338 [00:00<00:00, 75529.64it/s]
+ 78%|███████▊  | 43861/56338 [00:00<00:00, 78452.02it/s]
+ 93%|█████████▎| 52297/56338 [00:00<00:00, 80339.81it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 77047.28it/s]
+/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12030). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 5315.65it/s]
+/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/path_evaluation.py:1107: UserWarning: Weights sum to 0.800000, not 1.0. Normalizing weights.
+  warnings.warn(

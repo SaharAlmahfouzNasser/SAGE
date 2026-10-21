@@ -1,0 +1,190 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: Elevated Ki-67 proliferation index in bladder tumors independently predicts poor prognosis regardless of tumor stage or grade.
+      path_eval_weights: {'logic': 0.2, 'relevance': 0.2, 'novelty': 0.0, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+Elevated Ki-67 proliferation index in bladder tumors independently predicts poor prognosis regardless of tumor stage or grade.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_8bv3x5zHrhJNstch5lBLMKP2', arguments='{"sentence":"Ki-67 and bladder tumors"}', name='generate_path_from_sentence')]
+[Prompt tokens: 3674, Completion tokens: 2270]
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content='bladder||Organ -- should include -- ultrasound||Method -- has not been shown to cause -- gene expression||Process -- analyzing -- tumors||Tissue -- is expressed in -- PROS1||Protein -- is associated with -- Ki-67||Protein', name='generate_path_from_sentence', call_id='call_8bv3x5zHrhJNstch5lBLMKP2', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+bladder||Organ -- should include -- ultrasound||Method -- has not been shown to cause -- gene expression||Process -- analyzing -- tumors||Tissue -- is expressed in -- PROS1||Protein -- is associated with -- Ki-67||Protein
+---------- TextMessage (ontologist) ----------
+### Case B: Single Path
+
+```
+### Definitions:
+- **[Bladder]:** The urinary organ housing the urothelium where malignant transformation can occur; mechanistically, the bladder's tissue context and accessible anatomy influence imaging readouts and lesion detectability, shaping how we integrate diagnostic modalities.
+- **[Ultrasound]:** A non-invasive imaging modality using high-frequency sound waves to visualize bladder structure; mechanistically, its findings guide initial assessment and triage for further testing, impacting the diagnostic workflow for bladder lesions.
+- **[Gene expression]:** Transcriptional activity patterns within cells; mechanistically, tumor-associated gene expression profiles define molecular subtypes and potential therapeutic targets in bladder cancer.
+- **[Tumors]:** Malignant proliferations within bladder tissue; mechanistically, tumor cells and their microenvironment (stroma, immune infiltrates) drive progression and determine biomarker relationships.
+- **[PROS1]:** Protein S, a vitamin K–dependent anticoagulant protein; mechanistically, its expression in tumor contexts can intersect coagulation pathways and cell signaling, potentially influencing tumor biology and biomarker readouts.
+- **[Ki-67]:** A nuclear proliferation antigen expressed in cycling cells; mechanistically, Ki-67 provides a readout of proliferative activity and correlates with tumor aggressiveness.
+
+### Relationships:
+1. **[Bladder] → [should include] → [Ultrasound]:** The guidance that bladder evaluation should include ultrasound reflects a practical imaging step in initial assessment; this matters because ultrasound is accessible and can detect gross bladder abnormalities, influencing downstream diagnostic decisions.
+2. **[Ultrasound] → [has not been shown to cause] → [Gene expression]:** There is no evidence that ultrasound imaging alters tissue gene expression; this matters because it supports the interpretation of gene expression data as intrinsic to the tumor, not an artifact of imaging exposure.
+3. **[Gene expression] → [analyzing] → [Tumors]:** Gene expression analysis is performed on tumor tissue to characterize transcriptional programs; this matters for classifying molecular subtypes and identifying targets, which can guide prognosis and therapy.
+4. **[Tumors] → [is expressed in] → [PROS1]:** PROS1 is expressed in tumor tissue, suggesting a role for PROS1 in tumor biology (potential links to coagulation signaling and tumor–microenvironment interactions) that could influence biomarker readouts or biology.
+5. **[PROS1] → [is associated with] → [Ki-67]:** PROS1 expression is associated with Ki-67 levels, indicating a possible link between PROS1-related pathways and proliferative activity in tumors; this could serve as a basis for exploring PROS1 as a proliferation-associated biomarker or therapeutic anchor.
+
+### Clinical/Research Significance:
+This path suggests a testable workflow where bladder ultrasound is considered in initial evaluation, with downstream gene expression profiling of tumor tissue to categorize molecular features, and exploration of PROS1 as a tumor-associated biomarker linked to proliferation (Ki-67). If PROS1-proliferation associations hold, PROS1 could serve as a prognostic indicator or a portal to coagulation-signaling–targeted therapies in bladder cancer.
+```
+[Prompt tokens: 1590, Completion tokens: 3426]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Analyzing tumor interactions**
+
+I'm exploring the connection between PROS1, Ki-67, and the stromal-tumor ratio (TSR). I wonder if TSR relates to PROS1 and Ki-67, focusing on tumor-stroma interactions. The challenge is deciding on a primary endpoint, like overall survival or therapy response. I’m puzzled about why some tumors with high proliferation aren't aggressive. It seems that PROS1 might affect the tumor microenvironment differently. Ultimately, I need to stick with PROS1 and Ki-67 as key anchor genes.**Framing the hypothesis**
+
+I need to establish a mechanistic question centered on tumors with a high stromal-to-tumor ratio (TSR) and high PROS1 expression. I wonder if these factors contribute to increased proliferation (Ki-67) through PROS1's role in coagulation and stromal signaling, potentially leading to worse progression-free interval (PFI). I’ll phrase it in two sentences: the first will state the core claim linking TSR and PROS1, and the second will outline the predicted clinical consequence. I’ll include PROS1 and Ki-67 as anchor genes, focusing on PFI as the endpoint.**Determining endpoints and reasoning**
+
+I'm considering endpoints for bladder cancer, and PFI seems more relevant to progression than therapy response, especially since the dataset only includes hormone/HER2 therapy proxies from breast data. I find PFI interesting because PROS1 and proliferation could significantly influence progression. Now, I’ll outline my reasoning in five points: First, PROS1 is expressed in tumors and linked to Ki-67. Second, ultrasounds don't alter gene expression. Third, the central question is why PROS1 relates to proliferation. Fourth, I’m curious if spatial stromal context (TSR) affects this. Lastly, it appears there is no Tier 2 evidence to mention.**Following the research template**
+
+I need to stick to the template: first, outline the central puzzle; second, explain the Tier 1 paths built upon and their rationale; third, highlight Tier 2 evidence, though we don’t have any. I think mentioning that ultrasound implies imaging can be decoupled is valid, but we can't invent other genes for Tier 2. Next, I’ll discuss why PFI is the chosen endpoint and what was excluded. Since we only have PROS1 and Ki-67 (MKI67), I’ll formulate a concise hypothesis around those concepts. Here's an example:
+
+"In bladder tumors with high stromal-to-tumor ratio, tumor-cell PROS1 expression promotes paracrine coagulation signaling within the stroma that drives tumor cell proliferation (high MKI67)."**Crafting the hypothesis carefully**
+
+I’m analyzing the relationship between TSR-high/PROS1-high tumors and shorter progression-free intervals. It seems that these tumors indicate a stromal-coagulation-driven route to early progression. I want to frame my hypothesis as a question about the biological puzzle rather than merely a biomarker combination. So, I’ll phrase it this way: "Does elevated tumor PROS1 drive proliferation in stromal-rich bladder tumors through coagulation-mediated paracrine signaling that increases MKI67 expression?" The second sentence could state that "if so, TSR-high/PROS1-high tumors will have shorter PFI." I’ll include "stromal-to-tumor ratio" as the imaging feature and note that ultrasound was excluded because it isn't an available option in the dataset. Lastly, secondary modifiers will remain empty, considering only the relevant genes.
+</thinking>
+{
+"notes": "1) Central biological puzzle: The ontologist's single-path analysis highlights that PROS1 is expressed in tumors and is associated with Ki-67, raising the question of how PROS1-related biology mechanistically links to tumor proliferative state and clinical progression. 2) Tier 1 path used: the single provided path (Tumors → PROS1 → Ki-67). I built on this because it directly connects a tumor-expressed coagulation-related factor (PROS1) to proliferation (MKI67), forming a tight mechanistic backbone. 3) Tier 2 evidence: none was provided; supportive context comes only from the path's implication that imaging (ultrasound) does not perturb gene expression, so observed expression–imaging associations likely reflect biology rather than imaging artifacts. 4) Endpoint choice: I selected progression-free interval (PFI) because the question concerns whether PROS1-driven proliferative programs in a particular spatial microenvironment accelerate disease progression (PFI captures time to progression/recurrence). 5) Deliberate exclusions: The ontologist mentioned ultrasound, but the project's available imaging features are limited to TIL density, TLS-like aggregates, and stromal-to-tumor ratio (TSR); I therefore chose TSR as the most biologically relevant imaging correlate of PROS1's stromal/coagulation role and excluded ultrasound from the core hypothesis to conform to the dataset's imaging feature set. No additional genes were invented or included in the core hypothesis to keep the testable mechanistic focus.",
+"core_variables": {
+  "imaging_feature": "Stromal-to-tumor ratio (TSR)",
+  "anchor_genes": ["PROS1", "MKI67"],
+  "endpoint": "PFI"
+},
+"secondary_modifiers": [],
+"hypothesis": "Does elevated tumor PROS1 expression in stromal-rich (high TSR) tumors promote paracrine coagulation–related signaling that drives increased tumor cell proliferation (high MKI67)? If so, TSR-high/PROS1-high tumors will show shorter progression-free interval compared with TSR-high/PROS1-low tumors, indicating a stromal–coagulation–proliferation axis that accelerates progression."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Central puzzle: does tumor PROS1 interact with the stromal context (high TSR) to drive proliferation (Ki-67) and affect progression in bladder cancer? Build on the PROS1 → MKI67 anchor (Tier 1) and frame within a TSR-dependent stromal–coagulation–proliferation axis. Choose progression-free interval (PFI) as endpoint due to its relevance to disease progression in bladder cancer and constraints of the dataset. Acknowledge lack of Tier 2 evidence and avoid introducing additional genes beyond PROS1 and MKI67 as anchors. Plan to test with retrospective correlative analyses, spatial profiling, and mechanistic in vitro/in vivo experiments, focusing on PROS1 and Ki-67 in TSR-high contexts.",
+  "expanded_hypothesis": "In bladder tumors with high stromal-to-tumor ratio (TSR), elevated tumor cell PROS1 expression promotes paracrine signaling within the stromal compartment via TAM receptor–mediated pathways, driving tumor cell proliferation as indicated by increased MKI67 expression. If this TSR-dependent PROS1–Ki-67 axis operates, TSR-high/PROS1-high tumors will have shorter progression-free interval (PFI) compared with TSR-high/PROS1-low or TSR-low groups.",
+  "justification": "Rationale: PROS1 (protein S) is a vitamin K–dependent coagulation-associated protein that can function as a ligand for TAM receptors, influencing stromal and immune cell signaling. Ki-67 (MKI67) is a robust marker of cellular proliferation. TSR quantifies the proportion of stroma in the tumor microenvironment; higher TSR often reflects a richer stromal milieu that can modulate signaling networks affecting growth and progression. Mechanistic plausibility: in a high-TSR context, PROS1 expressed by tumor and/or stromal compartments could engage TAM signaling to reshape paracrine cues (cytokines, growth factors) that elevate Ki-67 expression and promote progression. This yields a testable, mechanistic link between PROS1, Ki-67, and the stromal milieu that can influence PFI. Feasibility and tests: the hypothesis can be evaluated using (1) retrospective analyses of bladder cancer cohorts with measured TSR, PROS1, MKI67, and PFI; (2) spatially resolved profiling to map PROS1 and MKI67 within TSR-defined regions; (3) in vitro co-culture systems (bladder cancer cells with fibroblasts) manipulating PROS1 levels and TAM signaling to assess MKI67 induction; (4) in vivo models to test PROS1/TAM axis effects on tumor growth and PFI. If PROS1-TAM signaling drives proliferation, pharmacologic or genetic inhibition of PROS1 or TAM receptors should reduce MKI67 and extend PFI in models with high TSR.",
+  "experimental_approach_outline": [
+    "Retrospective data analysis: identify bladder cancer cohorts with histologic TSR, quantify PROS1 and MKI67 by RNA and/or IHC, and model interactions predicting PFI using Cox regression with an interaction term for TSR × PROS1.",
+    "Spatial profiling: apply spatial transcriptomics or imaging mass cytometry to map PROS1 and MKI67 expression relative to stromal-rich regions, validating colocalization in TSR-high tumors.",
+    "In vitro mechanistic studies: co-culture bladder cancer cell lines with cancer-associated fibroblasts; manipulate PROS1 (overexpression/knockdown) and test effects on MKI67 expression; apply TAM receptor inhibitors to assess pathway dependence.",
+    "In vivo validation: establish bladder cancer xenografts or syngeneic models with controlled PROS1 expression in a high-TSR stromal environment; assess tumor growth, MKI67 levels, and PFI-like endpoints; test PROS1/TAM inhibition as a rescue.",
+    "Endpoints and readouts: MKI67 as proliferation readout; TSR as spatial context; PFI or progression-free-like metrics in preclinical models; mechanistic readouts of TAM signaling activity."
+  ]
+}
+[Prompt tokens: 1463, Completion tokens: 3868]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_tjptBVQR5NBhBJJK8LByEXg1', arguments='{"query":"PROS1 tumor receptor tyrosine kinase TAM bladder cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1994, Completion tokens: 301]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+tumor+receptor+tyrosine+kinase+TAM+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_tjptBVQR5NBhBJJK8LByEXg1', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_SkgqlWb1ICRIBydX01zrhihA', arguments='{"query":"PROS1 TAM receptor cancer PROS1 bladder cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2148, Completion tokens: 748]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+cancer+PROS1+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_SkgqlWb1ICRIBydX01zrhihA', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_6hFNJAHyEFWooVBtY9dniD0M', arguments='{"query":"PROS1 TAM receptor bladder cancer","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 2297, Completion tokens: 358]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_6hFNJAHyEFWooVBtY9dniD0M', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_UueyBzcU9pYYuDsahCrfa5zK', arguments='{"query":"PROS1 cancer TAM", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2436, Completion tokens: 678]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+cancer+TAM&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_UueyBzcU9pYYuDsahCrfa5zK', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_1fq0pgWWoWy79dVPvgeVR175', arguments='{"query":"PROS1 TAM receptor bladder cancer", "max_results": 10}', name='semanticscholar_search')]
+[Prompt tokens: 2567, Completion tokens: 552]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+bladder+cancer&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_1fq0pgWWoWy79dVPvgeVR175', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_fzdpC1TygRI999gDTTJnomAP', arguments='{"query": "PROS1 protein S cancer TAM receptor bladder cancer", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_jsOKRIk7Fv1vc1Zmi9wibV26', arguments='{"query": "PROS1 TAM receptor cancer review", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_V6qZH3LtcEO7kEpggBSC4cQI', arguments='{"parameters": {}}', name='semanticscholar_search')]
+[Prompt tokens: 2706, Completion tokens: 425]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+protein+S+cancer+TAM+receptor+bladder+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_fzdpC1TygRI999gDTTJnomAP', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+cancer+review&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_jsOKRIk7Fv1vc1Zmi9wibV26', is_error=False), FunctionExecutionResult(content="1 validation error for semanticscholar_searchargs\nquery\n  Field required [type=missing, input_value={'parameters': {}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing", name='semanticscholar_search', call_id='call_V6qZH3LtcEO7kEpggBSC4cQI', is_error=True)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 6,
+    "key_queries_used": [
+      "PROS1 protein S cancer TAM receptor",
+      "PROS1 TAM receptor cancer PROS1 bladder cancer",
+      "PROS1 bladder cancer",
+      "PROS1 TAM receptor bladder cancer",
+      "PROS1 cancer TAM",
+      "PROS1 TAM receptor bladder cancer"
+    ],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 5,
+      "rationale": "The proposal integrates PROS1 and MKI67 within a TSR-dependent stromal–coagulation–proliferation axis in bladder cancer, which leverages established biomarkers and signaling axes but does not propose a new experimental methodology or novel computational framework. The concept of TSR modulation of signaling is known, and PROS1–TAM signaling is established in other contexts; the novelty lies primarily in the specific proposed intersection rather than in method development."
+    },
+    "application_novelty": {
+      "score": 5,
+      "rationale": "Application to bladder cancer with a focus on TSR-high contexts and progression-free interval is a meaningful niche, but it remains within a domain with substantial prior study of TAM signaling and stromal influences. The specific TSR-high/PROS1-high vs PROS1-low stratification and PFI endpoint represent a moderately novel application rather than a completely new domain."
+    },
+    "theoretical_novelty": {
+      "score": 5,
+      "rationale": "The proposal suggests a new mechanistic linkage: a TSR-dependent PROS1–Ki-67 axis mediated by TAM receptors driving proliferation and progression. While grounded in known PROS1–TAM biology and stromal influences, there is no established theoretical framework that explicitly connects PROS1 in a TSR-rich bladder tumor microenvironment to MKI67-driven proliferation and PFI; thus, moderate theoretical novelty is present."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 5,
+    "calculation": "(Technical 5 * 0.4) + (Application 5 * 0.3) + (Theoretical 5 * 0.3) = 2.0 + 1.5 + 1.5 = 5.0",
+    "key_innovations": [
+      "Proposes a TSR-dependent PROS1–TAM signaling mechanism that modulates proliferation in bladder cancer via MKI67 expression",
+      "Incorporates spatial context by linking TSR-defined regions to PROS1 and MKI67 distribution (spatial profiling as a readout)",
+      "Links PROS1/TAM axis to a clinically relevant endpoint (progression-free interval) in bladder cancer"
+    ],
+    "overlaps_with_existing_work": [
+      "TAM receptor signaling is a well-studied pathway in cancer biology",
+      "Ki-67 (MKI67) as a marker of proliferation is widely used in bladder cancer studies",
+      "Stromal influence on tumor progression and signaling is a well-established concept"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 3066, Completion tokens: 3270]
+---------- Summary ----------
+Number of messages: 20
+Finish reason: Digraph execution is complete
+Total prompt tokens: 23941
+Total completion tokens: 15896
+Duration: 138.10 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0123.md
+PDF generated: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0123.pdf
+
+Done. Run saved to: experiment_results/hyp_full_no_novelty/hypotheses/hyp_N0123.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 145.5, "llm_calls": 10, "llm_errors": 0, "prompt_tokens": 23941, "completion_tokens": 15896, "total_tokens": 39837, "tokens_per_second": 273.7, "graph": "bladder_cancer_kg_latest.graphml", "domain": "bladder cancer", "path_eval_weights": {"logic": 0.2, "relevance": 0.2, "novelty": 0.0, "surprise": 0.3}}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5623.91it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 37%|███▋      | 15191/41053 [00:00<00:00, 151895.30it/s]
+ 75%|███████▌  | 30801/41053 [00:00<00:00, 154361.93it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 152818.01it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 15%|█▌        | 8596/56338 [00:00<00:00, 85946.76it/s]
+ 31%|███       | 17320/56338 [00:00<00:00, 86703.48it/s]
+ 47%|████▋     | 26578/56338 [00:00<00:00, 89384.37it/s]
+ 63%|██████▎   | 35758/56338 [00:00<00:00, 90335.81it/s]
+ 80%|███████▉  | 44792/56338 [00:00<00:00, 90008.79it/s]
+ 95%|█████████▌| 53794/56338 [00:00<00:00, 88620.63it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 88365.73it/s]

@@ -1,0 +1,50 @@
+from setuptools import find_packages, setup
+
+# It's a good practice to read long descriptions outside the setup function
+# with open("README.md", "r", encoding="utf-8") as f:
+#     long_description = f.read()
+
+setup(
+    name="HypothesisGeneration",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        "autogen",
+        "numpy",
+        "networkx",
+        "matplotlib",
+        "pandas",
+        "transformers>=4.39",
+        "powerlaw",
+        "markdown2",
+        "pdfkit",
+        "bitsandbytes",
+        "peft",
+        "accelerate",
+        "torch",
+        "torchvision",
+        "torchaudio",
+        "huggingface_hub",
+        "langchain",
+        "pyvis",
+        "yachalk",
+        "pytesseract",
+        "llama-index",
+        "tqdm",
+        "ipython",
+        "scikit-learn",
+        "scipy",
+        "seaborn",
+        "uuid",
+        "pdfminer.six",
+        "guidance",
+        "python-louvain",
+        "wkhtmltopdf",
+        "weasyprint",
+        "llama-index-embeddings-huggingface",
+        "xhtml2pdf",
+        "markdown",
+    ],
+    description="ScienceDiscovery: Use LLM-based multi-agent system to reason over graphs and generate novel research ideas.",
+    python_requires=">=3.10",
+)

@@ -1,0 +1,292 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: Elevated Ki-67 proliferation index in bladder tumors independently predicts poor prognosis regardless of tumor stage or grade.
+      path_eval_weights: {'logic': 0.2, 'relevance': 0.0, 'novelty': 0.3, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+Elevated Ki-67 proliferation index in bladder tumors independently predicts poor prognosis regardless of tumor stage or grade.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_LIL0eDrhL7TqaNSUT9COvcwX', arguments='{"sentence":"Ki-67 and bladder tumors"}', name='generate_path_from_sentence')]
+[Prompt tokens: 3674, Completion tokens: 2078]
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content='bladder||Organ -- should include -- ultrasound||Method -- has not been shown to cause -- gene expression||Process -- analyzing -- tumors||Tissue -- is expressed in -- PROS1||Protein -- is associated with -- Ki-67||Protein', name='generate_path_from_sentence', call_id='call_LIL0eDrhL7TqaNSUT9COvcwX', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+bladder||Organ -- should include -- ultrasound||Method -- has not been shown to cause -- gene expression||Process -- analyzing -- tumors||Tissue -- is expressed in -- PROS1||Protein -- is associated with -- Ki-67||Protein
+---------- TextMessage (ontologist) ----------
+### Definitions:
+- **[Node 1]: Bladder** — A hollow organ of the urinary system whose primary function is urine storage; imaging and sampling of bladder tissue are commonly used to diagnose pathology. In this path, the bladder is the organ context where imaging is applied.
+- **[Node 2]: Ultrasound** — A non-invasive imaging modality that uses high-frequency sound waves to visualize internal structures; widely used for bladder assessment and characterization of lesions.
+- **[Node 3]: Gene expression** — The cellular process by which information from genes is transcribed and translated into RNA and protein; analyzing gene expression reveals molecular programs active in cells.
+- **[Node 4]: Tumors** — Abnormal tissue growth that can be benign or malignant; in the bladder context, tumors represent disease tissue subjected to molecular analyses.
+- **[Node 5]: PROS1** — Protein S, a vitamin K–dependent plasma protein involved in coagulation and related pathways; in tumor biology, PROS1 protein expression can be detected within tumor tissues.
+- **[Node 6]: Ki-67** — A nuclear protein expressed in proliferating cells and commonly used as a proliferation marker in tumor samples to gauge growth activity.
+
+### Relationships:
+1. **[Node 1] → [Relationship: should include] → [Node 2]:** The bladder is a target organ for imaging, and ultrasound is an imaging modality that should be included in the evaluation of bladder pathology; this edge highlights ultrasound as a relevant tool for assessing bladder biology without implying causation of molecular changes.
+2. **[Node 2] → [Relationship: has not been shown to cause] → [Node 3]:** There is no evidence that ultrasound exposure induces changes in gene expression; this edge indicates that imaging modalities are unlikely confounders for transcriptional analyses in tissue studies.
+3. **[Node 3] → [Relationship: analyzing] → [Node 4]:** Gene expression analyses are applied to tumors to characterize their transcriptional programs and identify molecular features.
+4. **[Node 4] → [Relationship: is expressed in] → [Node 5]:** PROS1 protein is expressed in tumor tissue, indicating that tumor cells can produce or accumulate PROS1.
+5. **[Node 5] → [Relationship: is associated with] → [Node 6]:** PROS1 expression shows an association with Ki-67 levels, suggesting a link between PROS1 status and cellular proliferation within the tumor context.
+
+### Clinical/Research Significance:
+This path suggests a potential link between PROS1 expression and tumor proliferation as reflected by Ki-67 in bladder-related tumors. If PROS1 consistently correlates with Ki-67, PROS1 could emerge as a proliferation-associated biomarker or mechanistic clue in tumor biology, while ultrasound remains a safe imaging modality that does not confound gene expression analyses. Further targeted studies would be needed to validate the PROS1–Ki-67 relationship and to explore whether PROS1 plays a functional role in tumor growth or if the association is correlative.
+[Prompt tokens: 1590, Completion tokens: 2882]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Considering imaging features**
+
+I'm looking at allowed imaging features: TIL density, TLS-like lymphoid aggregates, and TSR. I see we need to choose one, focusing on PROS1 related to Ki-67 proliferation. Hmm, perhaps TSR might relate to proliferation, right? TIL density could also interact there. But I need to decide on the imaging feature that best fits the immune microenvironment. Since PROS1 is an anchor gene associated with Ki-67, I need to choose wisely for the second anchor gene.**Defining anchors and concepts**
+
+Okay, I think I’m settling on the anchors: PROS1 and MKI67. For the imaging feature, I should choose the Stromal-to-tumor ratio (TSR). But, what's the mechanistic question? I'm considering why tumors with high stromal content correlate differently with proliferation in relation to PROS1. TSR might affect this relationship. I’ll choose overall survival (OS) as my endpoint since it’s more robust. My hypothesis should clearly connect how high TSR impacts PROS1 expression and proliferation, formulated into two concise sentences.**Clarifying gene selection**
+
+I need to stick to allowed gene limits: one imaging feature and two anchors, which is good. About secondary modifiers, I can’t find specific genes or processes from the path, and it seems adding "coagulation pathway genes" or "PROS1 interactors" isn't viable since I can’t invent any. I might consider including Ki-67, but I'm leaning towards leaving secondary modifiers as an empty array. I now need to create notes that highlight the central biological puzzle involving PROS1 and Ki-67 correlation, and clarify which Tier 1 paths are relevant to a breast cancer context.**Generalizing tumor analysis**
+
+I think it’s acceptable to generalize the tumor characteristics. The Tier 2 evidence supports my claims, suggesting that ultrasound isn't a confounder, though I have to acknowledge the limitations in analyzing gene expression in tumors. The chosen endpoint is overall survival (OS) since it's robust. I need to explain why ultrasound, bladder organ, and Ki-67 were excluded. For the imaging feature (TSR), I need to justify its selection since it may influence PROS1's action through stromal interaction. I'll format concise notes in a bullet style while adhering to the JSON structure.**Crafting the hypothesis**
+
+I’m composing the hypothesis now. For Sentence 1: “High PROS1 expression promotes tumor cell proliferation via stromal context mechanisms, where tumors with a low stromal-to-tumor ratio (TSR) show a stronger link between PROS1 and MKI67 expression." This means that tumor-cell-derived PROS1 drives proliferation under limited stromal buffering. In Sentence 2, I’ll say: “Clinically, the PROS1–TSR interaction indicates worse overall survival, highlighting PROS1-high/low-TSR tumors as a high-risk group.” I need to clarify that while buffering is suggested, I shouldn't invent a precise mechanism. I'll note that secondary modifiers should be an empty array. Now I’ll produce the JSON, covering all necessary items and mentioning that we created Tier 1 anchor genes while having none for Tier 2 or Tier 3.
+</thinking>
+{
+"notes": "1) Central puzzle: The provided path links tumor PROS1 expression to Ki-67 (proliferation), but it is unclear under what tissue/microenvironmental conditions PROS1 associates with or drives proliferation and consequent clinical risk. 2) Tier 1 paths used: the single ontologist path (tumors → PROS1 → Ki-67) — I selected PROS1 and MKI67 as the mechanistic anchors because the path directly associates PROS1 protein with the proliferation marker. 3) Tier 2 support: gene-expression analyses of tumors (path node) and the observation that PROS1 is expressed in tumor tissue support a transcriptional/secreted-protein mechanism; the ultrasound→gene-expression edge was interpreted as evidence that imaging itself is unlikely to confound transcriptional measurements. These items reinforce focusing on a true biology–prognosis link rather than an imaging artifact. 4) Why OS: Overall survival is the most robust, clinically meaningful endpoint available in the referenced datasets and best captures the ultimate consequence of proliferation-driven tumor aggressiveness. 5) Deliberate exclusions: I excluded the organ/imaging modality from the mechanistic claim (ultrasound, bladder) because the available imaging-feature set for hypothesis construction is restricted to histology-derived metrics; I therefore mapped the microenvironmental context via a histopathologic imaging feature (stromal-to-tumor ratio) rather than the ultrasound node. I also excluded speculative pathway members or coagulation genes not present in the ontologist input to keep the hypothesis tightly focused on PROS1→MKI67 interaction and its modulation by stromal context.",
+"core_variables": {
+  "imaging_feature": "Stromal-to-tumor ratio (TSR)",
+  "anchor_genes": [
+    "PROS1",
+    "MKI67"
+  ],
+  "endpoint": "OS"
+},
+"secondary_modifiers": [],
+"hypothesis": "PROS1-driven increases in tumor cell proliferation are conditional on stromal context: tumors with high PROS1 expression show a stronger positive association with MKI67 when the stromal-to-tumor ratio is low, consistent with tumor-cell–derived PROS1 promoting proliferation when stromal buffering is limited. Clinically, this PROS1–TSR interaction identifies PROS1-high/low-TSR tumors with worse overall survival, defining a high-risk subset despite similar PROS1 levels across tumors."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Concise high-level planning: focus on the central puzzle where PROS1 expression links to proliferation (MKI67) and how the stromal context (TSR) modulates this link. Use PROS1 and MKI67 as mechanistic anchors with TSR as the imaging context, and OS as the clinical endpoint. Plan includes stratified/interaction analyses in public datasets, spatial profiling to map PROS1/MKI67 in tumor vs stroma, and functional assays to test PROS1 signaling through TAM receptors in low vs high stromal contexts.",
+  "expanded_hypothesis": "PROS1 promotes tumor cell proliferation via TAM receptor–mediated signaling in a stromal-context–dependent manner, such that the positive association between PROS1 expression and MKI67 is strongest when the stromal-to-tumor ratio (TSR) is low. Clinically, tumors that are PROS1-high and TSR-low identify a high-risk subset with worse overall survival, reflecting amplified proliferative signaling in a less buffered stromal environment.",
+  "justification": "Rationale: PROS1 is a secreted protein that can engage TAM receptors (Tyro3, Axl, MerTK) and influence cellular signaling with implications for proliferation and tumor-immune interactions. MKI67 is a canonical proliferation marker; linking PROS1 to MKI67 across tumors tests a biologically plausible PROS1–proliferation axis. TSR captures stromal burden, which shapes paracrine signaling and matrix–cell interactions; a low TSR could permit tumor-cell–intrinsic PROS1 signaling to drive proliferation more directly. The combination of PROS1 expression and low stromal buffering could translate into more aggressive biology and poorer OS. Experimental tests include: (1) interaction analyses (PROS1 × TSR) predicting MKI67 and OS in transcriptomic datasets with histopathology-derived TSR; (2) spatial/transcriptomic profiling to localize PROS1 and MKI67 within tumor vs stroma; (3) in vitro assays manipulating PROS1 and stromal components (e.g., cancer-associated fibroblasts) and TAM receptor signaling; (4) in vivo models with varied stromal content to assess PROS1-driven proliferation and survival. Adjust for confounders (tumor subtype, grade, treatment) in all analyses.}"
+}
+[Prompt tokens: 1445, Completion tokens: 2671]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_meWwzrAYYAj0Mpp8J4FmWeXU', arguments='{"query":"PROS1 TAM receptor Tyro3 MerTK cancer proliferation", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1628, Completion tokens: 493]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+Tyro3+MerTK+cancer+proliferation&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_meWwzrAYYAj0Mpp8J4FmWeXU', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_5CdoNuadYN13KViDIVwNv63Z', arguments='{"query": "PROS1 TAM receptor cancer Tyro3 MerTK proliferation", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_TyVKeGeEJCWZoKTIkO8WPr18', arguments='{"query": "Protein S PROS1 cancer signaling proliferation", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_9jcp1nXGRQ08fv25JubDy3OL', arguments='{"query": "GAS6 PROS1 TAM signaling cancer proliferation comparison", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_hxNchn11oNYbozRt1bhWh25y', arguments='{"query": "stromal-to-tumor ratio TSR histology cancer prognosis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_S5igDgvCz8XZM7TiN7Sh5ayp', arguments='{"query": "spatial transcriptomics PROS1 MKI67 cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1781, Completion tokens: 893]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+cancer+Tyro3+MerTK+proliferation&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_5CdoNuadYN13KViDIVwNv63Z', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Protein+S+PROS1+cancer+signaling+proliferation&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_TyVKeGeEJCWZoKTIkO8WPr18', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=GAS6+PROS1+TAM+signaling+cancer+proliferation+comparison&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_9jcp1nXGRQ08fv25JubDy3OL', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=stromal-to-tumor+ratio+TSR+histology+cancer+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_hxNchn11oNYbozRt1bhWh25y', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=spatial+transcriptomics+PROS1+MKI67+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_S5igDgvCz8XZM7TiN7Sh5ayp', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_WtWx8tMZSkI88tNAaCk9VUN8', arguments='{"query":"PROS1 cancer Protein S TAM receptor proliferation","max_results":10}', name='semanticscholar_search')]
+[Prompt tokens: 2480, Completion tokens: 616]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+cancer+Protein+S+TAM+receptor+proliferation&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_WtWx8tMZSkI88tNAaCk9VUN8', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_qzF74YowT25lqKNfUJI6Z0NN', arguments='{"query":"PROS1 TAM receptor Tyro3 MerTK cancer proliferation","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 2627, Completion tokens: 811]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+TAM+receptor+Tyro3+MerTK+cancer+proliferation&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_qzF74YowT25lqKNfUJI6Z0NN', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_pjJvdNRZB3PuSz5ekj9www3M', arguments='{"query":"PROS1 cancer Protein S TAM receptor Tyro3 MerTK cancer", "max_results": 6}', name='semanticscholar_search')]
+[Prompt tokens: 2780, Completion tokens: 879]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+cancer+Protein+S+TAM+receptor+Tyro3+MerTK+cancer&per_page=6&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_pjJvdNRZB3PuSz5ekj9www3M', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_FOFoMguqAkx2GRiJdy82EIym', arguments='{"query":"tumor-stroma ratio prognosis cancer TSR imaging histology","max_results":10}', name='semanticscholar_search')]
+[Prompt tokens: 2936, Completion tokens: 234]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor-stroma+ratio+prognosis+cancer+TSR+imaging+histology&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_FOFoMguqAkx2GRiJdy82EIym', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_YlDPBCSQPoKcew5yTgXmdL9h', arguments='{"query":"spatial transcriptomics cancer PROS1 MKI67 PROS1 expression MKI67","max_results":10}', name='semanticscholar_search')]
+[Prompt tokens: 3086, Completion tokens: 43]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=spatial+transcriptomics+cancer+PROS1+MKI67+PROS1+expression+MKI67&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_YlDPBCSQPoKcew5yTgXmdL9h', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_XQiGvVrZkpsWCC0PDdkkzmYU', arguments='{"query":"PROS1 cancer TAM receptor Tyro3 MerTK","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3248, Completion tokens: 1130]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PROS1+cancer+TAM+receptor+Tyro3+MerTK&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_XQiGvVrZkpsWCC0PDdkkzmYU', is_error=False)]
+SAGE_METRICS: {"duration_seconds": 139.3, "llm_calls": 11, "llm_errors": 1, "prompt_tokens": 27275, "completion_tokens": 12730, "total_tokens": 40005, "tokens_per_second": 287.1, "failed": true}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5295.10it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 37%|███▋      | 15113/41053 [00:00<00:00, 151117.53it/s]
+ 74%|███████▎  | 30233/41053 [00:00<00:00, 151158.28it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 146968.90it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 16%|█▋        | 9268/56338 [00:00<00:00, 92662.41it/s]
+ 33%|███▎      | 18711/56338 [00:00<00:00, 93698.46it/s]
+ 50%|████▉     | 28081/56338 [00:00<00:00, 93448.85it/s]
+ 66%|██████▋   | 37426/56338 [00:00<00:00, 92693.98it/s]
+ 83%|████████▎ | 46697/56338 [00:00<00:00, 88671.30it/s]
+ 99%|█████████▊| 55592/56338 [00:00<00:00, 86692.03it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 88920.85it/s]
+Error processing publish message for novelty_critic_agent_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 67, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 485, in on_message_impl
+    return await h(self, message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 268, in wrapper
+    return_value = await func(self, message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 133, in handle_request
+    async for msg in self._agent.on_messages_stream(self._message_buffer, ctx.cancellation_token):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_message_filter_agent.py", line 183, in on_messages_stream
+    async for item in self._wrapped_agent.on_messages_stream(filtered, cancellation_token):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 991, in on_messages_stream
+    async for output_event in self._process_model_result(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1303, in _process_model_result
+    async for reflection_response in cls._reflect_on_tool_use_flow(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1450, in _reflect_on_tool_use_flow
+    reflection_result = await model_client.create(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_ext/models/openai/_openai_client.py", line 704, in create
+    result: Union[ParsedChatCompletion[BaseModel], ChatCompletion] = await future
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 90, in patched_async_create
+    resp = await orig_async_create(self, *args, **kwargs)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 2877, in create
+    return await self._post(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+Error processing publish message for path_generation_agent_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for ontologist_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for scientist_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for hypothesis_expansion_agent_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for coding_tasks_agent_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Error processing publish message for summary_agent_4c4d7fb4-f485-4fc7-96fc-311a248bf2aa/4c4d7fb4-f485-4fc7-96fc-311a248bf2aa
+Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_single_threaded_agent_runtime.py", line 606, in _on_message
+    return await agent.on_message(
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_base_agent.py", line 119, in on_message
+    return await self.on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_sequential_routed_agent.py", line 72, in on_message_impl
+    return await super().on_message_impl(message, ctx)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_core/_routed_agent.py", line 486, in on_message_impl
+    return await self.on_unhandled_message(message, ctx)  # type: ignore
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 195, in on_unhandled_message
+    raise ValueError(f"Unhandled message in agent container: {type(message)}")
+ValueError: Unhandled message in agent container: <class 'autogen_agentchat.teams._group_chat._events.GroupChatError'>
+Traceback (most recent call last):
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 261, in <module>
+    asyncio.run(main())
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 246, in main
+    await sci_agents.run_with_console(message=args.query, save_to=save_to)
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/hypothesis_generation_pipeline_graph.py", line 426, in run_with_console
+    await CustomConsole(self.graph_flow.run_stream(task=message), output_stats=True, file_path=save_to)
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/modifiedAutogen/console.py", line 134, in CustomConsole
+    async for message in stream:
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_base_group_chat.py", line 554, in run_stream
+    raise RuntimeError(str(message.error))
+RuntimeError: BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+Traceback:
+Traceback (most recent call last):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/teams/_group_chat/_chat_agent_container.py", line 133, in handle_request
+    async for msg in self._agent.on_messages_stream(self._message_buffer, ctx.cancellation_token):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_message_filter_agent.py", line 183, in on_messages_stream
+    async for item in self._wrapped_agent.on_messages_stream(filtered, cancellation_token):
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 991, in on_messages_stream
+    async for output_event in self._process_model_result(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1303, in _process_model_result
+    async for reflection_response in cls._reflect_on_tool_use_flow(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_agentchat/agents/_assistant_agent.py", line 1450, in _reflect_on_tool_use_flow
+    reflection_result = await model_client.create(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/autogen_ext/models/openai/_openai_client.py", line 704, in create
+    result: Union[ParsedChatCompletion[BaseModel], ChatCompletion] = await future
+
+  File "/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/run_pipeline.py", line 90, in patched_async_create
+    resp = await orig_async_create(self, *args, **kwargs)
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 2877, in create
+    return await self._post(
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1931, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+
+  File "/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/openai/_base_client.py", line 1716, in request
+    raise self._make_status_error_from_response(err.response) from None
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Invalid prompt: your prompt was flagged as potentially violating our usage policy. Please try again with a different prompt: https://platform.openai.com/docs/guides/reasoning#advice-on-prompting', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_prompt'}}
+

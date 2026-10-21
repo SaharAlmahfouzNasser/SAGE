@@ -1,0 +1,396 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/bladder_cancer_kg_latest.graphml ...
+      giant component: 36431 nodes, 52913 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-bladder_cancer_kg_latest-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='bladder cancer')
+      query: Identify a prognostic biomarker for muscle-invasive bladder cancer (MIBC) by integrating morphological and gene-expression features.
+      path_eval_weights: {'logic': 0.2, 'relevance': 0.2, 'novelty': 0.0, 'surprise': 0.3}
+---------- TextMessage (user) ----------
+Identify a prognostic biomarker for muscle-invasive bladder cancer (MIBC) by integrating morphological and gene-expression features.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_CHcOXAF4eH7hPYg383VwIYa8', arguments='{"source_entity":"muscle-invasive bladder cancer (MIBC)","target_type":"Biomarker","max_results":30}', name='find_related_entities')]
+
+============================================================
+📋 PATH FINDING (validation will be done AFTER path finding)
+============================================================
+Found 47 nodes of type 'Biomarker'
+============================================================
+
+Limited to 30 nodes for path calculation
+
+🔍 Step 1: Finding paths to 30 target nodes...
+[Prompt tokens: 3676, Completion tokens: 1261]
+   Progress: 10/30
+   Progress: 20/30
+   Progress: 30/30
+
+✅ Found 30 paths
+
+============================================================
+✅ PATH FINDING AND VALIDATION COMPLETE
+============================================================
+Total target nodes found: 47
+Successful paths: 30/30
+============================================================
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content="✅ Found 30 paths from 'muscle-invasive bladder cancer (MIBC)' to 'Biomarker'\nEvaluated and ranked by: Logic(0.2) + Relevance(0.2) + Novelty(0.0) + Surprise(0.3)\n\nTop 10 Paths (sorted by total score):\n\n1. Path to 'biomarkers||Biomarker' (length: 9) ⭐ Total: 0.847\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- demonstrated antitumor activity in -- BCG||Vaccine -- is tested in -- the trial||ClinicalTrial -- are used in -- biomarkers||Biomarker\n   Logic: 0.800 | Relevance: 0.663 | Novelty: 0.524 | Surprise: 1.000\n\n2. Path to 'selected urine-DNA methylation biomarkers||Biomarker' (length: 7) ⭐ Total: 0.695\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker\n   Logic: 0.821 | Relevance: 0.737 | Novelty: 0.482 | Surprise: 0.584\n\n3. Path to 'ER status||Biomarker' (length: 5) ⭐ Total: 0.628\n   muscle-invasive bladder cancer (MIBC)||Disease -- mutated in -- TP53||Gene -- is associated with -- ER status||Biomarker\n   Logic: 0.676 | Relevance: 0.577 | Novelty: 0.605 | Surprise: 0.631\n\n4. Path to 'prognostic and immunological biomarker||Biomarker' (length: 7) ⭐ Total: 0.619\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is a novel prognostic and immunological biomarker in -- GARS1||Gene -- is a -- prognostic and immunological biomarker||Biomarker\n   Logic: 0.834 | Relevance: 0.672 | Novelty: 0.445 | Surprise: 0.440\n\n5. Path to 'liquid biopsy biomarkers||Biomarker' (length: 9) ⭐ Total: 0.605\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker\n   Logic: 0.772 | Relevance: 0.689 | Novelty: 0.600 | Surprise: 0.439\n\n6. Path to 'TMB radiomics biomarker||Biomarker' (length: 9) ⭐ Total: 0.580\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- is associated with -- NSCLC||Disease -- is evaluated on -- TMB radiomics biomarker||Biomarker\n   Logic: 0.759 | Relevance: 0.678 | Novelty: 0.451 | Surprise: 0.396\n\n7. Path to 'tumor biomarkers||Biomarker' (length: 7) ⭐ Total: 0.577\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- prognosis||Process -- made significant contributions to -- tumor biomarkers||Biomarker\n   Logic: 0.898 | Relevance: 0.695 | Novelty: 0.459 | Surprise: 0.285\n\n8. Path to 'prognostic tissue-based biomarkers||Biomarker' (length: 9) ⭐ Total: 0.571\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- enhances -- CD4 and CD8 tumor-infiltrating lymphocytes (TILs)||Cell -- are -- prognostic tissue-based biomarkers||Biomarker\n   Logic: 0.786 | Relevance: 0.660 | Novelty: 0.448 | Surprise: 0.369\n\n9. Path to 'tumour mutational burden (TMB)||Biomarker' (length: 5) ⭐ Total: 0.571\n   muscle-invasive bladder cancer (MIBC)||Disease -- is associated with -- immunotherapy response in patients with various cancers||Process -- holds promise as predictive biomarkers for -- tumour mutational burden (TMB)||Biomarker\n   Logic: 0.768 | Relevance: 0.593 | Novelty: 0.607 | Surprise: 0.425\n\n10. Path to 'mismatch repair deficiency (dMMR)||Biomarker' (length: 9) ⭐ Total: 0.566\n   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- approved for -- immune checkpoint inhibitors||Drug -- acts as a biomarker for -- microsatellite instability (MSI)||Disease -- is synonymous with -- mismatch repair deficiency (dMMR)||Biomarker\n   Logic: 0.731 | Relevance: 0.655 | Novelty: 0.529 | Surprise: 0.396\n\n======================================================================\n📋 INSTRUCTIONS FOR ONTOLOGIST:\n======================================================================\nYou have received 10 ranked candidate paths above.\n\nTask: Select and analyze the TOP 10 most scientifically interesting paths.\n\nRequired Format:\n1. PATH SELECTION: List all 10 selected paths with brief selection rationale\n2. DETAILED ANALYSIS: For each of the 10 paths, provide:\n   - Key Definitions (2-4 sentences per term)\n   - Relationship Analysis (2-3 sentences per relationship)\n   - Clinical/Research Significance (2-3 sentences)\n\nSelection Criteria (prioritize paths with):\n  • High total score (Logic + Relevance + Novelty + Surprise)\n  • Novel biological connections\n  • Clear therapeutic or biomarker potential\n  • Strong clinical relevance\n  • Diversity across different mechanisms\n\nNote: Ensure all 10 paths are analyzed in detail.\n======================================================================\n", name='find_related_entities', call_id='call_CHcOXAF4eH7hPYg383VwIYa8', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+✅ Found 30 paths from 'muscle-invasive bladder cancer (MIBC)' to 'Biomarker'
+Evaluated and ranked by: Logic(0.2) + Relevance(0.2) + Novelty(0.0) + Surprise(0.3)
+
+Top 10 Paths (sorted by total score):
+
+1. Path to 'biomarkers||Biomarker' (length: 9) ⭐ Total: 0.847
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- demonstrated antitumor activity in -- BCG||Vaccine -- is tested in -- the trial||ClinicalTrial -- are used in -- biomarkers||Biomarker
+   Logic: 0.800 | Relevance: 0.663 | Novelty: 0.524 | Surprise: 1.000
+
+2. Path to 'selected urine-DNA methylation biomarkers||Biomarker' (length: 7) ⭐ Total: 0.695
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker
+   Logic: 0.821 | Relevance: 0.737 | Novelty: 0.482 | Surprise: 0.584
+
+3. Path to 'ER status||Biomarker' (length: 5) ⭐ Total: 0.628
+   muscle-invasive bladder cancer (MIBC)||Disease -- mutated in -- TP53||Gene -- is associated with -- ER status||Biomarker
+   Logic: 0.676 | Relevance: 0.577 | Novelty: 0.605 | Surprise: 0.631
+
+4. Path to 'prognostic and immunological biomarker||Biomarker' (length: 7) ⭐ Total: 0.619
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is a novel prognostic and immunological biomarker in -- GARS1||Gene -- is a -- prognostic and immunological biomarker||Biomarker
+   Logic: 0.834 | Relevance: 0.672 | Novelty: 0.445 | Surprise: 0.440
+
+5. Path to 'liquid biopsy biomarkers||Biomarker' (length: 9) ⭐ Total: 0.605
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is the 10th most common -- carcinoma||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker
+   Logic: 0.772 | Relevance: 0.689 | Novelty: 0.600 | Surprise: 0.439
+
+6. Path to 'TMB radiomics biomarker||Biomarker' (length: 9) ⭐ Total: 0.580
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- is associated with -- NSCLC||Disease -- is evaluated on -- TMB radiomics biomarker||Biomarker
+   Logic: 0.759 | Relevance: 0.678 | Novelty: 0.451 | Surprise: 0.396
+
+7. Path to 'tumor biomarkers||Biomarker' (length: 7) ⭐ Total: 0.577
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- prognosis||Process -- made significant contributions to -- tumor biomarkers||Biomarker
+   Logic: 0.898 | Relevance: 0.695 | Novelty: 0.459 | Surprise: 0.285
+
+8. Path to 'prognostic tissue-based biomarkers||Biomarker' (length: 9) ⭐ Total: 0.571
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- enhances -- CD4 and CD8 tumor-infiltrating lymphocytes (TILs)||Cell -- are -- prognostic tissue-based biomarkers||Biomarker
+   Logic: 0.786 | Relevance: 0.660 | Novelty: 0.448 | Surprise: 0.369
+
+9. Path to 'tumour mutational burden (TMB)||Biomarker' (length: 5) ⭐ Total: 0.571
+   muscle-invasive bladder cancer (MIBC)||Disease -- is associated with -- immunotherapy response in patients with various cancers||Process -- holds promise as predictive biomarkers for -- tumour mutational burden (TMB)||Biomarker
+   Logic: 0.768 | Relevance: 0.593 | Novelty: 0.607 | Surprise: 0.425
+
+10. Path to 'mismatch repair deficiency (dMMR)||Biomarker' (length: 9) ⭐ Total: 0.566
+   muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- approved for -- immune checkpoint inhibitors||Drug -- acts as a biomarker for -- microsatellite instability (MSI)||Disease -- is synonymous with -- mismatch repair deficiency (dMMR)||Biomarker
+   Logic: 0.731 | Relevance: 0.655 | Novelty: 0.529 | Surprise: 0.396
+
+======================================================================
+📋 INSTRUCTIONS FOR ONTOLOGIST:
+======================================================================
+You have received 10 ranked candidate paths above.
+
+Task: Select and analyze the TOP 10 most scientifically interesting paths.
+
+Required Format:
+1. PATH SELECTION: List all 10 selected paths with brief selection rationale
+2. DETAILED ANALYSIS: For each of the 10 paths, provide:
+   - Key Definitions (2-4 sentences per term)
+   - Relationship Analysis (2-3 sentences per relationship)
+   - Clinical/Research Significance (2-3 sentences)
+
+Selection Criteria (prioritize paths with):
+  • High total score (Logic + Relevance + Novelty + Surprise)
+  • Novel biological connections
+  • Clear therapeutic or biomarker potential
+  • Strong clinical relevance
+  • Diversity across different mechanisms
+
+Note: Ensure all 10 paths are analyzed in detail.
+======================================================================
+
+---------- TextMessage (ontologist) ----------
+### HIERARCHICAL PATH TRIAGE
+
+I have reviewed 10 paths and organized them into three tiers.
+
+---
+
+## TIER 1 — CORE AXIS (3 paths)
+
+These paths form the strongest mechanistic backbone for hypothesis generation. They center on immunotherapy-responsive biomarkers with clear, testable clinical readouts in MIBC.
+
+### CORE PATH 1: [Tumour Mutational Burden (TMB)]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- is associated with -- immunotherapy response in patients with various cancers||Process -- holds promise as predictive biomarkers for -- tumour mutational burden (TMB)||Biomarker  
+**Role in core axis:** Positions TMB as a central predictive biomarker linked to immunotherapy response across cancers and as a putative mechanistic driver of response in MIBC.
+
+#### Key Definitions:
+- **Muscle-invasive bladder cancer (MIBC):** An advanced stage of bladder cancer where tumor invasion into the detrusor muscle occurs, driving higher risk of metastasis and shaping therapeutic choices (e.g., neoadjuvant or immune-based strategies).  
+- **Tumour mutational burden (TMB):** The total number of somatic mutations per coding area of a tumor genome; high TMB is thought to generate more neoantigens, increasing tumor immunogenicity and potential responsiveness to checkpoint inhibitors.  
+- **Biomarker:** A measurable indicator used to predict or monitor a clinical outcome; in this context, a biomarker helps forecast immunotherapy benefit.
+
+#### Relationship Analysis:
+1) **MIBC → is associated with immunotherapy response in various cancers:** This edge highlights that broader tumor-immune dynamics linked to immunotherapy have relevance in MIBC, supporting a rationale to test TMB as a predictive marker in this disease. The link matters because it suggests a shared, mechanism-driven basis for response across tumor types.  
+2) **Immunotherapy response (Process) → holds promise as predictive biomarkers for -- TMB:** This edge implies that the predictive utility of TMB as a biomarker may extend to immunotherapy outcomes, guiding patient stratification. It reinforces the notion that TMB can function as a clinically actionable readout.  
+3) **TMB biomarker:** Establishes TMB itself as a biomarker class to be evaluated in MIBC and in trials, anchoring the mechanistic hypothesis that mutational load shapes response.
+
+#### Mechanistic Contribution:
+This path supports the core claim that high mutational burden drives neoantigen load, enhancing T-cell recognition and response to checkpoint inhibition in MIBC, making TMB a prime, testable biomarker for patient selection.
+
+---
+
+### CORE PATH 2: [Mismatch Repair Deficiency (dMMR)]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is synonymous with -- mismatch repair deficiency (dMMR)||Biomarker  
+**Role in core axis:** Links the immunogenic MSI/dMMR phenotype to biomarker status, providing a mechanistic anchor for predicting immunotherapy benefit.
+
+#### Key Definitions:
+- **Mismatch repair deficiency (dMMR):** A defect in the DNA repair system that leads to microsatellite instability (MSI) and elevated mutational burden, increasing tumor immunogenicity.  
+- **MSI/dMMR as a biomarker:** MSI/dMMR status serves as a predictive biomarker for response to checkpoint inhibitors across several cancers, including urothelial tumors in some settings.  
+- **Biomarker:** As above, a measurable indicator guiding clinical decisions.
+
+#### Relationship Analysis:
+1) **MIBC → comprises bladder cancer:** Establishes the disease context.  
+2) **Bladder cancer → is synonymous with dMMR:** Signals that, within this path, MIBC biology is being connected explicitly to a DNA repair deficiency biomarker. This linkage supports a strategy to identify MSI/dMMR tumors as immunotherapy candidates.  
+3) **dMMR → Biomarker:** Frames dMMR as a clinically actionable biomarker for guiding therapy.
+
+#### Mechanistic Contribution:
+This path reinforces the hypothesis that dMMR/MSI-high status improves antigenicity and responsiveness to PD-1/PD-L1 inhibitors, providing a concrete, testable biomarker target in MIBC.
+
+---
+
+### CORE PATH 3: [Prognostic Tissue-Based Biomarkers (TIL-focused)]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- enhances -- CD4 and CD8 tumor-infiltrating lymphocytes (TILs)||Cell -- are -- prognostic tissue-based biomarkers||Biomarker  
+**Role in core axis:** Connects anti–PD-1 therapy to immune infiltration (CD4/CD8 TILs) and positions TILs as prognostic tissue-based biomarkers, anchoring the immunoarchitectural basis for TLS/immune contexture as a biomarker readout.
+
+#### Key Definitions:
+- **Anti–PD-1 therapy:** Checkpoint inhibitor targeting PD-1 to relieve T-cell exhaustion and reinvigorate anti-tumor immunity.  
+- **CD4 and CD8 tumor-infiltrating lymphocytes (TILs):** Immune cells present within the tumor microenvironment; higher densities often correlate with better prognosis and can predict response to immunotherapy.  
+- **Prognostic tissue-based biomarkers:** Biomarkers measured in tumor tissue (e.g., TIL density, immune gene signatures) that correlate with patient outcomes independent of therapy.
+
+#### Relationship Analysis:
+1) **Anti–PD-1 → enhances → CD4 and CD8 TILs:** Immune checkpoint blockade can augment intra-tumoral T-cell presence and activity, linking therapy mechanism to tissue-level immune contexture.  
+2) **CD4/CD8 TILs → are prognostic tissue-based biomarkers:** The abundance and quality of TILs in tissue provide prognostic information and can inform likelihood of benefit from immunotherapies.  
+3) **Prognostic tissue-based biomarkers → Biomarker:** Frames TIL-related readouts as bona fide biomarkers for risk stratification and therapy decisions.
+
+#### Mechanistic Contribution:
+This path highlights how the immune microenvironment, particularly TILs, modulates immunotherapy efficacy and provides a tangible tissue-based biomarker axis for patient selection and prognosis in MIBC.
+
+---
+
+## TIER 2 — SUPPORTING LAYER (4 paths)
+
+These paths reinforce or extend Tier 1 mechanisms with complementary angles (non-invasive modalities, imaging-linked biomarkers, and other immune/metabolic readouts).
+
+### SUPPORTING PATH 1: [Liquid Biopsy Biomarkers (CTCs)]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- are often detected at very low levels in some cancers -- CTCs||Cell -- are -- liquid biopsy biomarkers||Biomarker  
+**Supports core axis by:** Adds a non-invasive biomarker modality that can reflect tumor dynamics and metastatic potential, complementing tissue-based biomarkers.  
+**Key mechanism:** Circulating tumor cells (CTCs) provide a systemic readout of tumor burden and biology; when integrated with existing tissue and genomic biomarkers, they can improve real-time monitoring and prognostication.
+
+### SUPPORTING PATH 2: [TMB Radiomics Biomarker]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- anti–PD-1||Drug -- is associated with -- NSCLC||Disease -- is evaluated on -- TMB radiomics biomarker||Biomarker  
+**Supports core axis by:** Creates a bridge between imaging-derived features and TMB-informed biology, offering a non-invasive surrogate for mutational/neoantigen load and immunotherapy responsiveness.  
+**Key mechanism:** Radiomic patterns may reflect underlying tumor heterogeneity and mutational landscapes that influence immune visibility and response to checkpoint inhibitors.
+
+### SUPPORTING PATH 3: [Urine DNA Methylation Biomarkers]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is associated with -- urothelial carcinoma||Disease -- using -- selected urine-DNA methylation biomarkers||Biomarker  
+**Supports core axis by:** Provides a non-invasive, urine-based biomarker set that can complement tissue/tumor biomarkers, enabling longitudinal monitoring and early detection of risk strata.  
+**Key mechanism:** DNA methylation signatures in urine reflect tumor-derived epigenetic alterations, potentially signaling tumor presence, burden, or transformation to immunoreactive states.
+
+### SUPPORTING PATH 4: [GARS1 Prognostic and Immunological Biomarker]
+**Path:** muscle-invasive bladder cancer (MIBC)||Disease -- comprises -- bladder cancer||Disease -- is a novel prognostic and immunological biomarker in -- GARS1||Gene -- is a -- prognostic and immunological biomarker||Biomarker  
+**Supports core axis by:** Introduces a specific gene (GARS1) as a prognostic/immunological biomarker, providing a concrete molecular handle to test interactions with immune contexture and therapy response.  
+**Key mechanism:** GARS1 expression or function could reflect or modulate tumor-immune interactions, potentially predicting outcomes or immunotherapy responsiveness.
+
+---
+
+## TIER 3 — EXPLORATORY LAYER (remaining paths)
+
+These paths offer interesting directions but are more indirect or less validated as mechanistic contributors to the core narrative.
+
+- **Path 1 (Biomarker-focused on BCG trials):** MIBC is linked to BCG-based antitumor activity and biomarkers used in trials. Suggests a non-muscle-invasive–adjacent immune mechanism that could inform mucosal immunity and biomarker development, but less direct for checkpoint-inhibitor–driven immuno-oncology in MIBC.  
+- **Path 3 (ER status / TP53 mutation):** MIBC with TP53-related alterations linked to ER status; offers a potential avenue for understanding tumor suppressor–immune interactions, though the connection to immunotherapy biomarkers is less direct.  
+- **Path 7 (Tumor biomarkers broadly):** General association with prognosis and tumor biomarker concepts; useful for broad context but lacks a tight mechanistic tie to TLS/neoantigen–driven immunity in this curated core.
+
+---
+
+## SYNTHESIS FOR SCIENTIST
+
+### Central Mechanistic Question:
+Why do some MIBC tumors with high mutational or MSI-like landscapes respond robustly to immunotherapy, and how do tissue- and liquid-biopsy biomarkers, along with immune contexture (TILs), refine patient selection and monitoring? The Tier 1 paths imply that TMB and dMMR/MSI-H statuses shape neoantigen load and immune visibility, while Tier 2 paths provide non-invasive and microenvironmental readouts to track and predict response; Tier 3 paths offer broader but exploratory links to immune modulation and mucosal/epithelial immunity.
+
+### Anchor Genes/Entities (from Tier 1):
+- Tumour mutational burden (TMB)
+- Mismatch repair deficiency / MSI
+- CD4 and CD8 tumor-infiltrating lymphocytes (TILs)
+
+### Supporting Genes/Entities (from Tier 2):
+- PD-1/PD-L1 axis (anti–PD-1 therapy)
+- Circulating tumor cells (CTCs)
+- GARS1 (prognostic/immunological biomarker)
+- Urine DNA methylation markers
+
+### Path Quality Warning:
+Some edges in these paths are inherently correlative (e.g., “is associated with” or cross-talk statements) rather than proven causal links. The TMB/dMMR–immunotherapy connections are supported by broader oncology literature but require disease-specific validation in MIBC trials. The radiomics and urine methylation pathways are promising but need robust prospective validation to translate into standard-of-care biomarkers.
+
+---
+
+If you want, I can expand any individual path with more granular mechanistic diagrams or draft concrete experimental/clinical trial hypotheses (e.g., a trial stratifying MIBC patients by TMB and TIL density, with serial urine methylation biomarker assessments and CTC monitoring).
+[Prompt tokens: 2885, Completion tokens: 9470]
+---------- TextMessage (scientist) ----------
+<thinking>
+
+</thinking>
+{
+"notes": "1) Central biological puzzle: The Ontologist framed that high neoantigen-generating states (high TMB or dMMR/MSI) and intratumoral immune infiltration (CD4/CD8 TILs) each associate with immunotherapy benefit in MIBC, yet not all TIL-rich tumors respond — why does immune presence sometimes fail to translate into checkpoint-blockade benefit? 2) Tier 1 paths used: I built on the TMB path (core mechanistic link between mutational load → neoantigens → immune recognition) and the dMMR/MSI path (mechanism producing high TMB/MSI-H phenotype), because these most directly explain when TILs are likely to be productive effectors. 3) Tier 2 support: non‑invasive readouts (CTCs, urine methylation) and PD‑1/PD‑L1 biology provide orthogonal ways to detect tumor antigenicity, systemic tumor burden, and immunosuppressive signaling that can modulate the TIL–neoantigen interaction; GARS1 offers a candidate tumor-intrinsic modifier of immune biology for follow-up. 4) Endpoint choice: I selected therapy_response (anti–PD‑1/PD‑L1 responsiveness) because the core question is mechanistic—under what molecular conditions does immune infiltration convert into clinical benefit from checkpoint blockade in MIBC. 5) Deliberate exclusions: I excluded exploratory Tier 3 items (BCG/urothelial mucosal immunity, TP53/ER links) to keep a focused, testable mechanistic hypothesis driven by neoantigen load and local immune contexture; I also avoided adding more than two molecular anchors to preserve clarity and falsifiability.",
+"core_variables": {
+  "imaging_feature": "Tumor-Infiltrating Lymphocyte (TIL) density",
+  "anchor_genes": [
+    "TMB",
+    "dMMR/MSI"
+  ],
+  "endpoint": "therapy_response"
+},
+"secondary_modifiers": [
+  "PD-1/PD-L1 axis",
+  "CTCs",
+  "GARS1",
+  "Urine DNA methylation markers"
+],
+"hypothesis": "In MIBC, H&E-assessed high TIL density predicts benefit from anti–PD‑1 therapy only when tumors have high TMB or are dMMR/MSI‑high, because sufficient neoantigen load is required for infiltrating T cells to recognize and mediate checkpoint-blockade responses. Clinically, combining TIL density with TMB or dMMR/MSI status will better identify anti–PD‑1 responders than either metric alone."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "- The core puzzle: why some TIL-rich, high-antigenicity tumors still fail anti-PD-1/PD-L1 therapy in MIBC. - The proposed logic: combine antigenicity (TMB/MSI status and neoantigen quality) with immune contexture (TILs, T cell function) to predict response more accurately than either alone. - Include non-invasive readouts (CTCs, urine methylation) and a tumor-intrinsic modifier (GARS1) as orthogonal modulators of the TIL–neoantigen axis. - Ensure the hypothesis remains testable with clear biomarkers and endpoints (therapy_response). - Plan to contrast high-TIL/high-antigenicity vs other combos and quantify added predictive value of combined biomarker. - Anticipate confounders: sampling bias, prior therapies, PD-L1 status, tumor heterogeneity; need standardized assays and predefined cutoffs."
+  ,
+  "expanded_hypothesis": "In muscle-invasive bladder cancer (MIBC), the clinical benefit of anti–PD-1/PD-L1 therapy requires both sufficient tumor antigenicity and an activated local immune effector milieu. We hypothesize a combinatorial, mechanistic model: (1) High tumor antigenicity, proxied by elevated tumor mutational burden (TMB) or dMMR/MSI-H status, increases neoantigen load available for T cell recognition; (2) Robust effector TIL presence (high CD8+ and/or CD4+ TIL density with productive functional status) is necessary to translate neoantigen recognition into tumor cell killing upon checkpoint blockade. Consequently, anti–PD-1/PD-L1 therapy will yield the greatest objective responses and longer PFS/OS in tumors that (a) are TMB-high or MSI-H/dMMR and (b) exhibit high TIL density and functional T cell activity; tumors with high TMB/MSI-H but low TILs, or high TILs but low antigenicity, will show attenuated benefits. A two-step refinement is anticipated: (i) neoantigen quality (e.g., clonality, MHC-binding predicted affinity) and T cell exhaustion markers will modulate the TIL–neoantigen interaction and the magnitude of response; (ii) non-invasive readouts (circulating tumor cells [CTCs], urine DNA methylation signatures) and a tumor-intrinsic modifier (GARS1) will further stratify responders by reflecting antigen presentation dynamics, tumor burden, and immune signaling. In summary, combining TIL density with TMB or MSI/dMMR status will outperform either metric alone in predicting anti–PD-1/PD-L1 response in MIBC, and incorporating neoantigen quality, T cell functional status, and non-invasive biomarkers will yield a robust, testable predictive model.",
+  "justification": "Rationale: Immunotherapy benefits in MIBC are heterogeneous; high TILs or high TMB/MSI-H can individually correlate with responses, but many tumors with abundant TILs do not respond, implying that antigenic drivers of recognition are insufficient or that immunosuppressive signaling limits efficacy. The neoantigen–TIL axis provides a mechanistic framework: without neoantigens, TILs lack targets; without TIL activity, neoantigens cannot be translated into tumor killing. Evidence from multiple cancers supports TMB and MSI-H as predictors of IO response, but their predictive power is enhanced when combined with measures of immune contexture and function. Bladder cancer's mutation landscape includes variable TMB and occasional MSI-H/dMMR cases, justifying a biomarker strategy that integrates these dimensions. The inclusion of non-invasive readouts (CTCs, urine methylation) aligns with the need for dynamic, tumor-derived signals reflecting antigenicity and immune signaling, while GARS1 as a tumor-intrinsic modifier offers a focused, hypothesis-driven avenue to capture additional immune biology layers. Experimental plan (summary): a correlative study within prospective anti–PD-1/PD-L1 trials or a well-annotated retrospective cohort will measure (a) TMB (WES or large panel), (b) MSI/dMMR status, (c) TIL density and T cell functional markers (CD8, CD4, Granzyme B, PD-1/PD-L1, exhaustion signatures), (d) neoantigen burden and quality (clonality, MHC binding), (e) TCR clonality, (f) PD-L1 expression, (g) non-invasive readouts (CTCs enumeration and methylation signatures in urine), and (h) GARS1 expression/mutation status. Primary analysis will test the interaction between antigenicity (TMB/MSI) and immune contexture (TIL density/function) on objective response rate (ORR) to anti–PD-1/PD-L1, using multivariable models with interaction terms. Secondary analyses will examine PFS/OS, the incremental predictive value (AUC, NRI) of adding TIL+antigenicity to each biomarker alone, and the contribution of neoantigen quality and non-invasive markers. Potential pitfalls include variability in TMB/MSI measurement, heterogeneity of TIL scoring, and limited MSI-H prevalence in MIBC; these will be addressed with standardized assays, predefined cutoffs, and integration of continuous metrics. Overall, this expanded hypothesis seeks to define a falsifiable, mechanistically grounded biomarker framework to identify MIBC patients most likely to benefit from checkpoint blockade by requiring both antigenicity and effector immune presence.",
+  "endpoint_integration": [
+    "Primary endpoint: therapy_response (objective response rate) to anti–PD-1/PD-L1",
+    "Secondary endpoints: progression-free survival (PFS), overall survival (OS), duration of response",
+    "Exploratory endpoints: TMB and MSI/dMMR synergy with TILs, neoantigen quality metrics, TCR clonality, PD-L1/immune-signature profiles, CTC counts, urine methylation panel signals, GARS1 status"
+  ]
+}
+[Prompt tokens: 828, Completion tokens: 3950]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_D5ryqqDM65RPpSYCzZbSUIAo', arguments='{"query":"muscle-invasive bladder cancer TMB MSI predictive response immune checkpoint blockade", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2396, Completion tokens: 366]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=muscle-invasive+bladder+cancer+TMB+MSI+predictive+response+immune+checkpoint+blockade&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_D5ryqqDM65RPpSYCzZbSUIAo', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_UPByOoVYx8vJybO2DCMNGJzA', arguments='{"query":"bladder cancer immunotherapy TMB", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2553, Completion tokens: 488]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+immunotherapy+TMB&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_UPByOoVYx8vJybO2DCMNGJzA', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_x000luJ3kU6lAIqXwD1PZtH1', arguments='{"query": "bladder cancer immunotherapy TMB predictive response PD-1", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_nJfTk5b23dCJotSk5mUHr3o4', arguments='{"query": "MSI bladder cancer response anti-PD-1", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_deK38QPdbASNGpvX1CiXDnhO', arguments='{"query": "tumor-infiltrating lymphocytes bladder cancer checkpoint blockade response", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_K5CCQDeFMGdw4raUAVqim1xX', arguments='{"query": "GARS1 cancer immunology bladder", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_TyfsijtuAoLhaGMtiDe2565D', arguments='{"query": "urine methylation bladder cancer non-invasive biomarker", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2689, Completion tokens: 571]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+immunotherapy+TMB+predictive+response+PD-1&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_x000luJ3kU6lAIqXwD1PZtH1', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=MSI+bladder+cancer+response+anti-PD-1&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_nJfTk5b23dCJotSk5mUHr3o4', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=tumor-infiltrating+lymphocytes+bladder+cancer+checkpoint+blockade+response&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_deK38QPdbASNGpvX1CiXDnhO', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=GARS1+cancer+immunology+bladder&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_K5CCQDeFMGdw4raUAVqim1xX', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=urine+methylation+bladder+cancer+non-invasive+biomarker&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_TyfsijtuAoLhaGMtiDe2565D', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_0Zyu8U83nIHhNJk3R6LF36TY', arguments='{"query":"bladder cancer TMB predictive response PD-1", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 3374, Completion tokens: 619]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+TMB+predictive+response+PD-1&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_0Zyu8U83nIHhNJk3R6LF36TY', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_dgUiha9QdLLd5lRg5Fi2pMZv', arguments='{"query":"urothelial carcinoma TMB checkpoint inhibitor response","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3518, Completion tokens: 424]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=urothelial+carcinoma+TMB+checkpoint+inhibitor+response&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_dgUiha9QdLLd5lRg5Fi2pMZv', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_kXGcxtd4yeIH1wpFInYVIOEi', arguments='{"query":"MSI bladder cancer checkpoint inhibitors response","max_results":5}', name='semanticscholar_search')]
+[Prompt tokens: 3663, Completion tokens: 32]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=MSI+bladder+cancer+checkpoint+inhibitors+response&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_kXGcxtd4yeIH1wpFInYVIOEi', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_lT2tVjXbE687lW4mtcsLzOOW', arguments='{"query":"bladder cancer TMB immunotherapy", "max_results": 10}', name='semanticscholar_search')]
+[Prompt tokens: 3803, Completion tokens: 296]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+TMB+immunotherapy&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_lT2tVjXbE687lW4mtcsLzOOW', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_7d2s149CVdG57mVQ6PDc7NkZ', arguments='{"query":"bladder cancer neoantigen quality clonality TCR predictive response PD-1","max_results":10}', name='semanticscholar_search')]
+[Prompt tokens: 3939, Completion tokens: 559]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=bladder+cancer+neoantigen+quality+clonality+TCR+predictive+response+PD-1&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_7d2s149CVdG57mVQ6PDc7NkZ', is_error=False)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 5,
+    "key_queries_used": [
+      "bladder cancer TMB PD-1 response",
+      "urothelial carcinoma MSI response PD-1 blockade",
+      "tumor-infiltrating lymphocytes bladder cancer checkpoint blockade response",
+      "urine methylation bladder cancer non-invasive biomarker",
+      "GARS1 cancer immunology"
+    ],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 3,
+      "rationale": "The proposal largely builds on existing dimensions (TMB/MSI, TILs, neoantigen quality, PD-L1 status, immune contexture) and proposes their integration with non-invasive readouts and a tumor-intrinsic modifier (GARS1). It does not specify a radically new computational model or experimental modality beyond combining known markers; the novelty is more in the proposed integrative framework than in a new method. No explicit new algorithmic approach or assay technology is described as novel in the text provided."
+    },
+    "application_novelty": {
+      "score": 6,
+      "rationale": "Application-wise, targeting MIBC with a combined TMB/MSI and TIL-centric biomarker framework, plus non-invasive readouts, represents a relatively new integrated biomarker strategy within uro-oncology. While each individual biomarker (TMB, MSI, TILs, CTCs, urine methylation) has prior literature, their planned combination to predict anti–PD-1/PD-L1 response in MIBC, with a formal interaction model and two-step refinement including neoantigen quality and T cell function, suggests a novel application direction within bladder cancer immunotherapy. The explicit inclusion of GARS1 as an intrinsic modifier adds an additional, less-explored angle."
+    },
+    "theoretical_novelty": {
+      "score": 5,
+      "rationale": "Conceptually, the framework extends the established neoantigen–TIL axis by positing an interaction between antigenicity and local effector milieu and by adding non-invasive readouts and a tumor-intrinsic modifier to stratify responders. The idea of combining antigenicity with immune contexture is supported by prior immuno-oncology theory, but the specific proposed mechanism space (neoantigen quality, T cell exhaustion markers, GARS1) and its hypothesized predictive interaction in MIBC offers moderate theoretical novelty rather than a completely new theoretical framework."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 7,
+    "calculation": "(Technical 3 × 0.4) + (Application 6 × 0.3) + (Theoretical 5 × 0.3) = 1.2 + 1.8 + 1.5 = 4.5 -> rounded to 5",
+    "key_innovations": [
+      "Integrative biomarker model combining TMB/MSI with TIL density/function for predicting anti–PD-1/PD-L1 response in MIBC",
+      "Inclusion of non-invasive readouts (CTCs, urine methylation) to reflect antigen presentation dynamics and immune signaling",
+      "Incorporation of a tumor-intrinsic modifier (GARS1) as an orthogonal regulator of the TIL–neoantigen axis",
+      "Two-step refinement focusing on neoantigen quality and immune exhaustion markers to improve predictive power"
+    ],
+    "overlaps_with_existing_work": [
+      "Use of TMB/MSI as predictors of IO response",
+      "Role of TIL density and T-cell function in checkpoint blockade efficacy",
+      "Non-invasive biomarkers as surrogates for tumor dynamics (ctDNA, urine-based signals) and general concept of integrating multiple biomarker types"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 3948, Completion tokens: 1629]
+---------- Summary ----------
+Number of messages: 24
+Finish reason: Digraph execution is complete
+Total prompt tokens: 37272
+Total completion tokens: 19665
+Duration: 205.52 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/hyp_full_no_novelty/hypotheses/hyp_P0009.md
+PDF generated: experiment_results/hyp_full_no_novelty/hypotheses/hyp_P0009.pdf
+
+Done. Run saved to: experiment_results/hyp_full_no_novelty/hypotheses/hyp_P0009.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 213.1, "llm_calls": 12, "llm_errors": 0, "prompt_tokens": 37272, "completion_tokens": 19665, "total_tokens": 56937, "tokens_per_second": 267.2, "graph": "bladder_cancer_kg_latest.graphml", "domain": "bladder cancer", "path_eval_weights": {"logic": 0.2, "relevance": 0.2, "novelty": 0.0, "surprise": 0.3}}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5465.36it/s]
+
+  0%|          | 0/41053 [00:00<?, ?it/s]
+ 37%|███▋      | 15353/41053 [00:00<00:00, 153495.75it/s]
+ 75%|███████▍  | 30703/41053 [00:00<00:00, 152130.84it/s]
+100%|██████████| 41053/41053 [00:00<00:00, 152137.23it/s]
+
+  0%|          | 0/56338 [00:00<?, ?it/s]
+ 17%|█▋        | 9627/56338 [00:00<00:00, 96261.60it/s]
+ 34%|███▍      | 19254/56338 [00:00<00:00, 91931.46it/s]
+ 51%|█████     | 28461/56338 [00:00<00:00, 90022.56it/s]
+ 67%|██████▋   | 37471/56338 [00:00<00:00, 88346.84it/s]
+ 82%|████████▏ | 46311/56338 [00:00<00:00, 86619.41it/s]
+ 98%|█████████▊| 54977/56338 [00:00<00:00, 83975.84it/s]
+100%|██████████| 56338/56338 [00:00<00:00, 86129.31it/s]
+/workspace/miniconda3/envs/sage/lib/python3.10/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 12030). Please update your GPU driver by downloading and installing a new version from the URL: http://www.nvidia.com/Download/index.aspx Alternatively, go to: https://pytorch.org to install a PyTorch version that has been compiled with your version of the CUDA driver. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 4697.02it/s]
+/workspace/Agentic_AI/Hypothesis-Generation-sage-ui/HypothesisGeneration-pkg/HypothesisGeneration/path_evaluation.py:1107: UserWarning: Weights sum to 0.700000, not 1.0. Normalizing weights.
+  warnings.warn(

@@ -1,0 +1,176 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/prostate_cancer_kg.graphml ...
+      giant component: 19861 nodes, 31260 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-prostate_cancer_kg-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='prostate cancer')
+      query: Elevated serum PSA velocity directly predicts biochemical recurrence after radical prostatectomy, independent of baseline Gleason score or surgical margin status.
+---------- TextMessage (user) ----------
+Elevated serum PSA velocity directly predicts biochemical recurrence after radical prostatectomy, independent of baseline Gleason score or surgical margin status.
+---------- ToolCallRequestEvent (path_generation_agent) ----------
+[FunctionCall(id='call_NMwzRZoEl0H0579Lo8M8Jvnm', arguments='{"sentence":"PSA velocity, biochemical recurrence, and radical prostatectomy"}', name='generate_path_from_sentence')]
+[Prompt tokens: 3678, Completion tokens: 2915]
+---------- ToolCallExecutionEvent (path_generation_agent) ----------
+[FunctionExecutionResult(content='radical prostatectomy -- associated_with -- PCA -- stages -- 68Ga-PSMA-11 -- measured_by -- Biochemical -- measured_by -- 68Ga-PSMA-11 -- treats -- prostate cancer -- prognostic_for -- recurrence and progression -- prognostic_for -- prostate cancer -- measured_by -- serum PSA values -- measured_by -- PSA velocity -- measured_by -- serum PSA values -- increases_risk_of -- docetaxel -- evaluated_in -- STAMPEDE -- evaluated_in -- prostate RT -- treats -- FFS -- contributes_to -- radical RT', name='generate_path_from_sentence', call_id='call_NMwzRZoEl0H0579Lo8M8Jvnm', is_error=False)]
+---------- ToolCallSummaryMessage (path_generation_agent) ----------
+radical prostatectomy -- associated_with -- PCA -- stages -- 68Ga-PSMA-11 -- measured_by -- Biochemical -- measured_by -- 68Ga-PSMA-11 -- treats -- prostate cancer -- prognostic_for -- recurrence and progression -- prognostic_for -- prostate cancer -- measured_by -- serum PSA values -- measured_by -- PSA velocity -- measured_by -- serum PSA values -- increases_risk_of -- docetaxel -- evaluated_in -- STAMPEDE -- evaluated_in -- prostate RT -- treats -- FFS -- contributes_to -- radical RT
+---------- TextMessage (ontologist) ----------
+### Definitions:
+- **Radical Prostatectomy:** Surgical removal of the prostate gland (often with surrounding tissue) aimed at curative treatment for localized prostate cancer, which sets the baseline tumor burden and influences subsequent biomarker dynamics and imaging decisions.
+- **PCA:** A prostate cancer–related concept used here as a biomarker/status indicator that relates to disease stage and subsequent imaging/treatment decisions; mechanistically, it serves as a contextual anchor linking surgical clearance to imaging and systemic therapy planning.
+- **68Ga-PSMA-11:** A Gallium-68 labeled PSMA positron emission tomography tracer used to image PSMA-expressing prostate cancer lesions, informing staging and treatment planning; represents a diagnostic/pretreatment assessment tool with potential theranostic implications.
+- **Stages:** The clinical/pathologic disease stage (e.g., tumor burden, spread) used to stratify risk and guide imaging and therapy decisions.
+- **Biochemical:** A set of biochemical indicators of tumor activity (beyond or including PSA) used to interpret disease status in conjunction with imaging.
+- **Prostate Cancer:** Malignant neoplasm arising in the prostate with potential for local progression and metastatic spread; the central disease entity in this pathway.
+- **Recurrence and Progression:** Clinical endpoints reflecting return or advancement of disease after initial therapy (biochemical, radiographic, or clinical progression).
+- **Serum PSA values:** The concentration of prostate-specific antigen in blood, a key biomarker used to monitor tumor burden and treatment response.
+- **PSA velocity:** The rate of change of PSA over time; higher velocity indicates more rapid changes in tumor activity and can signal progression or relapse risk.
+- **Docetaxel:** A taxane chemotherapy agent used in systemic treatment of advanced or high-risk prostate cancer; its use is influenced by disease biology as reflected in PSA dynamics and staging.
+- **STAMPEDE:** A large, multi-arm randomized trial evaluating systemic therapies and radiotherapy strategies in high-risk localized or metastatic prostate cancer; its findings influence standard-of-care decisions including the use of docetaxel.
+- **Prostate RT:** Radiation therapy directed at the prostate, often as local control therapy in localized or high-risk disease.
+- **FFS (Failure-Free Survival):** A clinical outcome measure representing the time until biochemical, local, or distant progression or death.
+- **Radical RT:** An aggressive or comprehensive radiation therapy approach aimed at curative intent, typically with treatment of the prostate and possibly surrounding regions.
+
+### Relationships:
+1. **Radical Prostatectomy → associated_with → PCA:** Radical prostatectomy reduces tumor burden, which is reflected in PCA-related disease status. This association helps set the baseline context for subsequent staging and imaging decisions and may influence the likelihood of detectable residual disease on PSMA imaging.
+2. **PCA → stages → 68Ga-PSMA-11:** The PCA-driven disease context informs how disease stage is assessed with 68Ga-PSMA-11 PET imaging, where higher-risk PCA status may prompt comprehensive PSMA imaging to map nodal/metastatic burden for staging and planning.
+3. **68Ga-PSMA-11 → measured_by → Biochemical:** PSMA-PET findings correlate with biochemical signals of tumor activity; imaging readouts can be interpreted alongside biochemical markers to refine assessment of tumor activity and burden.
+4. **Biochemical → measured_by → 68Ga-PSMA-11:** Biochemical signals of tumor activity are validated or complemented by PSMA-11 imaging, anchoring a cross-check between circulating markers and radiotracer uptake patterns.
+5. **68Ga-PSMA-11 → treats → Prostate Cancer:** In this graph, PSMA-11 imaging is linked to treatment, reflecting the theranostic paradigm where imaging guides targeted therapy decisions (e.g., selection for PSMA-directed therapy) even though 68Ga-PSMA-11 itself is diagnostic; the edge points to the clinical implication of imaging guiding subsequent treatment choices.
+6. **Prostate Cancer → prognostic_for → Recurrence and Progression:** The biological status of prostate cancer informs the probability of recurrence or progression after initial therapy; higher disease burden or unfavorable biology increases this prognostic risk.
+7. **Recurrence and Progression → prognostic_for → Prostate Cancer:** The occurrence of recurrence or progression feeds back into prognostic assessments for ongoing disease trajectory, affecting future management decisions.
+8. **Prostate Cancer → measured_by → Serum PSA values:** Prostate cancer burden and activity are reflected in serum PSA levels; rising or rising-velocity PSA signals ongoing disease activity.
+9. **Serum PSA values → measured_by → PSA velocity:** PSA velocity is derived from serial serum PSA measurements, translating time-based PSA changes into a rate that informs risk of progression or need for intensified therapy.
+10. **PSA velocity → measured_by → Serum PSA values:** PSA velocity is ultimately calculated from serial PSA values, underscoring the linkage between raw biomarker data and dynamic risk assessment.
+11. **Serum PSA values → increases_risk_of → Docetaxel:** Higher PSA values or unfavorable PSA kinetics correlate with increased likelihood of requiring systemic therapy such as docetaxel.
+12. **Docetaxel → evaluated_in → STAMPEDE:** The STAMPEDE trial evaluated the role and timing of docetaxel within multimodal strategies for high-risk disease, influencing how and when docetaxel is used in practice.
+13. **STAMPEDE → evaluated_in → Prostate RT:** STAMPEDE also examined the integration of radiotherapy (including prostate RT) with systemic therapy, informing combined modality approaches.
+14. **Prostate RT → treats → FFS:** Prostate RT influences failure-free survival by delaying or reducing progression events, thereby impacting this clinical endpoint.
+15. **FFS → contributes_to → Radical RT:** The observed FFS outcomes feed into decisions about using radical RT approaches, as better FFS signals may support curative-intent radiation strategies or, conversely, poorer FFS may shift toward systemic-dominant regimens.
+
+### Clinical/Research Significance:
+- This single-path chain highlights how surgical tumor debulking, imaging-based staging with PSMA-11, PSA kinetics, and trial-driven systemic therapy (docetaxel) and radiotherapy strategies interact to shape progression-free outcomes. It underscores the potential for PSA dynamics and PSMA imaging to stratify patients for early intensification with docetaxel or early integration of radical RT, guided by data from STAMPEDE. A key mechanistic question arising from this path is how imaging-defined disease burden and PSA kinetics synergize to optimize patient selection for multimodal therapy to maximize FFS and minimize recurrence.
+[Prompt tokens: 1653, Completion tokens: 5858]
+---------- TextMessage (scientist) ----------
+<thinking>
+**Planning the note structure**
+
+I want to craft notes step-by-step, focusing on five key questions: the central puzzle, the Tier 1 paths we've defined and why we selected them, how Tier 2 evidence supports our claims, the reasoning behind choosing endpoint PFI and its fit to FFS, and what was excluded and the reasoning for those exclusions. I'll also ensure JSON strings are properly escaped and that the core_variables anchor_genes list maintains a length of 2. Once I finalize this, I'm all set!
+</thinking>
+{
+"notes": "1) Central biological puzzle: PSMA-PET lesion burden and PSA kinetics do not always align—some patients have low/negative 68Ga-PSMA-11 imaging yet rapidly rising PSA (high PSA velocity) and early recurrence. Why does imaging-defined low visible disease sometimes fail to predict durable control when biochemical dynamics indicate active disease?\n\n2) Tier 1 paths used: I built on the single provided path linking Radical Prostatectomy → PCA → stages → 68Ga-PSMA-11 → (biochemical cross-check) PSA/PSA velocity → Recurrence/Progression → FFS. This path directly frames the mismatch between imaging (PSMA PET) and biochemical markers (PSA kinetics) as determinative for subsequent progression risk.\n\n3) Tier 2 supporting evidence: Trial-driven management edges (STAMPEDE, docetaxel, prostate RT) and the role of radical local therapy (radical prostatectomy/radical RT) support the clinical relevance of correctly classifying patients for early systemic intensification. These links motivate the mechanistic hypothesis that a PSMA/PSA discordance identifies biologically distinct, treatment-relevant disease.\n\n4) Why PFI: The chain emphasizes recurrence/progression and failure-free outcomes (FFS); PFI (progression-free interval) is the closest standard endpoint available under the focusing rule and captures biochemical/radiographic progression risk driven by the PSMA–PSA relationship.\n\n5) Deliberate exclusions: I excluded granular imaging-sequence hypotheses (e.g., PSMA quantitation thresholds), explicit molecular pathway genes (none were provided), and broad multi-feature predictive models to keep the claim sharp and mechanistic. Trial names and therapies are held as secondary modifiers rather than anchors so the hypothesis focuses on the biological mismatch question.",
+"core_variables": {
+  "imaging_feature": "68Ga-PSMA-11 PET lesion burden",
+  "anchor_genes": [
+    "PSA velocity",
+    "serum PSA value"
+  ],
+  "endpoint": "PFI"
+},
+"secondary_modifiers": [
+  "Docetaxel",
+  "STAMPEDE",
+  "Prostate RT",
+  "Radical Prostatectomy",
+  "Stages",
+  "Failure-Free Survival (FFS)"
+],
+"hypothesis": "Discordance characterized by low 68Ga-PSMA-11 PET lesion burden but high PSA velocity reflects biologically aggressive, PSMA-low or micrometastatic disease that escapes imaging detection because rapidly progressing clones downregulate PSMA expression or disseminate below PET sensitivity thresholds. Patients with this PSMA–PSA mismatch will have shorter progression-free intervals and therefore constitute a group more likely to benefit from early systemic intensification (e.g., docetaxel or intensified multimodal therapy) compared with patients whose PSMA and PSA signals are concordantly low."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "1) Central puzzle: PSMA-PET lesion burden does not always track PSA kinetics; some patients with low/absent PSMA-avid disease still exhibit rapid PSA rise and early biochemical recurrence. 2) Tier 1 paths: the proposed mismatch between imaging and PSA dynamics as a determinant of progression risk. 3) Tier 2 evidence: trial-driven management strategies (STAMPEDE, docetaxel, RT) support early systemic intensification for high-risk biology; discordance may define a biologically distinct subgroup. 4) Endpoint choice: PFI is a practical proxy that aligns with biochemical and radiographic progression and interfaces with FFS. 5) Exclusions: avoid overfitting with imaging thresholds or broad multi-feature models; keep anchor variables to two genes; focus on biological mismatch rather than prescriptive therapy regimens.",
+  "expanded_hypothesis": "Primary expanded hypothesis: In men with localized prostate cancer who experience biochemical recurrence after radical local therapy, a discordant PSMA–PSA profile defined by low 68Ga-PSMA-11 PET lesion burden (low-volume or PSMA-silent disease) but rapid PSA kinetics (high PSA velocity or rising PSA) represents a biologically aggressive, PSMA-low subclone with micrometastatic dissemination that escapes PET detection. This discordant phenotype will be associated with shorter progression-free interval (PFI) after salvage or systemic-intensification strategies and will identify patients who derive greater absolute and relative benefit from early systemic therapy (e.g., docetaxel-containing regimens or intensified hormonal therapy) compared with patients whose PSMA and PSA signals are concordant. Secondary hypotheses: (a) the discordant group will have a higher circulating tumor DNA burden and/or PSMA-low molecular signatures, indicating micrometastatic disease; (b) quantitative PSMA-PET metrics (e.g., SUVmax, PSMA volume) will inversely correlate with PSA velocity; (c) a combined PSMA–PSA risk score will improve prediction of PFI/FFS beyond either modality alone; (d) early systemic therapy will attenuate the adverse impact of discordance on progression-free outcomes. Trial-relevant endpoints include primary PFI and secondary endpoints such as FFS, metastasis-free survival, and time to PSA progression.",
+  "justification": "PSMA-PET imaging has finite sensitivity for micro-metastatic or PSMA-low clones, while PSA velocity captures integrated tumor kinetics across all disease sites. Clinically, discordance between imaging and PSA dynamics is observed and may signal a biology prone to early progression despite low radiographic burden. Trials like STAMPEDE and local therapy strategies suggest early systemic intensification improves outcomes in high-risk groups, implying that identifying biological mismatch could tailor intervention where benefit is greatest. The proposed hypothesis leverages readily available clinical metrics (PSA kinetics and PSMA-PET metrics) to stratify risk, aligns with meaningful endpoints (PFI and FFS), and remains testable through retrospective cohort analyses with prospective validation, complemented by biomarker and tissue-based correlative studies to probe underlying biology of PSMA-low subclones."
+}
+[Prompt tokens: 981, Completion tokens: 2959]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_qILSc5ZCHhFk8Jlsfcrolm6i', arguments='{"query": "PSMA-PET and PSA velocity discordance prostate cancer", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_2qFq0wejfNxwCtYA9bTqykZb', arguments='{"query": "PSMA-PET sensitivity micrometastatic prostate cancer PSMA-low", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_oBasaHOgnfvZGQuqZRyMlVkk', arguments='{"query": "circulating tumor DNA prostate cancer PSMA-low signatures", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_un2CyuhtY8f668sjHGtMzhNV', arguments='{"query": "PSMA-PET lesion burden PSMA volume correlation PSA velocity", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 1789, Completion tokens: 682]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PSMA-PET+and+PSA+velocity+discordance+prostate+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_qILSc5ZCHhFk8Jlsfcrolm6i', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PSMA-PET+sensitivity+micrometastatic+prostate+cancer+PSMA-low&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_2qFq0wejfNxwCtYA9bTqykZb', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=circulating+tumor+DNA+prostate+cancer+PSMA-low+signatures&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_oBasaHOgnfvZGQuqZRyMlVkk', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PSMA-PET+lesion+burden+PSMA+volume+correlation+PSA+velocity&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_un2CyuhtY8f668sjHGtMzhNV', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_fWm9ZlxznBov78EEs1RKHwyc', arguments='{"query":"PSMA-PET discordance PSA velocity prostate cancer", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2365, Completion tokens: 363]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PSMA-PET+discordance+PSA+velocity+prostate+cancer&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_fWm9ZlxznBov78EEs1RKHwyc', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_xrH9mNpvGYqckrX3tfTU6em2', arguments='{"query":"PSMA PET PSA velocity discordance prostate cancer","max_results":10}', name='semanticscholar_search')]
+[Prompt tokens: 2510, Completion tokens: 360]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=PSMA+PET+PSA+velocity+discordance+prostate+cancer&per_page=10&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_xrH9mNpvGYqckrX3tfTU6em2', is_error=False)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 0,
+    "key_queries_used": [
+      "PSMA-PET and PSA velocity discordance prostate cancer",
+      "PSMA-PET sensitivity micrometastatic prostate cancer PSMA-low",
+      "circulating tumor DNA prostate cancer PSMA-low signatures",
+      "PSMA-PET lesion burden PSMA volume correlation PSA velocity"
+    ],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 6,
+      "rationale": "Proposes a discordant PSMA–PSA biology framework by integrating PSMA-PET metrics with PSA kinetics to identify a biologically distinct PSMA-low subclone. While the components (PSMA-PET metrics, PSA kinetics, ctDNA) are established, the specific combination to define a discordant phenotype and guide early systemic therapy represents a moderate methodological innovation rather than a fundamentally new imaging or analytical technique."
+    },
+    "application_novelty": {
+      "score": 7,
+      "rationale": "Addresses a relatively underexplored salvage/post-local-therapy setting with a biomarker-driven mismatch concept to tailor systemic intensification. The approach has potential to extend beyond conventional imaging-only or PSA-only stratification, offering a novel application pathway for risk-adapted therapy in biochemical recurrence."
+    },
+    "theoretical_novelty": {
+      "score": 6,
+      "rationale": "Suggests a new biological insight: PSMA-low micrometastatic subclones that escape PET detection but drive rapid PSA progression, potentially supported by ctDNA or molecular signatures. This adds a conceptual layer to tumor heterogeneity and disease dissemination in PSMA-targeted imaging contexts, though it stops short of a fully formal new theoretical framework."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 6,
+    "calculation": "Overall novelty = round( Technical × 0.4 + Application × 0.3 + Theoretical × 0.3 ) = round(6×0.4 + 7×0.3 + 6×0.3) = round(2.4 + 2.1 + 1.8) = 6",
+    "key_innovations": [
+      "Discordant PSMA-PET vs PSA kinetics as a biomarker-defined biologically aggressive subgroup (PSMA-low) in biochemical recurrence",
+      "Prospective integration of PSMA–PSA discordance with biomarkers (ctDNA/molecular signatures) and correlation to micrometastatic burden",
+      "Development of a combined PSMA–PSA risk score to enhance prediction of PFI/FFS beyond either modality alone"
+    ],
+    "overlaps_with_existing_work": [
+      "PSMA-PET has finite sensitivity for micrometastatic disease and can be discordant with PSA kinetics in some settings",
+      "ctDNA and other molecular signatures are being explored as prognostic tools in prostate cancer, with growing evidence but not yet integrated with PSMA-PET-guided strategies in salvage settings",
+      "Trials like STAMPEDE support early systemic intensification in high-risk groups, which this work seeks to refine via biomarker-defined subgroups"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 2654, Completion tokens: 2978]
+---------- Summary ----------
+Number of messages: 14
+Finish reason: Digraph execution is complete
+Total prompt tokens: 15630
+Total completion tokens: 16115
+Duration: 111.70 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/full_run/hypotheses/hyp_N0162.md
+PDF generated: experiment_results/full_run/hypotheses/hyp_N0162.pdf
+
+Done. Run saved to: experiment_results/full_run/hypotheses/hyp_N0162.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 115.7, "llm_calls": 7, "llm_errors": 0, "prompt_tokens": 15630, "completion_tokens": 16115, "total_tokens": 31745, "tokens_per_second": 274.4, "graph": "prostate_cancer_kg.graphml", "domain": "prostate cancer"}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5437.22it/s]
+
+  0%|          | 0/21814 [00:00<?, ?it/s]
+ 71%|███████   | 15410/21814 [00:00<00:00, 154086.55it/s]
+100%|██████████| 21814/21814 [00:00<00:00, 154522.37it/s]
+
+  0%|          | 0/33316 [00:00<?, ?it/s]
+ 23%|██▎       | 7686/33316 [00:00<00:00, 76853.66it/s]
+ 46%|████▌     | 15372/33316 [00:00<00:00, 76355.43it/s]
+ 69%|██████▉   | 23008/33316 [00:00<00:00, 75909.34it/s]
+ 92%|█████████▏| 30600/33316 [00:00<00:00, 75607.81it/s]
+100%|██████████| 33316/33316 [00:00<00:00, 75862.50it/s]

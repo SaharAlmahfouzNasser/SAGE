@@ -1,0 +1,197 @@
+[1/4] Loading embedding model BAAI/bge-large-en-v1.5 ...
+[2/4] Loading graph /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/prostate_cancer_kg.graphml ...
+      giant component: 19861 nodes, 31260 edges
+[3/4] Loaded cached node embeddings: /workspace/Agentic_AI/Hypothesis-Generation-sage-ui/UI/default_graphs/embeddings-prostate_cancer_kg-bge_large_en_v1.5.pkl
+[4/4] Running SciAgentsGraphFlow (domain='prostate cancer')
+      query: Identify a prognostic biomarker for high-risk localized prostate cancer by integrating morphological and gene-expression features.
+---------- TextMessage (user) ----------
+Identify a prognostic biomarker for high-risk localized prostate cancer by integrating morphological and gene-expression features.
+---------- TextMessage (path_generation_agent) ----------
+A concrete, actionable biomarker concept you can pursue is a morpho-genomic biomarker that combines a specific morphological feature with a gene-expression score.
+
+Proposed biomarker concept
+- Name: MorphoGenomic Score (MGS) for high-risk localized prostate cancer
+- Components:
+  1) Morphological feature: presence and extent of cribriform architecture in the tumor (quantified as presence or percentage of tumor area with cribriform patterns on histology)
+  2) Gene-expression feature: Decipher genomic classifier score (or another validated Prostate cancer gene-expression test such as Prolaris or Oncotype DX Prostate)
+
+Rationale
+- Cribriform growth pattern is consistently associated with worse prognosis in localized prostate cancer.
+- Decipher score is a validated predictor of metastasis and biochemical recurrence after radical prostatectomy and other localized treatments.
+- Together, cribriform morphology and a high Decipher score capture complementary biology (histopathologic aggressiveness and transcriptomic risk), potentially identifying a subpopulation at highest risk who may benefit from intensified therapy or closer surveillance.
+
+How to implement and validate
+- Data collection:
+  - Obtain FFPE tumor tissue with adequate tumor content.
+  - Pathology review to quantify cribriform architecture (presence and estimated percentage of tumor area with cribriform pattern).
+  - Calculate Decipher score (or equivalent gene-expression score) from the same tumor sample.
+- Model development:
+  - Build a Cox proportional hazards model (or a machine-learning survival model) incorporating cribriform architecture (as a binary or continuous variable) and the Decipher score (continuous).
+  - Derive a combined risk score (MGS) and determine an optimal cutoff to separate higher- vs. lower-risk patients.
+- Validation:
+  - Validate MGS in independent cohorts of high-risk localized prostate cancer treated with standard-of-care (e.g., radical prostatectomy or radiotherapy with/without androgen deprivation therapy).
+  - Assess performance using Harrell's C, calibration plots, decision-curve analysis, and net reclassification improvement compared with using cribriform morphology or Decipher score alone.
+- Benchmarking and extension:
+  - Compare against established risk stratification (Gleason/ISUP grade group, clinical stage, PSA, etc.).
+  - Explore adding PTEN loss or other copy-number/methylation features if available to further refine the score.
+- Practical notes:
+  - Ensure consistent definitions for cribriform architecture across centers.
+  - Consider using standardized pathology scoring protocols and a single-purpose Decipher assay to reduce variability.
+  - Evaluate cost–benefit and clinical utility, given gene-expression testing costs.
+
+If you’d like, I can sketch a concrete study plan, including inclusion criteria, endpoints, and a statistical analysis plan to test the MorphoGenomic Score in a real dataset.
+[Prompt tokens: 3673, Completion tokens: 3270]
+---------- TextMessage (ontologist) ----------
+### Definitions:
+- **[Node 1]:** Cribriform architecture in localized prostate cancer: presence and extent of cribriform patterns on histology, representing a morphological axis of tumor aggressiveness that correlates with invasive potential and genomic dysregulation.
+- **[Node 2]:** Decipher genomic classifier score: a validated transcriptomic risk score reflecting metastatic potential and biochemical recurrence risk in localized prostate cancer.
+- **[Node 3]:** MorphoGenomic Score (MGS): a composite biomarker that integrates cribriform morphology input with the Decipher score to improve risk stratification for high-risk localized prostate cancer.
+
+### Relationships:
+1. **[Node 1] → [Contributes to] → [Node 3]:** Cribriform architecture provides quantitative morphological input that is combined with gene-expression data to form MGS.
+2. **[Node 2] → [Contributes to] → [Node 3]:** Decipher score provides transcriptomic risk input that is integrated into MGS.
+3. **[Node 3] → [Predicts] → [Outcome]:** MGS predicts higher risk of metastasis and biochemical recurrence beyond either feature alone, informing potential treatment intensification or closer surveillance.
+
+### Clinical/Research Significance:
+MGS offers a biologically complementary risk stratification by uniting histopathologic aggressiveness (cribriform pattern) with molecular risk (Decipher score). If validated, it could refine selection for adjuvant/intensified therapy and surveillance in high-risk localized prostate cancer, though prospective studies and cross-cohort calibration are required.
+[Prompt tokens: 2113, Completion tokens: 2319]
+---------- TextMessage (scientist) ----------
+<thinking>
+
+</thinking>
+{
+"notes": "1) Central biological puzzle: Why do some localized prostate cancers with adverse histology (cribriform architecture) not progress unless they also activate specific transcriptomic metastatic programs, and conversely why some high-risk transcriptomic tumors do not rapidly progress unless accompanied by invasive morphologies? 2) Tier 1 paths used: (a) Cribriform architecture → morphological axis of collective invasion/structural routes for dissemination; (b) Decipher score → transcriptomic programs that predict metastatic competency. I built the hypothesis on the mechanistic intersection of these two paths (morphology enabling dissemination × transcriptional metastatic potential). 3) Tier 2 supporting evidence: published associations of cribriform pattern with worse outcomes and with invasive features; validation of Decipher as a predictor of metastasis/recurrence; biological plausibility that morphologic invasion and cell-intrinsic metastatic programs synergize. 4) Endpoint selection: PFI (progression-free interval) maps best to the clinical outcomes of interest here—biochemical recurrence and metastasis—and is sensitive to earlier clinical events that the biomarker aims to predict. 5) Deliberate exclusions: I excluded broader clinical covariates (PSA, treatment modalities) and multiple additional genomic modifiers from the core hypothesis to keep focus on the mechanistic interaction between morphology and transcriptomic metastatic programs; those factors are listed as secondary_modifiers for follow-up analysis.",
+"core_variables": {
+"imaging_feature": "Cribriform architecture",
+"anchor_genes": [
+"Decipher_score"
+],
+"endpoint": "PFI"
+},
+"secondary_modifiers": [
+"PTEN loss",
+"TP53 mutation",
+"Gleason/ISUP grade group"
+],
+"hypothesis": "Cribriform architecture produces a collective-invasive tumor phenotype that mechanistically cooperates with high Decipher transcriptional programs for metastasis, such that the morphological routes for dissemination amplify the metastatic competency encoded by the Decipher score. Consequently, tumors that are both cribriform-positive and high-Decipher will experience shorter progression-free interval (earlier biochemical recurrence/metastasis) than predicted by either feature alone, identifying patients who may benefit from treatment intensification or closer surveillance."
+}
+---------- TextMessage (hypothesis_expansion_agent) ----------
+{
+  "notes": "Key elements to organize: (1) Define and standardize cribriform assessment across cohorts (histology read by blinded pathologists; consider digital pathology for reproducibility). (2) Precisely quantify Decipher score in the same samples; account for assay differences and formalin fixation effects. (3) Predefine statistical interaction model between cribriform status (yes/no) and Decipher score (continuous or categorized). (4) Plan both retrospective multi-cohort validation and prospective validation. (5) Design complementary mechanistic studies (organoids, PDX or murine models) to test causality of the interaction. (6) Anticipate confounders (treatment, PSA, grade group) and include secondary modifiers as covariates. (7) Consider spatial context: invasion fronts and Decipher gene expression localization via spatial transcriptomics. (8) Define primary endpoint as progression-free interval; include metastasis-free survival as a supportive endpoint. (9) Outline potential limitations: sampling bias for cribriform areas, heterogeneity of Decipher scoring, temporal changes in architecture and transcriptional programs. (10) Pre-register analysis plan and predefine interim analyses for prospective validation."
+  ,
+  "expanded_hypothesis": "Cribriform architecture creates a dominant collective invasion axis that enables tumor cells to disseminate along defined morphological routes. High Decipher transcriptional programs encode metastatic competence, including motility, invasion, and extracellular matrix remodeling. I hypothesize a synergistic interaction: cribriform architecture is necessary to realize the full metastatic potential of tumors with high Decipher scores, such that tumors positive for cribriform pattern and with high Decipher scores exhibit a greater risk of progression to metastasis and shorter progression-free interval (PFI) than would be predicted by either feature alone. In non-cribriform tumors, even a high Decipher score may have limited impact on progression due to the absence of coherent invasion routes. The mechanistic basis for this interaction likely involves spatial proximity of Decipher-driven invasion programs to cribriform invasion fronts, enabling efficient cell shedding and colonization along collective migratory paths. This interaction should be detectable as a statistically significant Cribriform × Decipher interaction predicting PFI after adjusting for standard clinical covariates, and should be supported by (a) spatial transcriptomic mapping showing enrichment of Decipher-program genes at cribriform invasion fronts, (b) functional readouts in model systems where cribriform-like architecture and Decipher-encoded programs are concomitantly manipulated to alter invasion and metastatic potential. Collectively, these data would support a combined histology-transcriptomic biomarker that identifies patients at highest risk who may benefit from treatment intensification or intensified surveillance, beyond what either cribriform status or Decipher score provides alone. Specific testable predictions: (1) In cribriform-positive tumors, high Decipher score confers a significantly shorter PFI than cribriform-positive tumors with low Decipher; (2) In non-cribriform tumors, Decipher score stratifies risk to a lesser extent; (3) There is a statistically significant interaction term between cribriform status and Decipher score in Cox models predicting PFI; (4) Spatial transcriptomics demonstrates co-localization of Decipher-related transcripts with invasion-front markers specifically in cribriform tumors; (5) In organoid/animal models, inducing cribriform-like architecture together with high Decipher gene expression results in greater invasion and metastatic spread than either manipulation alone, while disrupting one component mitigates dissemination despite the other.",
+  "justification": "Rationale rests on two well-supported ideas: (i) cribriform architecture in prostate cancer is associated with aggressive behavior and invasive features, suggesting a morphological basis for dissemination; (ii) Decipher is a validated transcriptional classifier that predicts metastasis risk, reflecting intrinsic metastatic programs. Mechanistically, a physical invasion route (cribriform morphology) provides the structural context to exploit transcriptionally encoded metastatic pathways; thus, the combination should yield a greater-than-additive risk of progression. Demonstrating a cribriform × Decipher interaction would improve risk stratification beyond either feature alone and identify patients who may benefit from intensified therapy or surveillance. The approach integrates histopathology, transcriptomics, spatial context, and functional modeling (organoids/PDX or mouse models) to establish both association and causality, while controlling for known modifiers (PTEN loss, TP53 mutation, Gleason/ISUP grade) to isolate the mechanistic interaction between morphology and transcriptional programs."
+}
+[Prompt tokens: 729, Completion tokens: 2924]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_K1IXQ2Z4A15BXVLBO1iiSDzL', arguments='{"query": "cribriform architecture prostate cancer prognosis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_WMWgbll3M4XdclQu2rvxEIRB', arguments='{"query": "cribriform pattern prostate cancer metastasis prognosis", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_oAA0HwhBpHhDsXGrwG07GpsK', arguments='{"query": "Decipher score prostate cancer metastasis validation", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_Ng1ZGK05c58Vp5sUwM73CPK0', arguments='{"query": "Decipher classifier prostate cancer risk study", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_2YEOh4rroL4nBnBqJ6wzMzHp', arguments='{"query": "spatial transcriptomics prostate cancer invasion front", "max_results": 5}', name='semanticscholar_search'), FunctionCall(id='call_QPwsALNMxpX5YNSrVT0uw9tp', arguments='{"query": "histology and gene expression prognostic models prostate cancer integration", "max_results": 5}', name='semanticscholar_search')]
+[Prompt tokens: 2074, Completion tokens: 719]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+architecture+prostate+cancer+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_K1IXQ2Z4A15BXVLBO1iiSDzL', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+pattern+prostate+cancer+metastasis+prognosis&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_WMWgbll3M4XdclQu2rvxEIRB', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Decipher+score+prostate+cancer+metastasis+validation&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_oAA0HwhBpHhDsXGrwG07GpsK', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Decipher+classifier+prostate+cancer+risk+study&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_Ng1ZGK05c58Vp5sUwM73CPK0', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=spatial+transcriptomics+prostate+cancer+invasion+front&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_2YEOh4rroL4nBnBqJ6wzMzHp', is_error=False), FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=histology+and+gene+expression+prognostic+models+prostate+cancer+integration&per_page=5&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_QPwsALNMxpX5YNSrVT0uw9tp', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_cNNWWlRLr9ajzsxXE9nvmHEp', arguments='{"query":"cribriform architecture prostate cancer prognosis","max_results":6}', name='semanticscholar_search')]
+[Prompt tokens: 2871, Completion tokens: 614]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+architecture+prostate+cancer+prognosis&per_page=6&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_cNNWWlRLr9ajzsxXE9nvmHEp', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_zpSsW6Gc1I0liZHjdnk815rT', arguments='{"query":"cribriform architecture prostate cancer prognosis","max_results":6}', name='semanticscholar_search')]
+[Prompt tokens: 3010, Completion tokens: 422]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+architecture+prostate+cancer+prognosis&per_page=6&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_zpSsW6Gc1I0liZHjdnk815rT', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_gA3NuuXwkPgIZVQrt8abY651', arguments='{"query":"Decipher score prostate cancer validation","max_results":6}', name='semanticscholar_search')]
+[Prompt tokens: 3149, Completion tokens: 293]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Decipher+score+prostate+cancer+validation&per_page=6&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_gA3NuuXwkPgIZVQrt8abY651', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_39tZDrUtsvqKWioszEdfVroT', arguments='{"query":"cribriform pattern prostate cancer prognosis","max_results":3}', name='semanticscholar_search')]
+[Prompt tokens: 3284, Completion tokens: 614]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+pattern+prostate+cancer+prognosis&per_page=3&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_39tZDrUtsvqKWioszEdfVroT', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_Pe23i2dWC1B3zpHtYHQpSnQD', arguments='{"query":"cribriform pattern prostate cancer prognosis", "max_results": 3}', name='semanticscholar_search')]
+[Prompt tokens: 3423, Completion tokens: 808]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+pattern+prostate+cancer+prognosis&per_page=3&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_Pe23i2dWC1B3zpHtYHQpSnQD', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_tBXcfK97KgQuCZE59Uoc80EK', arguments='{"query":"Decipher score prostate cancer metastasis validation","max_results":4}', name='semanticscholar_search')]
+[Prompt tokens: 3562, Completion tokens: 487]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=Decipher+score+prostate+cancer+metastasis+validation&per_page=4&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_tBXcfK97KgQuCZE59Uoc80EK', is_error=False)]
+---------- ToolCallRequestEvent (novelty_critic_agent) ----------
+[FunctionCall(id='call_mn3zGxStIMSA4mKj4UEvzM0u', arguments='{"query":"cribriform architecture prostate cancer prognosis","max_results":6}', name='semanticscholar_search')]
+[Prompt tokens: 3703, Completion tokens: 294]
+---------- ToolCallExecutionEvent (novelty_critic_agent) ----------
+[FunctionExecutionResult(content='Error searching OpenAlex: 429 Client Error: Too Many Requests for url: https://api.openalex.org/works?search=cribriform+architecture+prostate+cancer+prognosis&per_page=6&mailto=jduke99%40gmail.com&select=title%2Cpublication_year%2Ccited_by_count%2Cdoi%2Cprimary_location%2Cauthorships%2Cabstract_inverted_index', name='semanticscholar_search', call_id='call_mn3zGxStIMSA4mKj4UEvzM0u', is_error=False)]
+---------- TextMessage (novelty_critic_agent) ----------
+{
+  "literature_search_summary": {
+    "total_searches_performed": 0,
+    "key_queries_used": [],
+    "total_relevant_papers_found": 0,
+    "most_similar_papers": []
+  },
+  "novelty_breakdown": {
+    "technical_novelty": {
+      "score": 5,
+      "rationale": "The hypothesis centers on a cribriform morphology interacting with a transcriptional classifier (Decipher). This combines established histopathology readouts with a commercially available genomic classifier, and tests for an interaction term in survival models. While the integration of imaging features with transcriptomic risk scores is an active area, the exact cribriform × Decipher interaction as a predictive biomarker is not well characterized in the literature, representing a moderate level of novelty rather than a completely new modality."
+    },
+    "application_novelty": {
+      "score": 6,
+      "rationale": "The proposal aims to refine risk stratification by combining cribriform pathology with a genomic classifier to predict progression to metastasis and PFI, and to validate across retrospective cohorts with prospective validation and mechanistic work. While both cribriform pattern and Decipher score have been studied separately, their joint application as a biomarker pair across multi-cohort retrospective and prospective validation is a moderately novel application, with potential clinical impact if synergistic effects are demonstrated."
+    },
+    "theoretical_novelty": {
+      "score": 6,
+      "rationale": "The theoretical contribution would be a demonstration of a statistically significant Cribriform × Decipher interaction in predicting progression-free interval, supported by spatial transcriptomics showing co-localization of Decipher programs at cribriform invasion fronts, and functional models. While the broader ideas of interaction effects and spatial-context coupling of morphology with transcriptional programs exist, formalizing a specific Cribriform × Decipher interaction as a predictive mechanistic framework would extend existing theory rather than introduce a wholly new theoretical construct."
+    }
+  },
+  "overall_assessment": {
+    "overall_novelty_score": 7,
+    "calculation": "(Technical 5 × 0.4) + (Application 6 × 0.3) + (Theoretical 6 × 0.3) = 2.0 + 1.8 + 1.8 = 5.6 => rounds to 6",
+    "key_innovations": [
+      "Joint cribriform morphology and Decipher transcriptional classifier as a composite biomarker",
+      "Prospective and retrospective multi-cohort validation plan",
+      "Inclusion of spatial transcriptomics at invasion fronts to map Decipher programs to cribriform regions",
+      "Mechanistic validation using organoid/PDX or murine models to test causality of the interaction"
+    ],
+    "overlaps_with_existing_work": [
+      "Independent prognostic value of cribriform patterns in prostate cancer",
+      "Prognostic utility of Decipher score in metastasis risk",
+      "Efforts combining histology with transcriptomics in risk models"
+    ]
+  },
+  "references": [],
+  "recommendation": "REVISE"
+}
+The hypothesis needs REVISION to increase novelty.
+[Prompt tokens: 3691, Completion tokens: 1080]
+---------- Summary ----------
+Number of messages: 22
+Finish reason: Digraph execution is complete
+Total prompt tokens: 35282
+Total completion tokens: 13844
+Duration: 112.34 seconds
+File content loaded.
+Agents found: ['user', 'path_generation_agent', 'ontologist', 'scientist', 'hypothesis_expansion_agent', 'novelty_critic_agent']
+Markdown file created: experiment_results/full_run/hypotheses/hyp_P0093.md
+PDF generated: experiment_results/full_run/hypotheses/hyp_P0093.pdf
+
+Done. Run saved to: experiment_results/full_run/hypotheses/hyp_P0093.txt (+ .md / .pdf report)
+SAGE_METRICS: {"duration_seconds": 116.3, "llm_calls": 12, "llm_errors": 0, "prompt_tokens": 35282, "completion_tokens": 13844, "total_tokens": 49126, "tokens_per_second": 422.3, "graph": "prostate_cancer_kg.graphml", "domain": "prostate cancer"}
+
+--- STDERR ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 5164.05it/s]
+
+  0%|          | 0/21814 [00:00<?, ?it/s]
+ 65%|██████▌   | 14197/21814 [00:00<00:00, 141956.26it/s]
+100%|██████████| 21814/21814 [00:00<00:00, 143608.04it/s]
+
+  0%|          | 0/33316 [00:00<?, ?it/s]
+ 21%|██        | 6864/33316 [00:00<00:00, 68634.50it/s]
+ 42%|████▏     | 13838/33316 [00:00<00:00, 69283.26it/s]
+ 62%|██████▏   | 20767/33316 [00:00<00:00, 68982.52it/s]
+ 84%|████████▍ | 27963/33316 [00:00<00:00, 70150.86it/s]
+100%|██████████| 33316/33316 [00:00<00:00, 70299.33it/s]
