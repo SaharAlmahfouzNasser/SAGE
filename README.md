@@ -131,3 +131,39 @@ Hypothesis_generation_pipeline/
     url={http://iopscience.iop.org/article/10.1088/2632-2153/ad7228},
 }
 ```
+
+## Citation
+
+If you use SAGE or the Healthcare Hypothesis Generation Pipeline
+in your research, please cite our paper:
+
+**SAGE: Evidence-First Biomarker Discovery through Multi-Agent Reasoning**  
+*Advances in Neural Information Processing Systems (NeurIPS 2026).*
+
+```bibtex
+@inproceedings{nasser2026sage,
+  title     = {{SAGE}: Evidence-First Biomarker Discovery
+               through Multi-Agent Reasoning},
+  author    = {Nasser, Sahar Almahfouz and others},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}
+```
+
+Please also cite the original SciAgents and GraphReasoning
+publications, listed in the References section, when using
+or building upon those components.
+
+## License
+
+The SAGE Healthcare Hypothesis Generation Pipeline is
+licensed under the **Apache License, Version 2.0**.
+
+This license permits academic and commercial use,
+modification, and redistribution, subject to the
+license terms and attribution requirements.
+
+See the [LICENSE](LICENSE) file for the complete terms.
+
+Third-party software and components included in this
+repository remain subject to their respective licenses.
