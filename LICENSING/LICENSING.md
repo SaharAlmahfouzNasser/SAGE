@@ -4,7 +4,7 @@ SAGE (Structured Agentic Framework for Generating and Evaluating Scientific Hypo
 
 This repository contains materials governed by different licenses.
 
-#1. Third-Party Software Notices
+# 1. Third-Party Software Notices
 
 ## 1. SciAgents
 
