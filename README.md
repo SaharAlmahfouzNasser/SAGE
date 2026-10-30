@@ -154,16 +154,4 @@ Please also cite the original SciAgents and GraphReasoning
 publications, listed in the References section, when using
 or building upon those components.
 
-## License
 
-The SAGE Healthcare Hypothesis Generation Pipeline is
-licensed under the **Apache License, Version 2.0**.
-
-This license permits academic and commercial use,
-modification, and redistribution, subject to the
-license terms and attribution requirements.
-
-See the [LICENSE](LICENSE) file for the complete terms.
-
-Third-party software and components included in this
-repository remain subject to their respective licenses.
