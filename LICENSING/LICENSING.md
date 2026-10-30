@@ -46,12 +46,4 @@ If you use SAGE in published research, please cite the SAGE publication when its
 
 For licensing of original SAGE contributions, contact the project maintainers or the appropriate institutional rights holder through the contact mechanism listed in the repository README. No commercial license to original SAGE contributions is granted by this document. Commercial rights separately provided by upstream MIT- and Apache-licensed code remain in effect.
 
-## 7. Prior to public release
 
-1. Confirm the copyright owners and institutional rights applicable to original SAGE modules.
-2. Identify all reused and modified third-party files and populate `THIRD_PARTY_NOTICES.md`.
-3. Preserve original headers, applicable upstream NOTICE material, and full license texts.
-4. Select and publish a complete, software-specific license for original SAGE code; identify its scope at file or directory level.
-5. Check the licenses of additional dependencies and redistributed assets.
-
-This document describes intended licensing boundaries; it is not legal advice.
