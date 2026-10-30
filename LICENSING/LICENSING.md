@@ -4,21 +4,41 @@ SAGE (Structured Agentic Framework for Generating and Evaluating Scientific Hypo
 
 This repository contains materials governed by different licenses.
 
-### 1. Third-party software
+#1. Third-Party Software Notices
 
-Portions of this repository are derived from:
+## 1. SciAgents
 
-**SciAgents: Automating Scientific Discovery Through Bioinspired Multi-Agent Intelligent Graph Reasoning**
+**Project:** SciAgents: Automating Scientific Discovery Through Bioinspired Multi-Agent Intelligent Graph Reasoning
 
-Authors: A. Ghafarollahi and M. J. Buehler
+**Authors:** A. Ghafarollahi and M. J. Buehler
 
-Repository: https://github.com/lamm-mit/SciAgentsDiscovery
+**Repository:** https://github.com/lamm-mit/SciAgentsDiscovery
 
-Paper: https://arxiv.org/abs/2409.05556
+**License:** Apache License 2.0
 
-The reused portions remain available under the Apache License, Version 2.0. Their original copyright, license, and attribution notices are retained.
+SAGE incorporates selected functions derived from SciAgents. The original copyright and license notices are retained, and modifications are identified in the relevant source files.
 
-See `licenses/Apache-2.0.txt` and `THIRD_PARTY_NOTICES.md` for details.
+## 2. Paperclip
+
+**Project:** Paperclip — AI Agent Orchestration
+
+**Repository:** https://github.com/paperclipai/paperclip
+
+**License:** MIT License
+
+Paperclip is distributed under the MIT License. Any Paperclip source code incorporated into SAGE retains its original copyright and MIT license notices.
+
+The applicable MIT license text is included in `licenses/MIT-Paperclip.txt`.
+
+## 3. Original SAGE Components
+
+Original SAGE components are subject to a separate noncommercial software license, as specified in `LICENSING.md`.
+
+These restrictions apply only to contributions owned by the relevant SAGE copyright holders and do not override rights granted under the original SciAgents or Paperclip licenses.
+
+## 4. Third-Party Code Inventory
+
+Before release, document each reused component, its source file, applicable license, and any modifications made by the SAGE development team.
 
 ### 2. Original SAGE components
 
