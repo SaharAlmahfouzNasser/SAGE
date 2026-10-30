@@ -1,63 +1,57 @@
-# SAGE — Licensing Information
+# SAGE — Licensing and Third-Party Software
 
-SAGE (Structured Agentic Framework for Generating and Evaluating Scientific Hypotheses in Computational Pathology) incorporates selected components adapted from SciAgents and includes original modules developed by the SAGE research team.
+SAGE (Structured Agentic Framework for Generating and Evaluating Scientific Hypotheses in Computational Pathology) includes original research software and may include third-party code. **Different files may be subject to different licenses.** This document does not apply a single license to every file in the repository.
 
-This repository contains materials governed by different licenses.
+## 1. Original SAGE contributions
 
-# 1. Third-Party Software Notices
+Original SAGE code for which the SAGE copyright holders have licensing authority will be governed by a **separate software-specific license**, to be selected and added before public release.
 
-## 1. SciAgents
+**Status: LICENSE NOT YET SELECTED.** Do not infer permission to use, modify, redistribute, or commercially exploit original SAGE code from this document alone. Until an explicit license is published, copyright law governs such contributions.
 
-**Project:** SciAgents: Automating Scientific Discovery Through Bioinspired Multi-Agent Intelligent Graph Reasoning
+The project intends to enable noncommercial academic research while reserving commercial licensing of original SAGE components, subject to the terms of the eventual license and any institutional or coauthor ownership rights. This statement of intent is not itself a license grant.
 
-**Authors:** A. Ghafarollahi and M. J. Buehler
+## 2. SciAgents-derived portions — Apache License 2.0
 
-**Repository:** https://github.com/lamm-mit/SciAgentsDiscovery
+Some SAGE functions are reused or adapted from:
 
-**License:** Apache License 2.0
+- **Project:** SciAgents — *Automating Scientific Discovery Through Bioinspired Multi-Agent Intelligent Graph Reasoning*
+- **Authors:** A. Ghafarollahi and M. J. Buehler
+- **Paper:** https://arxiv.org/abs/2409.05556
+- **Repository:** https://github.com/lamm-mit/SciAgentsDiscovery
+- **Upstream license:** Apache License, Version 2.0
 
-SAGE incorporates selected functions derived from SciAgents. The original copyright and license notices are retained, and modifications are identified in the relevant source files.
+Any copied SciAgents code remains available under its applicable Apache 2.0 permissions. Retain upstream copyright and license notices; mark modified files prominently; include the Apache 2.0 license text and any applicable upstream NOTICE content in distributed copies. Additional licensing conditions for separately copyrightable SAGE contributions must not purport to revoke rights previously granted to recipients in the original Apache-licensed material.
 
-## 2. Paperclip
+See `THIRD_PARTY_NOTICES.md` for source-file provenance and modifications.
 
-**Project:** Paperclip — AI Agent Orchestration
+## 3. Paperclip — MIT License (if incorporated or redistributed)
 
-**Repository:** https://github.com/paperclipai/paperclip
+- **Project:** Paperclip
+- **Repository:** https://github.com/paperclipai/paperclip
+- **Upstream license:** MIT License
 
-**License:** MIT License
+If Paperclip source or a redistributed Paperclip component is included in SAGE, retain the copyright and permission notice from the **specific upstream version used**, and provide the corresponding MIT license text in distributed copies. The MIT rights covering Paperclip code are not overridden by the separate SAGE license.
 
-Paperclip is distributed under the MIT License. Any Paperclip source code incorporated into SAGE retains its original copyright and MIT license notices.
+If SAGE merely interoperates with an independently installed Paperclip service or tool, without redistributing its code, document that relationship in the README or dependency list as appropriate; do not state that Paperclip source was incorporated unless it actually was.
 
-The applicable MIT license text is included in `licenses/MIT-Paperclip.txt`.
+## 4. Documentation and figures
 
-## 3. Original SAGE Components
+Original documentation and figures may be licensed separately, for example under Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International (**CC BY-NC-ND 4.0**) if their copyright holders choose to do so. **Do not apply CC BY-NC-ND to software by default.** This is a proposed option, not a present license grant.
 
-Original SAGE components are subject to a separate noncommercial software license, as specified in `LICENSING.md`.
+## 5. Attribution and citation
 
-These restrictions apply only to contributions owned by the relevant SAGE copyright holders and do not override rights granted under the original SciAgents or Paperclip licenses.
+If you use SAGE in published research, please cite the SAGE publication when its bibliographic details are available and acknowledge the SciAgents publication where relevant. This publication-citation request is separate from legally required attribution and notice obligations.
 
-## 4. Third-Party Code Inventory
+## 6. Commercial licensing and inquiries
 
-Before release, document each reused component, its source file, applicable license, and any modifications made by the SAGE development team.
+For licensing of original SAGE contributions, contact the project maintainers or the appropriate institutional rights holder through the contact mechanism listed in the repository README. No commercial license to original SAGE contributions is granted by this document. Commercial rights separately provided by upstream MIT- and Apache-licensed code remain in effect.
 
-### 2. Original SAGE components
+## 7. Prior to public release
 
-The original SAGE components identified in this repository are subject to the separate license provided in `licenses/SAGE-NONCOMMERCIAL.txt`, once that license is finalized.
+1. Confirm the copyright owners and institutional rights applicable to original SAGE modules.
+2. Identify all reused and modified third-party files and populate `THIRD_PARTY_NOTICES.md`.
+3. Preserve original headers, applicable upstream NOTICE material, and full license texts.
+4. Select and publish a complete, software-specific license for original SAGE code; identify its scope at file or directory level.
+5. Check the licenses of additional dependencies and redistributed assets.
 
-The applicable terms are limited to contributions for which the SAGE copyright holders have the authority to grant rights.
-
-### 3. Commercial licensing
-
-Commercial licensing of original SAGE components may be available through a separate written agreement with the appropriate rights holders.
-
-The restrictions applicable to original SAGE components do not alter rights independently granted under Apache License 2.0 for the underlying SciAgents code.
-
-### 4. Attribution
-
-Academic publications using SAGE are requested to cite the SAGE publication and acknowledge relevant SciAgents components.
-
-Citation requests are separate from mandatory license compliance obligations.
-
-### 5. License precedence
-
-Each file is governed by its applicable license and copyright notices. Nothing in this document supersedes third-party licenses or restricts rights already granted by their copyright holders.
+This document describes intended licensing boundaries; it is not legal advice.
