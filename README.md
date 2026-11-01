@@ -144,7 +144,7 @@ in your research, please cite our paper:
 @inproceedings{nasser2026sage,
   title     = {{SAGE}: Evidence-First Biomarker Discovery
                through Multi-Agent Reasoning},
-  author    = {Nasser, Sahar Almahfouz and others},
+  author    = {Almahfouz Nasser, Sahar et al},
   booktitle = {Advances in Neural Information Processing Systems},
   year      = {2026}
 }
